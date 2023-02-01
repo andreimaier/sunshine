@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;800&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/bb8e411a96.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/FA-6/css/all.css" />
+
+    <title>Random WORD</title>
+
+    <script src="/index.js" defer></script>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="nav">
+        <div><img src="/images/logo.png" class="nav__logo" alt="" /></div>
+        <ul>
+          <li><a href="#to-save">Home</a></li>
+          <li><a href="#random">Second</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+
+      <h1 id="to-save">Review Your Vocabulary</h1>
+      <section class="students">
+        <button class="item" id="@item1">
+          Lucas<span class="count"></span>
+        </button>
+        <button class="item" id="@item2">
+          Grace<span class="count"></span>
+        </button>
+        <button class="item" id="@item3">
+          Tony<span class="count"></span>
+        </button>
+        <button class="item" id="@item4">
+          Eason<span class="count"></span>
+        </button>
+        <button class="item" id="@item5">
+          Dora<span class="count"></span>
+        </button>
+        <button class="item" id="@item6">
+          Tanya<span class="count"></span>
+        </button>
+        <button class="item" id="@item7">Eva<span class="count"></span></button>
+        <button class="item" id="@item8">
+          Selina<span class="count"></span>
+        </button>
+        <button class="item" id="@item9">
+          Gina<span class="count"></span>
+        </button>
+      </section>
+      <button class="output">Random WORD</button>
+      <div id="collection"></div>
+      <article id="existing-lists" class="existing-lists">
+        <section class="list">
+          <h5>Legume</h5>
+          <button class="addToRoster">
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+          <ul>
+            <li>ceapa</li>
+            <li>ardei</li>
+            <li>usturoi</li>
+            <li>conopida</li>
+            <li>varza</li>
+            <li>porumb</li>
+          </ul>
+        </section>
+        <section class="list">
+          <h5>Fructe</h5>
+
+          <button class="addToRoster">
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+
+          <ul>
+            <li>struguri</li>
+            <li>capsuni</li>
+            <li>portocale</li>
+            <li>mere</li>
+            <li>pepene de vara</li>
+            <li>prune</li>
+            <li>kiwi</li>
+            <li>piersici</li>
+          </ul>
+        </section>
+      </article>
+      <section>
+        <button id="collapsible" class="collapsible">Week 1</button>
+        <ul class="weekX">
+          <li>unu</li>
+          <li>doi</li>
+          <li>trei</li>
+          <li>patru</li>
+          <li>patrucincisase</li>
+          <li>patrucincisase</li>
+          <li>patrucincisase</li>
+        </ul>
+        <button id="collapsible" class="collapsible">Week 1</button>
+        <ul class="weekX">
+          <li>unu</li>
+          <li>doi</li>
+          <li>trei</li>
+          <li>patru</li>
+          <li>patrucincisase</li>
+          <li>patrucincisase</li>
+          <li>patrucincisase</li>
+        </ul>
+      </section>
+      <section class="input">
+        <label for="key" class="hidden">Title:</label>
+        <input type="text" name="key" id="key" placeholder="your title here" />
+        <label class="hidden" for="word-list">Words:</label>
+        <textarea
+          placeholder="Add your words separated by comma, space or a new line"
+          name="word list"
+          id="word-list"
+          cols="20"
+          rows="10"
+        ></textarea>
+        <div class="buttons">
+          <button id="instructions">Toggle instructions</button>
+          <button class="createNew" id="createNew">New List</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
