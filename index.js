@@ -8,8 +8,6 @@ alt + shift + D
 
 
 
-
-
 const output = document.querySelector('.output');
 const words = document.querySelector('#word-list');
 const instructions = document.getElementById('instructions')
@@ -35,9 +33,13 @@ const lists = document.getElementById('existing-lists')
 
 let valoare = words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ');
 
+const buttons = document.querySelectorAll('.item')
+const collapsible = document.querySelectorAll('.collapsible')
+
 //CHECK find the glitch that makes it jump a bit when you save in VSCode
 
-const collapsible = document.querySelectorAll('.collapsible')
+
+//change this to match the the setup the other functions have
 collapsible.forEach((e) => {
     e.addEventListener('click', function(){
         this.classList.toggle('active')
@@ -78,8 +80,7 @@ function createButtonsAndDiv() {
 }
 
 //EVENT listeners
-//CHANGE see if you want to add another evet, like 'change' 
-    //in that canse you can prompt that these words will be added...
+
 /* words.addEventListener('keyup', () => {
     document.querySelector('.temporary').value = words.value
 }) */
@@ -96,8 +97,8 @@ document.addEventListener('click', e => {
     if(e.target === createNew) createNewFun(e)
     if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
     if(e.target.matches('.output')) randomFun(e)
-    if(e.target.matches('.item')) counterFun(e) 
 })
+
 
 addEventListener('load', () => {
     retrieveScores()
@@ -116,9 +117,6 @@ addEventListener('load', () => {
     } 
 })
 
-
-
-
 //HELPER functions//
 
 function retrieveScores() {
@@ -130,9 +128,7 @@ function retrieveScores() {
     }
 }
 
-const span = document.querySelectorAll('.count')
-const buttons = document.querySelectorAll('.item')
-let button = {}
+
 
 buttons.forEach((button) => {
     button.addEventListener('click', ()=> {
@@ -143,29 +139,6 @@ buttons.forEach((button) => {
     button.firstElementChild.textContent = button.value 
         
 })
-
-
-
-
-
-
-    
-    
-        
-//URGENT CHANGE
-//when you click cancel when making a new list it will still make a list...because it will save it in local storage
-
-
-
-
-
-
-
-
-
-
-
-
 function instructionsFun() {
     document.querySelectorAll('.hidden').forEach( x => {
         if(x.hasAttribute('hidden')) {
@@ -180,7 +153,6 @@ function createNewFun(e){
 }
 //Functionality for Remove BTN
 function collectionFun(e){
-    /* console.log(e.target.parentNode.nextSibling.nextSibling) */
     //remove ONLY if not added to list
     if(e.target.classList.contains('fa-trash-can') && !e.target.parentNode.nextSibling.nextSibling.classList.contains('addToRosterAnimation')){
         e.target.classList.add('removeIAnimation')
@@ -211,8 +183,7 @@ function randomFun(e) {
         output.classList.remove('outputAnimation'); // reset animation
         void output.offsetWidth; // trigger reflow
         output.classList.add('outputAnimation'); // start animation
-    /* random.classList.add('spinAnimation')
-    replace with other stuff for the click on output field */
+  
     console.log(randomList)  
     }, 0);
 }
@@ -221,16 +192,19 @@ function changeAddToRosterButton(e) {
     //click on ADD
     if(!e.target.classList.contains('checked')) {
         e.target.classList.add('checked')
-        /*  e.target.parentNode.classList.add('checked') */
+       
         addRandomList(e) 
     //click on REMOVE
     } else {
         e.target.classList.remove('checked')
         e.target.style.backgroundColor = 'transparent'  
         e.target.parentNode.style.backgroundColor = 'transparent'
-        removeRandomList(e)
+        removeFromRandomList(e)
     }
 }
+
+//CHECK at some point I have to change the order of element in my preset lists to match the user-built lists or viceversa, to avoid checking all the time what list I am in...
+
 
 function addRandomList(e) {
     let here = e.target.parentNode.nextSibling
@@ -240,30 +214,26 @@ function addRandomList(e) {
             randomList.push(elem.textContent)
         })
     }
-    if(here.nextSibling){
+    if(here.nextSibling){ //preset lists
         here.nextSibling.childNodes.forEach(a => {
             if(a.value == 0) {
                 randomList.push(a.textContent) 
-        }
-    })  
-}
-        console.log(randomList)        
+            }
+        }) 
+    }
+    console.log(randomList)
 } 
         
-function removeRandomList(e) {
-    let here = e.target.parentNode.nextSibling
-    if(here.childNodes){
-        here.childNodes.forEach(elem => {
+function removeFromRandomList(e) {
+    let here = e.target.parentNode.nextElementSibling
+    here.childNodes.forEach(elem => {
+        if(elem.value == 0) {
             randomList.splice(randomList.indexOf(elem.textContent), 1)
-        })
-    }
-    if(here.nextSibling){
-        here.nextSibling.childNodes.forEach(elem => {
-            randomList.splice(randomList.indexOf(elem.textContent), 1)
+        }
     })
-}
     console.log(randomList)
 }
+
 //OK
 function listaNoua(titleName) {
     titleName = key.value
@@ -284,9 +254,10 @@ function listaNoua(titleName) {
         if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
             createButtonsAndDiv()
             sanitizeWords(titleName)
+            localStorage.setItem(`#${titleName}`, words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' '))  
         }
         
-        localStorage.setItem(`#${titleName}`, words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' '))  
+        
         } 
     }  
 }
@@ -299,17 +270,16 @@ function sanitizeWords(titleName) {
         item.textContent = words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ')[i]
         newList.appendChild(item)
     }
-    //for alert
-    /* newList.childNodes.forEach(elem =>{
-        alerta += elem.textContent
-        alerta.toString().replace(',', ' ')
-    }) */
-
-    
-
-
-    
 }
+//CHANGE give me some nicer font for kids' names
+
+document.querySelector('.resetPoints').addEventListener('click', () => {
+    const regex = '/^@\w+/g'
+    localStorage.clear();
+    console.log(regex)
+    
+})
+
 
 
 
@@ -331,12 +301,7 @@ function sanitizeWords(titleName) {
 
 //**********to do**********//
 
-//write a map of the functions in JS file
+
 
 //find out how to make elements moving on viewport resize or when list deleted.// maybe on freont end mentor someone had something similar
 
-//combine 4 event listeners into one
-//--Decide on page layout: one page or scrollable?
-    //move instructions and toggle button
-    //new list button style
-    //random button style
