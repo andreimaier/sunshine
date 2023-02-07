@@ -39,7 +39,9 @@ const collapsible = document.querySelectorAll('.collapsible')
 //CHECK find the glitch that makes it jump a bit when you save in VSCode
 
 
-//change this to match the the setup the other functions have
+//CHANGE this because you will have a div with a button to add inside it.
+//....maybe even new lists will take this format from now on...
+//CHANGE this to match the the setup the other functions have
 collapsible.forEach((e) => {
     e.addEventListener('click', function(){
         this.classList.toggle('active')
@@ -139,8 +141,10 @@ count.forEach( (e) => {
         
         /* e.parentElement.value = -1  */
         
-        e.classList.toggle('count-disabled')
-        e.textContent = `is absent`
+        e.classList.toggle('count-disabled');
+        e.textContent === `is absent` ?
+        e.textContent = '' :
+        e.textContent = 'is absent';
         
         /*
         e.parentElement.textContent = `${e.parentNode.textContent} absent`
