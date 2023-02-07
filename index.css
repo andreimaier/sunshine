@@ -41,9 +41,8 @@ html, body {
 } 
 body{
     
-    background-color: #e5e5f7;
-    background: radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent) 17.5px 17.5px, linear-gradient(#00A6ED 1.4000000000000001px, transparent 1.4000000000000001px) 0 -0.7000000000000001px, linear-gradient(90deg, #00A6ED 1.4000000000000001px, #e5e5f7 1.4000000000000001px) -0.7000000000000001px 0;
-    background-size: 35px 35px, 35px 35px, 17.5px 17.5px, 17.5px 17.5px;
+    background: rgb(237,237,237);
+background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
     
 }
 p, li, h1, h2, h3, h4, h5, h6 {
@@ -74,7 +73,7 @@ input {
     color: aqua;
 }
 main {
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 #to-save {
     transition: transform 500ms ease;
@@ -133,38 +132,55 @@ h1 {
 }
 
 .students {
+    
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: space-around;
+   
     
 }
 .students button {
-    width: 5rem;
+   
+    width: 25%;
     aspect-ratio: 1;
     position: relative;
 
     background: rgb(201,219,241);
     background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-    border-radius: 30px;
+  
     border: none;
 
     font-size: 1rem;
 
 }
+
+.item:disabled {
+    
+}
+
 .item:active {
     transform: scale(0.9);
     box-shadow: 2px 2px 10px #355070
 }
-.item9 {
-    grid-area: ;
-}
+
 .count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: black;
     position: absolute;
-    bottom: 10px;
-    right: 20px;
+    bottom: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
     font-weight: 600;
+    border: 1px solid black;
+}
+.count-disabled {
+    background-color: #F6511D;
+    /* position: absolute;
+    bottom: 0px;
+    right: 40px; */
+
 }
 
 
@@ -174,12 +190,12 @@ h1 {
     width: max-content;
     border-radius: 10px;
     background: rgb(237,237,237);
-background: radial-gradient(circle, rgba(237,237,237,1) 0%, rgba(251,196,178,1) 100%);
+    background: radial-gradient(circle, rgba(237,237,237,1) 0%, rgba(251,196,178,1) 100%);
     padding: 1rem;
 
 
  
-    color: var(--redOrange);
+    color: var(--CarolinaBlue);
     border: 1px var(--OxfordBlue);
     box-shadow: 5px 5px 20px 1px var(--YInMnBlue);  
     text-align: center;

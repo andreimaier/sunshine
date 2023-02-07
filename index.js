@@ -94,7 +94,7 @@ document.addEventListener('click', e => {
         return
     } 
     if(e.target === instructions) instructionsFun()
-    if(e.target === createNew) createNewFun(e)
+    if(e.target === createNew) listaNoua()
     if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
     if(e.target.matches('.output')) randomFun(e)
 })
@@ -124,33 +124,69 @@ function retrieveScores() {
         if(/^@\w+/g.test(key)) {
         document.getElementById(key).value = valoare
         document.getElementById(key).firstElementChild.textContent = valoare 
-        }
     }
+}
 }
 
 
+const count = document.querySelectorAll('.count')
+
+count.forEach( (e) => {
+    e.addEventListener('click', () => {
+        console.log(e.parentElement.textContent)    
+       
+        e.parentElement.toggleAttribute("disabled") 
+        
+        /* e.parentElement.value = -1  */
+        
+        e.classList.toggle('count-disabled')
+        e.textContent = `is absent`
+        
+        /*
+        e.parentElement.textContent = `${e.parentNode.textContent} absent`
+        
+        
+        
+            console.log('i am disabled')
+            console.log(e.parentNode) */
+        })
+}) 
 
 buttons.forEach((button) => {
-    button.addEventListener('click', ()=> {
-        button.value ++
+    button.addEventListener('dblclick', () => {
+        button.value -= 3
         button.firstElementChild.textContent = button.value
         localStorage.setItem(button.id, button.value) 
     })
+    button.addEventListener('click', (e)=> {
+        if(e.target.matches('.count')) return 
+        else {
+            button.value ++
+            button.firstElementChild.textContent = button.value
+            localStorage.setItem(button.id, button.value) 
+        }
+    })
+    //set the value into the span element
     button.firstElementChild.textContent = button.value 
-        
 })
-function instructionsFun() {
+
+
+
+
+
+
+
+
+
+
+function instructionsFun() { //hides instructions
     document.querySelectorAll('.hidden').forEach( x => {
         if(x.hasAttribute('hidden')) {
             x.removeAttribute('hidden')  
         } else x.setAttribute('hidden', "")
     })
 }
-function createNewFun(e){
-    if(e.target.classList.contains('createNew')) {
-        listaNoua()
-    }
-}
+
 //Functionality for Remove BTN
 function collectionFun(e){
     //remove ONLY if not added to list
@@ -169,6 +205,7 @@ function collectionFun(e){
     && e.target.parentNode.nextSibling.nextSibling.classList.contains('addToRosterAnimation')) {
         alert('Can\'t delete an added list')
     }
+    //adds animation to check button
     if(e.target.classList.contains('fa-circle-check', 'addToRoster')) {
         e.target.parentNode.classList.toggle('addToRosterAnimation')
         changeAddToRosterButton(e)
@@ -187,6 +224,8 @@ function randomFun(e) {
     console.log(randomList)  
     }, 0);
 }
+
+
 //Main functions
 function changeAddToRosterButton(e) {
     //click on ADD
@@ -197,8 +236,6 @@ function changeAddToRosterButton(e) {
     //click on REMOVE
     } else {
         e.target.classList.remove('checked')
-        e.target.style.backgroundColor = 'transparent'  
-        e.target.parentNode.style.backgroundColor = 'transparent'
         removeFromRandomList(e)
     }
 }
@@ -234,6 +271,10 @@ function removeFromRandomList(e) {
     console.log(randomList)
 }
 
+//CHECK reset points button CANNOT remove my lists
+//CHECK START looking into backend storing data server
+//CHECK how to export the points into a file
+
 //OK
 function listaNoua(titleName) {
     titleName = key.value
@@ -245,19 +286,14 @@ function listaNoua(titleName) {
         window.alert('hei...forgot something?')
     } 
     if (titleName != '' && words.value != '') {
-    
-        if(document.getElementById(title.getAttribute('id'))) {
+        if(document.getElementById(title.getAttribute(`id`))) {
             alert('don\'t do it, Mickey!!!!')
         } else {
-    
-        
-        if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
-            createButtonsAndDiv()
-            sanitizeWords(titleName)
-            localStorage.setItem(`#${titleName}`, words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' '))  
-        }
-        
-        
+            if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
+                createButtonsAndDiv()
+                sanitizeWords(titleName)
+                localStorage.setItem(`#${titleName}`, words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' '))  
+            }
         } 
     }  
 }
@@ -271,12 +307,15 @@ function sanitizeWords(titleName) {
         newList.appendChild(item)
     }
 }
-//CHANGE give me some nicer font for kids' names
+/* console.log(words.value) */
 
 document.querySelector('.resetPoints').addEventListener('click', () => {
     const regex = '/^@\w+/g'
     localStorage.clear();
-    console.log(regex)
+    
+    buttons.forEach((button)=> {
+        button.firstElementChild.textContent = null
+    })
     
 })
 
@@ -288,13 +327,7 @@ document.querySelector('.resetPoints').addEventListener('click', () => {
 //have a count on how many times a certain word came up as a random word. make that into local/session storage (and maybe save to account for stats later.)
 //have a higher chance for something to come up if you answer wrongly...or you say you want that word more often
 
-
-
-
-//change to a fun font
-//ADD PHOTOS TO WORD
-
-
+//also for kids to not be 100% random but based on how many time one was picked already
 
 
 
@@ -303,5 +336,5 @@ document.querySelector('.resetPoints').addEventListener('click', () => {
 
 
 
-//find out how to make elements moving on viewport resize or when list deleted.// maybe on freont end mentor someone had something similar
+
 
