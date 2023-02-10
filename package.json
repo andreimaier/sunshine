@@ -1,0 +1,26 @@
+{
+  "name": "sunshine",
+  "version": "1.0.0",
+  "description": "this is saving the scores of my students",
+  "main": "second.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreimaier/sunshine.git"
+  },
+  "keywords": [
+    "scores",
+    "students"
+  ],
+  "author": "andrei maier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andreimaier/sunshine/issues"
+  },
+  "homepage": "https://github.com/andreimaier/sunshine#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
