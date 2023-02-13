@@ -54,7 +54,7 @@ collapsible.forEach((e) => {
     })
 })
 //why no update github
-
+//CHANGE use .append() instead of .appendChild() because you can append multiple elements at once
 
 function createButtonsAndDiv() {
     newList = document.createElement('ul') 

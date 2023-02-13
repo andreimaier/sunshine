@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/andreimaier/sunshine#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nebd": "^0.0.1-security"
   }
 }
