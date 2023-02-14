@@ -73,9 +73,7 @@ input {
 :target {
     color: aqua;
 }
-main {
-    /* padding: 1rem; */
-}
+
 #to-save {
     transition: transform 500ms ease;
 }
@@ -151,9 +149,7 @@ h1 {
 
 }
 
-.item:disabled {
-    
-}
+
 
 .item:active {
     transform: scale(0.9);
