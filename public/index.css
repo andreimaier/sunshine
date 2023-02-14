@@ -40,7 +40,8 @@ html, body {
     height: 100%; 
 } 
 body{
-    
+    max-width: 500px;
+    margin: 2rem auto;
     background: rgb(237,237,237);
 background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
     
@@ -132,18 +133,15 @@ h1 {
 }
 
 .students {
-    
     display: flex;
     flex-wrap: wrap;
-   
-    
+    height: 100vh;
+    justify-content: center;
 }
-.students button {
-   
+.item {
+   height: calc(100vh / 6);
     width: 25%;
-    aspect-ratio: 1;
     position: relative;
-
     background: rgb(201,219,241);
     background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
   
@@ -241,7 +239,13 @@ h1 {
     max-height: 0;
     overflow: hidden;
     transition: 300ms ease-in-out;
+    position: relative;
+    background: rgb(201,219,241);
+    background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
 } 
+.weekX li {
+    padding: 0.2rem;
+}
 
 
 
@@ -298,8 +302,8 @@ button {
     border-radius: 20%;
     padding: 0.2rem;
     position: absolute;
-    right: 5%;
-    bottom: 5%;
+    right: 2%;
+    bottom: 0%;
     font-size: 2rem;
 }
 
@@ -342,14 +346,13 @@ button {
 
 
 
-.divvy,
-.list {
+.divvy {
     padding: 0.5rem;
     transform: rotate(1turn);
     animation: entry 300ms linear;
     flex: 1 1 3rem;
     position: relative;
-    max-width: max-content;
+    max-width: 100%;
     background: rgb(201,219,241);
 background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
 

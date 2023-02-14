@@ -5,10 +5,11 @@ alt + shift + U
 alt + shift + D
 */
 
+console.log(localStorage.remainingSpace)
 
 
-
-const output = document.querySelector('.output');
+const randomWord = document.getElementById('randomWord');
+const randomStudent = document.getElementById('randomStudent');
 const words = document.querySelector('#word-list');
 const instructions = document.getElementById('instructions')
 const createNew = document.getElementById('createNew')
@@ -24,14 +25,16 @@ let emoticon2 = {}
 let addToRoster = {}
 
 let randomList = []
+let studentList = []
+
 
 let starsCount = 0;
 
 
 const animationDuration = 1000
-const lists = document.getElementById('existing-lists')
 
-let valoare = words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ');
+const count = document.querySelectorAll('.count')
+
 
 const buttons = document.querySelectorAll('.item')
 const collapsible = document.querySelectorAll('.collapsible')
@@ -39,22 +42,12 @@ const collapsible = document.querySelectorAll('.collapsible')
 //CHECK find the glitch that makes it jump a bit when you save in VSCode
 
 
-//CHANGE this because you will have a div with a button to add inside it.
-//....maybe even new lists will take this format from now on...
-//CHANGE this to match the the setup the other functions have
-collapsible.forEach((e) => {
-    e.addEventListener('click', function(){
-        this.classList.toggle('active')
-        const content = this.nextElementSibling
-        if(content.style.maxHeight) {
-            content.style.maxHeight = null
-        } else {
-            content.style.maxHeight = content.scrollHeight + 'px'
-        }
-    })
-})
-//why no update github
-//CHANGE use .append() instead of .appendChild() because you can append multiple elements at once
+
+
+
+
+
+
 
 function createButtonsAndDiv() {
     newList = document.createElement('ul') 
@@ -75,33 +68,36 @@ function createButtonsAndDiv() {
     addToRoster.appendChild(emoticon2)
     emoticon2.classList.add('fa-regular', 'fa-circle-check')
     
-    div.appendChild(removeBtn)
-    div.appendChild(title)
-    div.appendChild(addToRoster)
-    div.appendChild(newList) 
+    div.append(removeBtn, title, newList, addToRoster) 
 }
 
 //EVENT listeners
 
-/* words.addEventListener('keyup', () => {
-    document.querySelector('.temporary').value = words.value
-}) */
 document.addEventListener('click', e => {
     if( e.target !== instructions 
         && e.target !== createNew 
-        && !e.target.matches('.output')
+        && !e.target.matches('#randomWord')
+        && !e.target.matches('#randomStudent')
         && !e.target.matches('.fa-circle-check')
         && !e.target.matches('.fa-trash-can')
-        && !e.target.matches('.item')) {
+        && !e.target.matches('.item')
+        && !e.target.matches('.collapsible')
+        && !e.target.matches('#resetPoints')) {
         return
     } 
     if(e.target === instructions) instructionsFun()
     if(e.target === createNew) listaNoua()
     if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
-    if(e.target.matches('.output')) randomFun(e)
+    if(e.target.matches('#randomWord')) randomWordFun(e)
+    if(e.target.matches('#randomStudent')) randomStudentFun(e)
+    if(e.target.matches('.collapsible')) collapsibleFun(e)
+    if(e.target.matches('#resetPoints')) resetPointsFun()
 })
 
 
+
+
+ 
 addEventListener('load', () => {
     retrieveScores()
     for (const [key, value] of Object.entries(localStorage)) {
@@ -110,14 +106,15 @@ addEventListener('load', () => {
             title.textContent = key
             title.setAttribute('id', key)   
             createButtonsAndDiv()
-            for (i = 0; i < value.trim().replace(/(\s|,)+/g, ' '). trim().split(' ').length ; i++) {
+            for (i = 0; i < value.split(',').length ; i++) {
                 const item = document.createElement('li')
-                item.textContent = value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ')[i]
+                item.textContent = value.split(',')[i]
                 newList.appendChild(item)
             }  
         }
     } 
 })
+
 
 //HELPER functions//
 
@@ -126,33 +123,28 @@ function retrieveScores() {
         if(/^@\w+/g.test(key)) {
         document.getElementById(key).value = valoare
         document.getElementById(key).firstElementChild.textContent = valoare 
+        }
     }
 }
+
+function sanitizeWords() {
+    for (i = 0; i < words.value.split(/\n/g).length ; i++) {
+        const item = document.createElement('li')
+        item.textContent = words.value.split(/\n/)[i]
+        newList.appendChild(item)
+    }
 }
-
-
-const count = document.querySelectorAll('.count')
 
 count.forEach( (e) => {
     e.addEventListener('click', () => {
         console.log(e.parentElement.textContent)    
-       
-        e.parentElement.toggleAttribute("disabled") 
         
-        /* e.parentElement.value = -1  */
+        e.parentElement.toggleAttribute("disabled") 
         
         e.classList.toggle('count-disabled');
         e.textContent === `is absent` ?
         e.textContent = '' :
         e.textContent = 'is absent';
-        
-        /*
-        e.parentElement.textContent = `${e.parentNode.textContent} absent`
-        
-        
-        
-            console.log('i am disabled')
-            console.log(e.parentNode) */
         })
 }) 
 
@@ -174,14 +166,15 @@ buttons.forEach((button) => {
     button.firstElementChild.textContent = button.value 
 })
 
-
-
-
-
-
-
-
-
+function collapsibleFun(e) {
+    e.target.classList.toggle('active')
+    const content = e.target.nextElementSibling
+    if(content.style.maxHeight) {
+        content.style.maxHeight = null
+    } else {
+        content.style.maxHeight = content.scrollHeight + 'px'
+    }
+}
 
 function instructionsFun() { //hides instructions
     document.querySelectorAll('.hidden').forEach( x => {
@@ -194,13 +187,14 @@ function instructionsFun() { //hides instructions
 //Functionality for Remove BTN
 function collectionFun(e){
     //remove ONLY if not added to list
-    if(e.target.classList.contains('fa-trash-can') && !e.target.parentNode.nextSibling.nextSibling.classList.contains('addToRosterAnimation')){
+    if(e.target.classList.contains('fa-trash-can') && !e.target.parentNode.parentElement.lastChild.classList.contains('addToRosterAnimation')){
         e.target.classList.add('removeIAnimation')
         e.target.parentNode.classList.add('removeAnimation') 
         
         setTimeout(() => {
             //timeout for divvy to go away       
             e.target.parentNode.parentNode.remove() 
+            localStorage.removeItem(`#${e.target.parentNode.nextSibling.id}`)
             localStorage.removeItem(e.target.parentNode.nextSibling.id)
         }, animationDuration);
     } 
@@ -215,18 +209,41 @@ function collectionFun(e){
         changeAddToRosterButton(e)
     } 
 }
-function randomFun(e) {
+function randomWordFun(e) {
     console.log(e.target)
     setTimeout(() => {
       let index = Math.floor(Math.random() * randomList.length)
-    output.textContent = randomList[index];
-    output.classList.add('outputAnimation')
-        output.classList.remove('outputAnimation'); // reset animation
-        void output.offsetWidth; // trigger reflow
-        output.classList.add('outputAnimation'); // start animation
+    randomWord.textContent = randomList[index];
+    randomWord.classList.add('outputAnimation')
+        randomWord.classList.remove('outputAnimation'); // reset animation
+        void randomWord.offsetWidth; // trigger reflow
+        randomWord.classList.add('outputAnimation'); // start animation
   
     console.log(randomList)  
     }, 0);
+}
+document.querySelectorAll('.item').forEach(item => studentList.push(item.textContent))
+function randomStudentFun(e) {
+    
+    setTimeout(() => {
+      let index = Math.floor(Math.random() * studentList.length)
+    randomStudent.textContent = studentList[index];
+    randomStudent.classList.add('outputAnimation')
+        randomStudent.classList.remove('outputAnimation'); // reset animation
+        void randomStudent.offsetWidth; // trigger reflow
+        randomStudent.classList.add('outputAnimation'); // start animation
+    }, 0);
+}
+
+function resetPointsFun() {
+    for (const [key, valoare] of Object.entries(localStorage)) {
+        if(/^@\w+/g.test(key)) {
+          localStorage.removeItem(key);
+        }
+    }
+    buttons.forEach((button)=> {
+        button.firstElementChild.textContent = null
+    })
 }
 
 
@@ -244,30 +261,22 @@ function changeAddToRosterButton(e) {
     }
 }
 
-//CHECK at some point I have to change the order of element in my preset lists to match the user-built lists or viceversa, to avoid checking all the time what list I am in...
-
-
 function addRandomList(e) {
-    let here = e.target.parentNode.nextSibling
+    const here = e.target.parentElement
     //check if //here// is UL or EMPTY node(between preset li elements)
-    if(here.childNodes){
-        here.childNodes.forEach(elem => {
-            randomList.push(elem.textContent)
-        })
-    }
-    if(here.nextSibling){ //preset lists
-        here.nextSibling.childNodes.forEach(a => {
+    if(here.previousElementSibling.childNodes){ //preset lists
+        here.previousElementSibling.childNodes.forEach(a => {
             if(a.value == 0) {
                 randomList.push(a.textContent) 
             }
         }) 
-    }
-    console.log(randomList)
-} 
-        
+    } 
+console.log(randomList)
+}
+
 function removeFromRandomList(e) {
-    let here = e.target.parentNode.nextElementSibling
-    here.childNodes.forEach(elem => {
+    const here = e.target.parentElement
+    here.previousElementSibling.childNodes.forEach(elem => {
         if(elem.value == 0) {
             randomList.splice(randomList.indexOf(elem.textContent), 1)
         }
@@ -275,7 +284,6 @@ function removeFromRandomList(e) {
     console.log(randomList)
 }
 
-//CHECK reset points button CANNOT remove my lists
 //CHECK START looking into backend storing data server
 //CHECK how to export the points into a file
 
@@ -295,33 +303,18 @@ function listaNoua(titleName) {
         } else {
             if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
                 createButtonsAndDiv()
-                sanitizeWords(titleName)
-                localStorage.setItem(`#${titleName}`, words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' '))  
+                sanitizeWords()
+                localStorage.setItem(`#${titleName}`, words.value.split(/\n/))  
             }
         } 
     }  
 }
 
-//CHANGE to have each word on a new line so you can have words with spaces in them
 
-function sanitizeWords(titleName) {
-    for (i = 0; i < words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ').length ; i++) {
-        const item = document.createElement('li')
-        item.textContent = words.value.trim().replace(/(\s|,)+/g, ' ').trim().split(' ')[i]
-        newList.appendChild(item)
-    }
-}
-/* console.log(words.value) */
 
-document.querySelector('.resetPoints').addEventListener('click', () => {
-    const regex = '/^@\w+/g'
-    localStorage.clear();
-    
-    buttons.forEach((button)=> {
-        button.firstElementChild.textContent = null
-    })
-    
-})
+
+
+
 
 
 
@@ -337,7 +330,6 @@ document.querySelector('.resetPoints').addEventListener('click', () => {
 
 
 //**********to do**********//
-
 
 
 
