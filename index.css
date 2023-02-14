@@ -137,7 +137,7 @@ h1 {
     justify-content: center;
 }
 .item {
-   height: calc(90vh / 6);
+   height: calc(80vh / 6);
     width: 25%;
     position: relative;
     background: rgb(201,219,241);
