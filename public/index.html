@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;800&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/bb8e411a96.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/FA-6/css/all.css" />
+
+    <title>Random WORD</title>
+
+    <script src="./index.js" type="module" defer></script>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <header>
+      <a href="second.html">Second</a>
+    </header>
+    <main>
+      <!-- hide logo for now -->
+      <!--  <nav class="nav">
+        <div><img src="/images/logo.png" class="nav__logo" alt="" /></div>
+        <ul>
+          <li><a href="#to-save">Home</a></li>
+          <li><a href="#random">Second</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav> -->
+
+      <!-- <h1 id="to-save">Students Points</h1> -->
+      <br /><br />
+      <button id="submitToMongodb">Submit to mongodb</button>
+      <br /><br />
+      <section class="students">
+        <button class="item" name="Tony" id="@Tony">
+          Tony<span class="count"></span>
+        </button>
+        <button class="item" id="@Jerry">
+          Jerry
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Emma">
+          Emma
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Eason">
+          Eason<span class="count"></span>
+        </button>
+        <button class="item" id="@Eddie">
+          Eddie<span class="count"></span>
+        </button>
+        <button class="item" id="@Gina">Gina<span class="count"></span></button>
+        <button class="item" id="@Joanna">
+          Joanna<span class="count"></span>
+        </button>
+        <button class="item" id="@Daniel">
+          Daniel
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Lucas">
+          Lucas<span class="count"></span>
+        </button>
+        <button class="item" id="@Grace">
+          Grace
+          <span class="count"></span>
+        </button>
+
+        <button class="item" id="@Mia">
+          Mia
+          <span class="count"></span>
+        </button>
+
+        <button class="item" id="@Cathy">
+          Cathy
+          <span class="count"></span>
+        </button>
+        <button class="item" id=""><span class="count"></span></button>
+        <button class="item" id="@Eva">Eva<span class="count"></span></button>
+        <button class="item" id="@Pauline">
+          Pauline
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Selina">
+          Selina<span class="count"></span>
+        </button>
+        <button class="item" id="@Dora">Dora<span class="count"></span></button>
+        <button class="item" id=""><span class="count"></span></button>
+        <button class="item" id="@Sharon">
+          Sharon<span class="count"></span>
+        </button>
+        <button class="item" id="@Tanya">
+          Tanya<span class="count"></span>
+        </button>
+        <button class="item" id="@Charlotte">
+          Charlotte
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Carissa">
+          Carissa
+          <span class="count"></span>
+        </button>
+        <button class="item" id="">
+          <span class="count"></span>
+        </button>
+        <button class="item" id="">
+          <span class="count"></span>
+        </button>
+        <button class="item" id="@Jenny">
+          Jenny<span class="count"></span>
+        </button>
+      </section>
+      <button class="output" id="randomWord">Random WORD</button>
+      <button class="output" id="randomStudent">Student</button>
+
+      <div id="collection"></div>
+      <section>
+        <button class="collapsible">Week 1</button>
+        <div class="weekX">
+          <ul>
+            <li>burglar</li>
+            <li>chase</li>
+            <li>goal</li>
+            <li>fall over</li>
+            <li>drum</li>
+            <li>be thankful for</li>
+            <li>Morse code</li>
+            <li>distance</li>
+            <li>plane</li>
+            <li>light</li>
+            <li>Semaphore</li>
+            <li>be used to (+Ving)</li>
+            <li>postal system</li>
+            <li>flags</li>
+            <li>treasure</li>
+            <li>explosion</li>
+            <li>quill</li>
+            <li>be willing to</li>
+            <li>target</li>
+            <li>nightmare</li>
+            <li>peacefully</li>
+            <li>hallway</li>
+            <li>lift</li>
+            <li>be worried about</li>
+          </ul>
+          <button class="addToRoster">
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+        </div>
+        <button class="collapsible">Week 1</button>
+        <div class="weekX">
+          <ul>
+            <li>unu</li>
+            <li>doi</li>
+            <li>trei</li>
+            <li>patru</li>
+            <li>patrucincisase</li>
+            <li>patrucincisase</li>
+            <li>patrucincisase</li>
+          </ul>
+          <button class="addToRoster">
+            <i class="fa-regular fa-circle-check"></i>
+          </button>
+        </div>
+      </section>
+      <section class="input">
+        <label for="key" class="hidden">Title:</label>
+        <input type="text" name="key" id="key" placeholder="your title here" />
+        <label class="hidden" for="word-list">Words:</label>
+        <textarea
+          placeholder="Add your words separated by comma, space or a new line"
+          name="word list"
+          id="word-list"
+          cols="20"
+          rows="10"
+        ></textarea>
+
+        <div class="buttons">
+          <button id="instructions">Toggle instructions</button>
+          <button class="createNew" id="createNew">New List</button>
+        </div>
+      </section>
+      <button id="resetPoints">Reset Points</button>
+    </main>
+  </body>
+</html>
