@@ -2,7 +2,7 @@
   "name": "sunshine",
   "version": "1.0.0",
   "description": "this is saving the scores of my students",
-  "main": "second.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
