@@ -15,7 +15,7 @@ const buton = document.querySelector("#submitToMongodb");
 
 //clears EMPTY nodes, changes IDs and empty string score values
 function studentTrimFun() {
-    document.querySelectorAll('.item').forEach( (student) => {
+    document.querySelectorAll('.studentJS').forEach( (student) => {
         if(student.id) {
             student.value === '' 
             ? student.value = 0
@@ -36,7 +36,7 @@ buton.addEventListener("click", async (event) => {
     
     studentTrimFun()
     
-    
+    alert("I updated the database")
    
     const options = {
     method: "POST",
@@ -93,9 +93,10 @@ let starsCount = 0;
 const animationDuration = 1000
 
 const count = document.querySelectorAll('.count')
+const reduce = document.querySelectorAll('.reduce')
 
 
-const buttons = document.querySelectorAll('.item')
+const buttons = document.querySelectorAll('.studentJS')
 const collapsible = document.querySelectorAll('.collapsible')
 
 //CHECK find the glitch that makes it jump a bit when you save in VSCode
@@ -139,7 +140,7 @@ document.addEventListener('click', e => {
         && !e.target.matches('#randomStudent')
         && !e.target.matches('.fa-circle-check')
         && !e.target.matches('.fa-trash-can')
-        && !e.target.matches('.item')
+        && !e.target.matches('.studentJS')
         && !e.target.matches('.collapsible')
         && !e.target.matches('#resetPoints')) {
         return
@@ -206,13 +207,16 @@ count.forEach( (e) => {
         e.textContent = 'is absent';
         })
 }) 
+reduce.forEach( (e) => {
+    e.addEventListener('click', () => {
+        const buton = e.parentElement
+        buton.value -= 2
+        buton.firstElementChild.textContent = buton.value
+        localStorage.setItem(buton.id, buton.value) 
+    })
+})
 
 buttons.forEach((button) => {
-    button.addEventListener('dblclick', () => {
-        button.value -= 3
-        button.firstElementChild.textContent = button.value
-        localStorage.setItem(button.id, button.value) 
-    })
     button.addEventListener('click', (e)=> {
         if(e.target.matches('.count')) return 
         else {
@@ -287,7 +291,13 @@ function randomWordFun(e) {
     console.log(randomList)  
     }, 0);
 }
-document.querySelectorAll('.item').forEach(item => studentList.push(item.textContent))
+document.querySelectorAll('.studentJS').forEach(item => {
+    let nou = item.textContent.replace(/-/, "")
+    studentList.push(nou)
+    if(item.id == "") {
+        studentList.splice(studentList.indexOf(item), 1)
+    }
+})
 function randomStudentFun(e) {
     
     setTimeout(() => {
@@ -298,6 +308,7 @@ function randomStudentFun(e) {
         void randomStudent.offsetWidth; // trigger reflow
         randomStudent.classList.add('outputAnimation'); // start animation
     }, 0);
+    
 }
 
 function resetPointsFun() {
@@ -307,9 +318,13 @@ function resetPointsFun() {
         }
     }
     buttons.forEach((button)=> {
-        button.firstElementChild.textContent = null
+       
+        button.firstElementChild.textContent = null 
     })
+    alert("Erased all points!")
 }
+
+//CHANGE when random student name not to show the - from reduce span
 
 
 //Main functions
@@ -348,9 +363,6 @@ function removeFromRandomList(e) {
     })
     console.log(randomList)
 }
-
-//CHECK START looking into backend storing data server
-//CHECK how to export the points into a file
 
 //OK
 function listaNoua(titleName) {

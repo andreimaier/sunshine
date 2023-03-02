@@ -27,5 +27,6 @@
     "mongodb": "^5.0.1",
     "mongoose": "^6.9.2",
     "nebd": "^0.0.1-security"
-  }
+  },
+  "devDependencies": {}
 }

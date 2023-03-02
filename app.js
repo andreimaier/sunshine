@@ -3,8 +3,8 @@
 
 
 
-const { hello } = require('./testModule')
-hello()
+/* const { hello } = require('./testModule')
+hello() */
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -38,6 +38,7 @@ const Student = mongoose.model('Student', studentSchema)
 app.get('/api', async (request, response) => {
   response.json(await Student.find({}));
     /* res.sendFile(__dirname + './public/index.html') */ //instead of putting things in public folder
+    console.log(`serveru alearga la ${port}`)
 })
 
 
@@ -49,11 +50,6 @@ app.post("/api", (request, response) => {
     class: request.body
   })
 
-
-
-
-
-  
   dailyScores.save(function (err) {
     if (err) console.log(err)
   })

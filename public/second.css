@@ -1,17 +1,76 @@
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    height: 100vh;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+} 
+* {
+  margin: 0;
+  padding: 0; 
+} 
+:root {
+  --animationDuration: 1000ms;
+  --naplesYellow: #FEE165;
+  --redOrange: #F6511D;
+  --CarolinaBlue: #00A6ED;
+  --OxfordBlue: #0D2C54;
+  --YInMnBlue: #355070;
+  --roboto: 'Roboto', sans-serif;
+  --grandstander: 'Grandstander', cursive;
+}
+.nav-link {
+  display: flex;
+  justify-content: end;
+  padding-inline: 1rem;
+  padding-block-start: 1rem;
+  text-decoration: none;
+  color: var(--OxfordBlue);
+  font-size: 1.3rem;
+  text-decoration: underline;
+    font-style: italic;
+}
+
+h1 {
+  text-align: center;
+  padding-block-end: 1rem;
+}
+#pointsTable, td, th {
+  text-align: center;
+}
+
+#pointsTable {
+  border: 1px solid var(--YInMnBlue);
+  overflow: hidden;
+  border-spacing: 0;
+  border-radius: 10px;
+  border-collapse: separate;
   
-  .flex-item {
-    width: 20%;
-    height: 20%;
-    border: 2px solid black;
-    background-color: aquamarine;
-  }
-  
-  .drag-over {
-    background-color: yellow;
-  }
+}
+/* th:first-child{
+  border: none;
+} */
+#pointsTable {
+  width: 90%;
+  min-height: 100vh;
+  margin: 5px auto;
+  box-shadow: 1px 1px 3px var(--YInMnBlue);  
+  font-family: var(--grandstander);
+}
+tr:nth-child(odd) {
+  background-color: var(--CarolinaBlue);
+}
+#appendDate {
+  background-color: transparent;
+}
+.student {
+  font-weight: bold;
+}
+.total {
+  color: var(--redOrange);
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+
+td:not(.student, .total) {
+  padding-block: 1rem;
+  padding-inline: 1rem;
+
+}
