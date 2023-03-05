@@ -1,4 +1,8 @@
-
+//CHANGE get all text blurred or gray when is student is abset.
+//CHANGE when student is abset, make it a thing in the local storage.
+//CHANGE when absent, add a different value to the student's daily points
+//CHANGE when absent, add a different value to the student's daily points AND DO NOT add to total....MAYBE
+//CHANGE when absent,
 
 
 /* 
@@ -36,7 +40,7 @@ buton.addEventListener("click", async (event) => {
     
     studentTrimFun()
     
-    alert("I updated the database")
+    confirm("I updated the database")
    
     const options = {
     method: "POST",
@@ -292,7 +296,7 @@ function randomWordFun(e) {
     }, 0);
 }
 document.querySelectorAll('.studentJS').forEach(item => {
-    let nou = item.textContent.replace(/-/, "")
+    let nou = item.textContent.replace(/⭐/, "")
     studentList.push(nou)
     if(item.id == "") {
         studentList.splice(studentList.indexOf(item), 1)

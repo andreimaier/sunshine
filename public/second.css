@@ -36,22 +36,23 @@ h1 {
 }
 
 #pointsTable {
+ 
   border: 1px solid var(--YInMnBlue);
   overflow: hidden;
   border-spacing: 0;
   border-radius: 10px;
   border-collapse: separate;
+  width: 90%;
+  min-height: 100vh;
+  margin: 5px auto;
+  box-shadow: 1px 1px 3px var(--YInMnBlue);  
+  font-family: var(--grandstander);
   
 }
 /* th:first-child{
   border: none;
 } */
 #pointsTable {
-  width: 90%;
-  min-height: 100vh;
-  margin: 5px auto;
-  box-shadow: 1px 1px 3px var(--YInMnBlue);  
-  font-family: var(--grandstander);
 }
 tr:nth-child(odd) {
   background-color: var(--CarolinaBlue);
