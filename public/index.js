@@ -71,11 +71,9 @@ clasaMea = []
 
 
 
-const randomWord = document.getElementById('randomWord');
-const randomStudent = document.getElementById('randomStudent');
-const words = document.querySelector('#word-list');
-const instructions = document.getElementById('instructions')
-const createNew = document.getElementById('createNew')
+const randomWordButton = document.getElementById('randomWordButton');
+const randomStudentButton = document.getElementById('randomStudentButton');
+
 const key = document.getElementById('key')
 const collection = document.querySelector('#collection')
 
@@ -87,7 +85,6 @@ let emoticon = {}
 let emoticon2 = {}
 let addToRoster = {}
 
-let randomList = []
 let studentList = []
 
 
@@ -103,7 +100,6 @@ const reduce = document.querySelectorAll('.reduce')
 const buttons = document.querySelectorAll('.studentJS')
 const collapsible = document.querySelectorAll('.collapsible')
 
-//CHECK find the glitch that makes it jump a bit when you save in VSCode
 
 
 
@@ -113,48 +109,23 @@ const collapsible = document.querySelectorAll('.collapsible')
 
 
 
-function createButtonsAndDiv() {
-    newList = document.createElement('ul') 
-
-    div = document.createElement('div')   
-    div.setAttribute('class', 'divvy')
-    collection.appendChild(div)
- 
-    removeBtn = document.createElement('button')
-    removeBtn.classList.add('remove')
-    emoticon = document.createElement('i')
-    emoticon.classList.add('fa-trash-can', 'fa-solid')
-    removeBtn.appendChild(emoticon)
-
-    addToRoster = document.createElement('button')
-    addToRoster.classList.add('addToRoster')
-    emoticon2 = document.createElement('i')
-    addToRoster.appendChild(emoticon2)
-    emoticon2.classList.add('fa-regular', 'fa-circle-check')
-    
-    div.append(removeBtn, title, newList, addToRoster) 
-}
 
 //EVENT listeners
 
 document.addEventListener('click', e => {
-    if( e.target !== instructions 
-        && e.target !== createNew 
-        && !e.target.matches('#randomWord')
-        && !e.target.matches('#randomStudent')
-        && !e.target.matches('.fa-circle-check')
-        && !e.target.matches('.fa-trash-can')
+    if( !e.target.matches('#randomWordButton')
+        && !e.target.matches('#randomStudentButton')
+        
         && !e.target.matches('.studentJS')
-        && !e.target.matches('.collapsible')
+      
         && !e.target.matches('#resetPoints')) {
         return
     } 
-    if(e.target === instructions) instructionsFun()
-    if(e.target === createNew) listaNoua()
-    if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
-    if(e.target.matches('#randomWord')) randomWordFun(e)
-    if(e.target.matches('#randomStudent')) randomStudentFun(e)
-    if(e.target.matches('.collapsible')) collapsibleFun(e)
+    
+    
+    if(e.target.matches('#randomWordButton')) randomWordFun(e)
+    if(e.target.matches('#randomStudentButton')) randomStudentFun(e)
+   
     if(e.target.matches('#resetPoints')) resetPointsFun()
 })
 
@@ -162,23 +133,10 @@ document.addEventListener('click', e => {
 
 
  
+
 addEventListener('load', () => {
     retrieveScores()
-    for (const [key, value] of Object.entries(localStorage)) {
-        if(/^#\w+/g.test(key)) {
-            title = document.createElement('h5')
-            title.textContent = key
-            title.setAttribute('id', key)   
-            createButtonsAndDiv()
-            for (i = 0; i < value.split(',').length ; i++) {
-                const item = document.createElement('li')
-                item.textContent = value.split(',')[i]
-                newList.appendChild(item)
-            }  
-        }
-    } 
 })
-
 
 //HELPER functions//
 
@@ -191,13 +149,7 @@ function retrieveScores() {
     }
 }
 
-function sanitizeWords() {
-    for (i = 0; i < words.value.split(/\n/g).length ; i++) {
-        const item = document.createElement('li')
-        item.textContent = words.value.split(/\n/)[i]
-        newList.appendChild(item)
-    }
-}
+
 
 count.forEach( (e) => {
     e.addEventListener('click', () => {
@@ -235,62 +187,32 @@ buttons.forEach((button) => {
     /* button.firstElementChild.textContent = button.value */
 
     //to sent to DB
-    
-    
 })
 
-function collapsibleFun(e) {
-    e.target.classList.toggle('active')
-    const content = e.target.nextElementSibling
-    if(content.style.maxHeight) {
-        content.style.maxHeight = null
-    } else {
-        content.style.maxHeight = content.scrollHeight + 'px'
-    }
-}
 
-function instructionsFun() { //hides instructions
-    document.querySelectorAll('.hidden').forEach( x => {
-        if(x.hasAttribute('hidden')) {
-            x.removeAttribute('hidden')  
-        } else x.setAttribute('hidden', "")
-    })
-}
 
-//Functionality for Remove BTN
-function collectionFun(e){
-    //remove ONLY if not added to list
-    if(e.target.classList.contains('fa-trash-can') && !e.target.parentNode.parentElement.lastChild.classList.contains('addToRosterAnimation')){
-        e.target.classList.add('removeIAnimation')
-        e.target.parentNode.classList.add('removeAnimation') 
-        
-        setTimeout(() => {
-            //timeout for divvy to go away       
-            e.target.parentNode.parentNode.remove() 
-            localStorage.removeItem(`#${e.target.parentNode.nextSibling.id}`)
-            localStorage.removeItem(e.target.parentNode.nextSibling.id)
-        }, animationDuration);
-    } 
-    //checks if list added to randomList
-    if(e.target.classList.contains('fa-trash-can') 
-    && e.target.parentNode.nextSibling.nextSibling.classList.contains('addToRosterAnimation')) {
-        alert('Can\'t delete an added list')
-    }
-    //adds animation to check button
-    if(e.target.classList.contains('fa-circle-check', 'addToRoster')) {
-        e.target.parentNode.classList.toggle('addToRosterAnimation')
-        changeAddToRosterButton(e)
-    } 
-}
+
+
+
+const randomWordOutput = document.getElementById('randomWordOutput')
+
 function randomWordFun(e) {
+    let randomList = []
+    for(const [key, v] of Object.entries(localStorage)) {
+        if(/^#\w+/g.test(key)) {
+    for(const item of localStorage.getItem(key).split(',')) {
+        randomList.push(item)
+        };
+    }
+    }
     console.log(e.target)
     setTimeout(() => {
       let index = Math.floor(Math.random() * randomList.length)
-    randomWord.textContent = randomList[index];
-    randomWord.classList.add('outputAnimation')
-        randomWord.classList.remove('outputAnimation'); // reset animation
-        void randomWord.offsetWidth; // trigger reflow
-        randomWord.classList.add('outputAnimation'); // start animation
+      randomWordOutput.textContent = randomList[index];
+    randomWordButton.classList.add('outputAnimation')
+        randomWordButton.classList.remove('outputAnimation'); // reset animation
+        void randomWordButton.offsetWidth; // trigger reflow
+        randomWordButton.classList.add('outputAnimation'); // start animation
   
     console.log(randomList)  
     }, 0);
@@ -302,15 +224,17 @@ document.querySelectorAll('.studentJS').forEach(item => {
         studentList.splice(studentList.indexOf(item), 1)
     }
 })
+
+const randomStudentOutput = document.getElementById("randomStudentOutput")
 function randomStudentFun(e) {
     
     setTimeout(() => {
       let index = Math.floor(Math.random() * studentList.length)
-    randomStudent.textContent = studentList[index];
-    randomStudent.classList.add('outputAnimation')
-        randomStudent.classList.remove('outputAnimation'); // reset animation
-        void randomStudent.offsetWidth; // trigger reflow
-        randomStudent.classList.add('outputAnimation'); // start animation
+      randomStudentOutput.textContent = studentList[index];
+      randomStudentButton.classList.add('outputAnimation')
+        randomStudentButton.classList.remove('outputAnimation'); // reset animation
+        void randomStudentButton.offsetWidth; // trigger reflow
+        randomStudentButton.classList.add('outputAnimation'); // start animation
     }, 0);
     
 }
@@ -329,73 +253,6 @@ function resetPointsFun() {
 }
 
 //CHANGE when random student name not to show the - from reduce span
-
-
-//Main functions
-function changeAddToRosterButton(e) {
-    //click on ADD
-    if(!e.target.classList.contains('checked')) {
-        e.target.classList.add('checked')
-       
-        addRandomList(e) 
-    //click on REMOVE
-    } else {
-        e.target.classList.remove('checked')
-        removeFromRandomList(e)
-    }
-}
-
-function addRandomList(e) {
-    const here = e.target.parentElement
-    //check if //here// is UL or EMPTY node(between preset li elements)
-    if(here.previousElementSibling.childNodes){ //preset lists
-        here.previousElementSibling.childNodes.forEach(a => {
-            if(a.value == 0) {
-                randomList.push(a.textContent) 
-            }
-        }) 
-    } 
-console.log(randomList)
-}
-
-function removeFromRandomList(e) {
-    const here = e.target.parentElement
-    here.previousElementSibling.childNodes.forEach(elem => {
-        if(elem.value == 0) {
-            randomList.splice(randomList.indexOf(elem.textContent), 1)
-        }
-    })
-    console.log(randomList)
-}
-
-//OK
-function listaNoua(titleName) {
-    titleName = key.value
-    title = document.createElement('h5')
-    title.textContent = titleName
-    title.setAttribute('id', titleName)
-
-    if (titleName == '' || words.value == '') {
-        window.alert('hei...forgot something?')
-    } 
-    if (titleName != '' && words.value != '') {
-        if(document.getElementById(title.getAttribute(`id`))) {
-            alert('don\'t do it, Mickey!!!!')
-        } else {
-            if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
-                createButtonsAndDiv()
-                sanitizeWords()
-                localStorage.setItem(`#${titleName}`, words.value.split(/\n/))  
-            }
-        } 
-    }  
-}
-
-
-
-
-
-
 
 
 

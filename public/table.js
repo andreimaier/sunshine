@@ -39,14 +39,79 @@ students.forEach(student => {
 })  */  
 
 let maxArr = []
-let max, sum
+let sum
+
+
+
+
+
+
+let studentPoints 
+let totalArray = []
+
+
 
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
   
- 
   console.log(data)
+
+    
+   const studentPoints = data.reduce((acc, curr) => {
+      curr.class.forEach(student => {
+        const index = acc.findIndex(s => s.name === student.name);
+        if (index !== -1) {
+          acc[index].points += parseInt(student.points, 10);
+        } else {
+          acc.push({
+            name: student.name,
+            points: parseInt(student.points, 10)
+          });
+        }
+      });
+      return acc;
+    }, []);
+console.log(studentPoints)
+    
+        /* totalArray = totalArray.sort(function(a, b) {
+          return a - b;
+        }).reverse(); */
+
+let max
+  //👑 TOTAL
+  students.forEach(elev => {
+      const { points } = studentPoints.find(({ name }) => name == elev.textContent)
+      const td = document.createElement('td')
+  
+      elev.parentNode.append(td)
+      td.textContent = points
+      
+      totalArray.push(points)
+
+      totalArray.sort((a, b) => a - b).reverse(); 
+      
+      /* td.textContent == totalArray[0] ? 
+      td.textContent = `👑${td.textContent}` :
+      td.textContent = td.textContent  */
+    })  
+ 
+    students.forEach(elev => {
+      let obiect = elev.nextElementSibling
+      
+      obiect.textContent == totalArray[0] ? 
+      obiect.textContent = `🥇${obiect.textContent}` :
+      obiect.textContent == totalArray[1] ? 
+      obiect.textContent = `🥈${obiect.textContent}` :
+      obiect.textContent == totalArray[2] ? 
+      obiect.textContent = `🥉${obiect.textContent}` :
+      obiect.textContent = obiect.textContent 
+    })
+
+
+    console.log(typeof totalArray[0])
+    console.log(typeof totalArray)
+
 
 
   for(let obj of data){
@@ -55,18 +120,14 @@ async function getDataFun() {
     th.textContent = obj.date
     appendDate.append(th)
 
-     
-       
        maxArr = obj.class.map(lala => parseInt(lala.points)); 
       let max = Math.max(...maxArr)
+
+      
+
     
 
-
-     /*  const { puncte } = obj.class.find(({points})) 
-      console.log(puncte) */
-      /* const studentIndex = data.classes[classIndex].students.findIndex(student => student.points === Math.max(...data.classes[classIndex].students.map(student => student.points))); */
-
-     
+    //👑 DAY
     students.forEach(elev => {
       const { points } = obj.class.find(({ name }) => name === elev.textContent)
       const td = document.createElement('td')
@@ -74,17 +135,16 @@ async function getDataFun() {
       td.textContent = points
       
 
-      if(td.textContent === max.toString()) {
-        td.textContent = "👑" + points 
-      }
-      
-    
-    
+      if(td.textContent == max.toString()) {
+        td.textContent = `👑${points}` 
+      } 
     });
 
    
    
   }
+
+
 }
 
 getDataFun()

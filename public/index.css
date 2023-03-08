@@ -40,11 +40,7 @@ html, body {
     height: 100%; 
 } 
 body{
-
-  
-    background: rgb(237,237,237);
-background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
-    
+    background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
 }
 p, li, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
@@ -112,27 +108,12 @@ header {
     font-size: 2rem;
     font-weight: bolder;
 }
+.fa {
+    
+}
 
 
-#key,
-#word-list,
-/* .output, */
-.divvy,
-.list  {
-    margin-block: 0.3rem;
-    border: var(--YInMnBlue);
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px var(--YInMnBlue);  
-}
-#key:focus,
-#word-list:focus {
-    outline: 2px solid var(--OxfordBlue);
-}
-#key,
-#word-list {
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
-}
+
 h1 {
     text-align: center;
     margin-bottom: 2rem;
@@ -174,10 +155,39 @@ main {
 
 
 
-/* .itemCSS:active {
-    transform: scale(0.9);
-    box-shadow: 2px 2px 10px #355070
-} */
+
+.randomFields {
+    width: calc(100% - 10px);  
+    margin-top: 10px;
+}
+
+.randomFields__div {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.randomFields__para {
+    border-radius: 10px;
+    width: 70%;
+    min-height: 2.4rem;
+    margin-bottom: 10px;
+    border: 5px inset white;
+    color: #eee;
+    padding-block: 2px;
+    padding-inline: 10px;
+}
+.randomFields__button {
+    margin-bottom: 10px;
+    border: none;
+    background: none;
+    font-size: 2rem;
+   
+    border-radius: 10px;
+    color: var(--OxfordBlue);
+}
+
+
+
 .reduce {
     /* border: 1px solid black; */
     width: 20px;
@@ -205,6 +215,8 @@ main {
     font-weight: 600;
     color: var(--OxfordBlue);
 }
+
+/* add smth here to blur the name and also in JS to take out of local storage for the day pls...maybe store a special value...? */
 .count-disabled {
     color: grey;
     font-size: 0.8rem;
@@ -215,99 +227,12 @@ main {
 
 }
 
-.randomStuff{
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 10px);
-
-
-}
-
-
-.output {
-   
-    border-radius: 10px;
-    background: radial-gradient(circle, rgba(237,237,237,1) 0%, rgba(251,196,178,1) 100%);
-    padding: 1rem;
- 
-    color: var(--CarolinaBlue);
-    border: 1px var(--OxfordBlue);
-    box-shadow: 5px 5px 20px 1px var(--YInMnBlue);  
-    text-align: center;
-    font-family: var(--grandstander);
-    font-weight: 800;
-    letter-spacing: 0.2rem;
-    font-size: 1.5rem;
-
-}
-
-/* .output:active {
-    transform: scale(0.98);
-    box-shadow: 1px 1px 22px 1px rgba(0, 0, 0, 0.24);
-} */ 
-
-
-.collapsible {
-    margin-top: 10px;
-    background-color: #eee;
-    color: var(--CarolinaBlue);
-    cursor: pointer;
-    padding: 1rem;
-    width: 100%;
-    border: none;
-    text-align: left;
-    
-}
-.collapsible:after {
-    content: '\002B'; 
-    color: var(--CarolinaBlue);
-    float: right;
-}
-.active {
-    background-color: #0D2C54;
-    
-}
-
-.active:after {
-    content: "\2212";
-}
-.weekX {
-    max-height: 0;
-    overflow: hidden;
-    transition: 300ms ease-in-out;
-    position: relative;
-    background: rgb(201,219,241);
-    background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-} 
-.weekX li {
-    padding: 0.2rem;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CHANGE this to move title and words away */
-.input {
-    display: flex;
-    flex-direction: column;
-    max-width: 900%;
-    padding: 1rem;
-}
 
 .buttons {
     display: inherit;
-    justify-content: space-around;
+    justify-content: space-evenly;
     gap: 0.3rem;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 80px;
     width: calc(100% - 10px);
 }
@@ -326,128 +251,6 @@ main {
     background-color: var(--CarolinaBlue);
 }
 
-/* #random {
-    width: 100px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: none;
-    background: no-repeat center/110% url(/images/spin\ wheel.png);
-} */
-
-.remove {
-    background-color: transparent;
-    color: darkblue;
-    font-size: 2rem;
-    border-radius: 20%;
-    padding: 0.2rem;
-    border: none;
-    position: absolute;
-    right: 5%;
-    top: 5%; 
-    
-}
-.addToRoster {
-    color: var(--YInMnBlue);
-    background-color: transparent;
-    border: none;
-    border-radius: 20%;
-    padding: 0.2rem;
-    position: absolute;
-    right: 2%;
-    bottom: 0%;
-    font-size: 2rem;
-}
-
-
-
-.checked {
-    color: var(--CarolinaBlue);
-    transition: 300ms ease-in-out;
-}
-
-
-.addToRosterAnimation {
-    animation: jiggle 500ms ease-in-out;
-} 
-
-.removeAnimation {
-    background-color: transparent;
-    transition: var(--animationDuration);
-} 
-.removeIAnimation {
-    transform: scale(0.1) rotate(1turn);
-    transition: var(--animationDuration) ease;
-}
-
-
-
-
-
-#collection,
-.existing-lists {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    
-}
-
-
-
-
-
-
-
-.divvy {
-    padding: 0.5rem;
-    transform: rotate(1turn);
-    animation: entry 300ms linear;
-    flex: 1 1 3rem;
-    position: relative;
-    max-width: 100%;
-    background: rgb(201,219,241);
-background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-
-
-}
-
-
-
-/* .scoate-afara {
-    transform: translateX(100vw);
-} */
-
-.divvy h5,
-.list h5 {
-    padding-right: 3.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-.divvy ul,
-.list ul {
-    padding-top: 0.5rem;
-    padding-right: 3.5rem;
-}
-.divvy h5,
-.list h5 {
-    max-width: max-content;
-}
-.divvy li,
-.list li {
-    overflow-wrap: break-word;
-}
-
-
-
-@keyframes entry {
-    from {
-        transform: scaleY(0) 
-    }
-    to {
-        transform: scaleY(1) ;
-        
-    }
-}
-
 
 .outputAnimation {
     animation: word 300ms ease-in-out;
@@ -462,38 +265,8 @@ background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 
     }
 }
 
-@keyframes jiggle {
-    20% {
-        transform: translateX(-20%)
-    }
-    40% {
-        transform: translateX(20%)
-    }
-    60% {
-        transform: translateX(-10%)
-    }
-    80% {
-        transform: translateX(10%)
-    }
-}
 
-@media screen and (min-width: 45em) {
-    nav li:hover {
-        transform: translate(0, 5px);
-        transition:  300ms ease;
-    }
-    
-    nav a:hover {
-        background-color: darkblue;
-        color: yellow;
-        transition:  300ms ease;
-        
-    }
-}
 
-.resetPoints {
-    margin: 2rem;
-}
 
 
 /* //// add remove animation

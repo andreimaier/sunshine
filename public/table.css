@@ -15,16 +15,22 @@
   --roboto: 'Roboto', sans-serif;
   --grandstander: 'Grandstander', cursive;
 }
-.nav-link {
+
+header {
+  
   display: flex;
+  width: 100%;
+  padding-inline-end: 1rem;
+  padding-block: 0.5rem;
   justify-content: end;
-  padding-inline: 1rem;
-  padding-block-start: 1rem;
+  align-items: center;
+}
+.nav-link {
   text-decoration: none;
-  color: var(--OxfordBlue);
-  font-size: 1.3rem;
-  text-decoration: underline;
-    font-style: italic;
+  color: whitesmoke;
+  /* font-style: italic; */
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 h1 {
