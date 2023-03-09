@@ -5,6 +5,20 @@
 //CHANGE when absent,
 
 
+
+//FOR MARCH 9th
+//bigger font on names on table
+//2nd and 3rd for each days
+
+//fix table head to always show
+//--both column and header
+
+//FOR MARCH 10th
+//make the absent kid invisible
+//make the absent kid have some special score on DB
+
+
+
 /* 
 ctrl + alt + L 
 alt + shift + C

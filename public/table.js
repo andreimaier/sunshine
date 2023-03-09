@@ -120,8 +120,14 @@ let max
     th.textContent = obj.date
     appendDate.append(th)
 
-       maxArr = obj.class.map(lala => parseInt(lala.points)); 
-      let max = Math.max(...maxArr)
+      maxArr = obj.class.map(lala => parseInt(lala.points)); 
+      maxArr.sort((a, b) => a - b).reverse()
+      
+
+      console.log(maxArr)
+      
+      
+       /* let max = Math.max(...maxArr) */
 
       
 
@@ -135,9 +141,20 @@ let max
       td.textContent = points
       
 
-      if(td.textContent == max.toString()) {
+      /* if(td.textContent == max.toString()) {
         td.textContent = `👑${points}` 
-      } 
+      }  */
+    td.textContent == maxArr[0] ?
+    td.textContent = `🥇${maxArr[0]}`:
+    td.textContent == maxArr[1] ?
+    td.textContent = `🥈${maxArr[0]}`:
+    td.textContent == maxArr[2] ?
+    td.textContent = `🥉${maxArr[0]}`: 
+    td.textContent = td.textContent
+
+
+
+
     });
 
    

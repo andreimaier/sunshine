@@ -15,7 +15,10 @@
   --roboto: 'Roboto', sans-serif;
   --grandstander: 'Grandstander', cursive;
 }
-
+main {
+  /* width: 100vw; */
+  margin: auto;
+}
 header {
   
   display: flex;
@@ -37,6 +40,12 @@ h1 {
   text-align: center;
   padding-block-end: 1rem;
 }
+#section__pointsTable {
+  position: relative;
+  overflow: auto;
+  
+  white-space: nowrap;
+}
 #pointsTable, td, th {
   text-align: center;
 }
@@ -44,7 +53,7 @@ h1 {
 #pointsTable {
  
   border: 1px solid var(--YInMnBlue);
-  overflow: hidden;
+  /* overflow: hidden; */
   border-spacing: 0;
   border-radius: 10px;
   border-collapse: separate;
@@ -58,26 +67,46 @@ h1 {
 /* th:first-child{
   border: none;
 } */
-#pointsTable {
-}
+/* .total {
+  color: #FEE165;
+  width: 20px;
+  border: 1px solid black;
+} */
+
+
+
+
 tr:nth-child(odd) {
   background-color: var(--CarolinaBlue);
 }
 #appendDate {
   background-color: transparent;
 }
-.student {
+.itemCSS {
+ /*  width: 100px; */
+  left: 0px;
   font-weight: bold;
+  font-size: 1.3rem;
 }
-.total {
-  color: var(--redOrange);
-  font-weight: 900;
-  font-size: 1.2rem;
+td {
+  z-index: 1;
 }
 
 
-td:not(.student, .total) {
+td:not(.total) {
   padding-block: 1rem;
   padding-inline: 1rem;
 
+}
+td:first-of-type{
+  
+}
+
+.sticky {
+  /* position: sticky; */
+  z-index: 9;
+
+}
+.sticky:nth-child() {
+  background-color: green;
 }
