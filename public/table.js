@@ -130,9 +130,9 @@ console.log(maxArr)
     td.textContent == maxArr[0] ?
     td.textContent = `🥇${maxArr[0]}`:
     td.textContent == maxArr[1] ?
-    td.textContent = `🥈${maxArr[0]}`:
+    td.textContent = `🥈${maxArr[1]}`:
     td.textContent == maxArr[2] ?
-    td.textContent = `🥉${maxArr[0]}`: 
+    td.textContent = `🥉${maxArr[2]}`: 
     td.textContent = td.textContent
 
 

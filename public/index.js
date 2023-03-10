@@ -6,7 +6,8 @@
 
 
 //FOR MARCH 10th
-//find the missing random button
+//erase points properly
+//gray student properly
 
 
 /* 
