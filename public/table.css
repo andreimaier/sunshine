@@ -16,7 +16,7 @@
   --grandstander: 'Grandstander', cursive;
 }
 main {
-  /* width: 100vw; */
+  width: 100vw;
   margin: auto;
 }
 header {
@@ -31,7 +31,7 @@ header {
 .nav-link {
   text-decoration: none;
   color: whitesmoke;
-  /* font-style: italic; */
+ 
   font-size: 2rem;
   font-weight: bolder;
 }
@@ -43,17 +43,15 @@ h1 {
 #section__pointsTable {
   position: relative;
   overflow: auto;
-  
-  white-space: nowrap;
+ /*  white-space: nowrap; */
 }
 #pointsTable, td, th {
   text-align: center;
 }
 
 #pointsTable {
- 
   border: 1px solid var(--YInMnBlue);
-  /* overflow: hidden; */
+  overflow: hidden; 
   border-spacing: 0;
   border-radius: 10px;
   border-collapse: separate;
@@ -62,34 +60,33 @@ h1 {
   margin: 5px auto;
   box-shadow: 1px 1px 3px var(--YInMnBlue);  
   font-family: var(--grandstander);
-  
 }
-/* th:first-child{
-  border: none;
-} */
-/* .total {
-  color: #FEE165;
-  width: 20px;
-  border: 1px solid black;
-} */
-
-
 
 
 tr:nth-child(odd) {
   background-color: var(--CarolinaBlue);
 }
+tr:nth-child(odd) td:first-child,
+tr:nth-child(odd) td:nth-child(2) {
+  background-color: var(--CarolinaBlue);
+}
+tr:nth-child(even) td:first-child,
+tr:nth-child(even) td:nth-child(2)  {
+  background-color: white;
+}
+tr th:first-child,
+tr th:nth-child(2) {
+  background-color: white;
+}
+
 #appendDate {
-  background-color: transparent;
+  background-color: white;
 }
 .itemCSS {
- /*  width: 100px; */
+  width: 100px;
   left: 0px;
   font-weight: bold;
   font-size: 1.3rem;
-}
-td {
-  z-index: 1;
 }
 
 
@@ -98,15 +95,16 @@ td:not(.total) {
   padding-inline: 1rem;
 
 }
-td:first-of-type{
-  
-}
 
 .sticky {
-  /* position: sticky; */
-  z-index: 9;
-
+  position: sticky;
+  left: 0px;
+  width: 100px;
 }
-.sticky:nth-child() {
-  background-color: green;
+.stickyTotal {
+  position: sticky;
+  overflow: hidden;
+  left: 110px;
+  width: 50px;
+  
 }

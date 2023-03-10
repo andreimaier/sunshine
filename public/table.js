@@ -55,30 +55,29 @@ async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
   
-  console.log(data)
+ /*  console.log(data) */
 
     
    const studentPoints = data.reduce((acc, curr) => {
       curr.class.forEach(student => {
         const index = acc.findIndex(s => s.name === student.name);
+        if (!isNaN(parseInt(student.points))) {
         if (index !== -1) {
           acc[index].points += parseInt(student.points, 10);
         } else {
-          acc.push({
-            name: student.name,
-            points: parseInt(student.points, 10)
-          });
+            acc.push({
+              name: student.name,
+              points: parseInt(student.points, 10)
+            });
+          }
         }
       });
       return acc;
     }, []);
-console.log(studentPoints)
+/* console.log(studentPoints) */
     
-        /* totalArray = totalArray.sort(function(a, b) {
-          return a - b;
-        }).reverse(); */
 
-let max
+
   //👑 TOTAL
   students.forEach(elev => {
       const { points } = studentPoints.find(({ name }) => name == elev.textContent)
@@ -86,14 +85,15 @@ let max
   
       elev.parentNode.append(td)
       td.textContent = points
+      td.classList.add('stickyTotal')
+
+      if (!isNaN(parseInt(points))) {
+        totalArray.push(points)
+      }
       
-      totalArray.push(points)
 
       totalArray.sort((a, b) => a - b).reverse(); 
-      
-      /* td.textContent == totalArray[0] ? 
-      td.textContent = `👑${td.textContent}` :
-      td.textContent = td.textContent  */
+    console.log(totalArray)
     })  
  
     students.forEach(elev => {
@@ -109,11 +109,6 @@ let max
     })
 
 
-    console.log(typeof totalArray[0])
-    console.log(typeof totalArray)
-
-
-
   for(let obj of data){
     obj.date = obj.date.replace('/2023', '')
     th = document.createElement('th') 
@@ -122,16 +117,6 @@ let max
 
       maxArr = obj.class.map(lala => parseInt(lala.points)); 
       maxArr.sort((a, b) => a - b).reverse()
-      
-
-      console.log(maxArr)
-      
-      
-       /* let max = Math.max(...maxArr) */
-
-      
-
-    
 
     //👑 DAY
     students.forEach(elev => {

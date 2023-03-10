@@ -218,13 +218,7 @@ main {
 
 /* add smth here to blur the name and also in JS to take out of local storage for the day pls...maybe store a special value...? */
 .count-disabled {
-    color: grey;
-    font-size: 0.8rem;
-    font-family: var(--roboto);
-    font-weight: 100;
-    width: 100%;
-    border: none;
-
+    color: grey; 
 }
 
 

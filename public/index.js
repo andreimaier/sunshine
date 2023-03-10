@@ -5,18 +5,8 @@
 //CHANGE when absent,
 
 
-
-//FOR MARCH 9th
-//bigger font on names on table
-//2nd and 3rd for each days
-
-//fix table head to always show
-//--both column and header
-
 //FOR MARCH 10th
-//make the absent kid invisible
-//make the absent kid have some special score on DB
-
+//find the missing random button
 
 
 /* 
@@ -29,15 +19,15 @@ alt + shift + D
 
 let elev, name, score
 let clasaMea = []
-const buton = document.querySelector("#submitToMongodb");
+const submitDB = document.querySelector("#submitToMongodb");
 
 //clears EMPTY nodes, changes IDs and empty string score values
 function studentTrimFun() {
     document.querySelectorAll('.studentJS').forEach( (student) => {
         if(student.id) {
             student.value === '' 
-            ? student.value = 0
-            : student.value
+            ? student.value = 'abs'
+            : student.value 
             
             elev = { name: `${student.id.replace('@', '')}`, points: student.value }
         
@@ -50,7 +40,7 @@ function studentTrimFun() {
 
 
 
-buton.addEventListener("click", async (event) => {
+submitDB.addEventListener("click", async (event) => {
     
     studentTrimFun()
     
@@ -168,13 +158,12 @@ function retrieveScores() {
 count.forEach( (e) => {
     e.addEventListener('click', () => {
         console.log(e.parentElement.textContent)    
-        
+        const text = e.parentElement
         e.parentElement.toggleAttribute("disabled") 
         
-        e.classList.toggle('count-disabled');
-        e.textContent === `is absent` ?
-        e.textContent = '' :
-        e.textContent = 'is absent';
+        e.parentElement.classList.toggle('count-disabled');
+        console.log(e.parentElement.value)
+   
         })
 }) 
 reduce.forEach( (e) => {
