@@ -93,7 +93,6 @@ async function getDataFun() {
       
 
       totalArray.sort((a, b) => a - b).reverse(); 
-    console.log(totalArray)
     })  
  
     students.forEach(elev => {
@@ -115,9 +114,10 @@ async function getDataFun() {
     th.textContent = obj.date
     appendDate.append(th)
 
-      maxArr = obj.class.map(lala => parseInt(lala.points)); 
-      maxArr.sort((a, b) => a - b).reverse()
-
+      const lol = obj.class.map(lala => parseInt(lala.points)); 
+      maxArr = lol.filter(e => !isNaN(e))
+      maxArr.sort((a, b) => a - b).reverse() 
+console.log(maxArr)
     //👑 DAY
     students.forEach(elev => {
       const { points } = obj.class.find(({ name }) => name === elev.textContent)
@@ -126,9 +126,7 @@ async function getDataFun() {
       td.textContent = points
       
 
-      /* if(td.textContent == max.toString()) {
-        td.textContent = `👑${points}` 
-      }  */
+      
     td.textContent == maxArr[0] ?
     td.textContent = `🥇${maxArr[0]}`:
     td.textContent == maxArr[1] ?
