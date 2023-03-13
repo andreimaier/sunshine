@@ -1,13 +1,15 @@
-//CHANGE get all text blurred or gray when is student is abset.
-//CHANGE when student is abset, make it a thing in the local storage.
-//CHANGE when absent, add a different value to the student's daily points
-//CHANGE when absent, add a different value to the student's daily points AND DO NOT add to total....MAYBE
-//CHANGE when absent,
+//fully automated atlas db submission at time of day
+//list of db entries with data displayed...for me to delete easier
+
+//BIG ONE
+//--password and account
+//--specific pages
 
 
-//FOR MARCH 10th
-//erase points properly
-//gray student properly
+
+//FOR MARCH 13th
+//for all devices
+
 
 
 /* 
@@ -16,6 +18,8 @@ alt + shift + C
 alt + shift + U
 alt + shift + D
 */
+
+
 //CONNECT TO BACK
 
 let elev, name, score
@@ -26,9 +30,6 @@ const submitDB = document.querySelector("#submitToMongodb");
 function studentTrimFun() {
     document.querySelectorAll('.studentJS').forEach( (student) => {
         if(student.id) {
-            student.value === '' 
-            ? student.value = 'abs'
-            : student.value 
             
             elev = { name: `${student.id.replace('@', '')}`, points: student.value }
         
@@ -37,8 +38,6 @@ function studentTrimFun() {
 })
     console.log(clasaMea)
 }
-
-
 
 
 submitDB.addEventListener("click", async (event) => {
@@ -62,20 +61,6 @@ clasaMea = []
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const randomWordButton = document.getElementById('randomWordButton');
 const randomStudentButton = document.getElementById('randomStudentButton');
 
@@ -92,26 +77,12 @@ let addToRoster = {}
 
 let studentList = []
 
-
-let starsCount = 0;
-
-
 const animationDuration = 1000
 
 const count = document.querySelectorAll('.count')
 const reduce = document.querySelectorAll('.reduce')
 
-
 const buttons = document.querySelectorAll('.studentJS')
-const collapsible = document.querySelectorAll('.collapsible')
-
-
-
-
-
-
-
-
 
 
 
@@ -120,17 +91,12 @@ const collapsible = document.querySelectorAll('.collapsible')
 document.addEventListener('click', e => {
     if( !e.target.matches('#randomWordButton')
         && !e.target.matches('#randomStudentButton')
-        
         && !e.target.matches('.studentJS')
-      
         && !e.target.matches('#resetPoints')) {
         return
     } 
-    
-    
     if(e.target.matches('#randomWordButton')) randomWordFun(e)
     if(e.target.matches('#randomStudentButton')) randomStudentFun(e)
-   
     if(e.target.matches('#resetPoints')) resetPointsFun()
 })
 
@@ -158,12 +124,16 @@ function retrieveScores() {
 
 count.forEach( (e) => {
     e.addEventListener('click', () => {
-        console.log(e.parentElement.textContent)    
         const text = e.parentElement
-        e.parentElement.toggleAttribute("disabled") 
+        console.log(e.nextElementSibling)    
+        e.textContent = ''
+        text.toggleAttribute("disabled") 
         
-        e.parentElement.classList.toggle('count-disabled');
-        console.log(e.parentElement.value)
+        text.hasAttribute('disabled') ?
+        e.nextElementSibling.textContent = '' :
+        e.nextElementSibling.textContent = '⭐' 
+
+        text.classList.toggle('count-disabled');
    
         })
 }) 
@@ -251,12 +221,13 @@ function resetPointsFun() {
     }
     buttons.forEach((button)=> {
        
-        button.firstElementChild.textContent = null 
+        button.firstElementChild.textContent = '' 
+        button.value = ''
     })
     alert("Erased all points!")
 }
 
-//CHANGE when random student name not to show the - from reduce span
+
 
 
 

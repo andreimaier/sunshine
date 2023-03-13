@@ -20,15 +20,13 @@
 /* html {
     color-scheme: dark light;
 }  */
-html, body {
-    height: 100%; 
-} 
-body{
 
-  
-    background: rgb(237,237,237);
-background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
+/* html, body {
     
+} */ 
+
+body{
+    background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);    
 }
 p, li, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
@@ -77,11 +75,17 @@ header {
     font-weight: bolder;
 }
 
+.input,
+#lists__section {
+    width: 60%;
+}
+
+
 #key,
 #word-list,
 /* .output, */
 .divvy,
-.list  {
+.list {
     margin-block: 0.3rem;
     border: var(--YInMnBlue);
     border-radius: 10px;
@@ -134,17 +138,13 @@ main {
 }
 .active {
     background-color: #0D2C54;
-    
 }
 
 .active:after {
     content: "\2212";
 }
-
-
-
 .weekX {
-   
+    max-height: 0;
     overflow: hidden;
     transition: 300ms ease-in-out;
     position: relative;
@@ -160,7 +160,6 @@ main {
     display: flex;
     flex-direction: column;
     max-width: 900%;
-    padding: 1rem;
 }
 
 .remove {
@@ -255,4 +254,26 @@ background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 
 .divvy li,
 .list li {
     overflow-wrap: break-word;
+}
+
+.buttons {
+    margin-bottom: 10px;
+}
+
+/* #lists__section {
+  
+} */
+#lists__box {
+    
+    border-radius: 10px;
+    min-height: 2.4rem;
+    margin-bottom: 10px;
+    border: 5px inset white;
+    color: #eee;
+    padding-block: 2px;
+    padding-inline: 10px;
+}
+.lists__item {
+    display: flex;
+    justify-content: space-around;
 }

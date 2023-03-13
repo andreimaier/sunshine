@@ -1,103 +1,4 @@
-const data = [
-    {
-        date: "03/02/2023",
-        class: [
-            {
-                name: "eddie",
-                points: "10"
-            },
-            {
-                name: "tony",
-                points: "11"
-            },
-            {
-                name: "mia",
-                points: "100"
-            },
-            {
-                name: "Carissa",
-                points: "30"
-            },
-            {
-                name: "Eason",
-                points: "50"
-            }
-        ]
-    },
-    {
-        date: "03/03/2023",
-        class: [
-            {
-                name: "eddie",
-                points: "100"
-            },
-            {
-                name: "tony",
-                points: "110"
-            },
-            {
-                name: "mia",
-                points: "1000"
-            },
-            {
-                name: "Carissa",
-                points: "300"
-            },
-            {
-                name: "Eason",
-                points: "500"
-            }
-        ]
-    },
-    {
-        date: "03/04/2023",
-        class: [
-            {
-                name: "eddie",
-                points: "1000"
-            },
-            {
-                name: "tony",
-                points: "1100"
-            },
-            {
-                name: "mia",
-                points: "10000"
-            },
-            {
-                name: "Carissa",
-                points: "3000"
-            },
-            {
-                name: "Eason",
-                points: "5000"
-            }
-        ]
-    },
-]
-
-
-
-//👑next to highest of the total
-const studentPoints = data.reduce((acc, curr) => {
-  curr.class.forEach(student => {
-    const index = acc.findIndex(s => s.name === student.name);
-    if (index !== -1) {
-      acc[index].points += parseInt(student.points, 10);
-    } else {
-      acc.push({
-        name: student.name,
-        points: parseInt(student.points, 10)
-      });
-    }
-  });
-  return acc;
-}, []);
-
-console.log(studentPoints);
-
-
-
+const collapsible = document.querySelectorAll('.collapsible')
 
 const instructions = document.getElementById('instructions')
 const createNew = document.getElementById('createNew')
@@ -124,7 +25,7 @@ document.addEventListener('click', e => {
 addEventListener('load', () => {
     
     for (const [key, value] of Object.entries(localStorage)) {
-        if(/^#\w+/g.test(key)) {
+        if(/^!\w+/g.test(key)) {
             title = document.createElement('h5')
             title.textContent = key
             title.setAttribute('id', key)   
@@ -189,7 +90,7 @@ function listaNoua(titleName) {
             if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
                 createButtonsAndDiv()
                 sanitizeWords()
-                localStorage.setItem(`#${titleName}`, words.value.split(/\n/))  
+                localStorage.setItem(`!${titleName}`, words.value.split(/\n/))  
             }
         } 
     }  
@@ -207,6 +108,7 @@ function sanitizeWords() {
 
 function collapsibleFun(e) {
     e.target.classList.toggle('active')
+    console.log(e.target.nextElementSibling)
     const content = e.target.nextElementSibling
     if(content.style.maxHeight) {
         content.style.maxHeight = null
@@ -222,8 +124,8 @@ function collectionFun(e){
         e.target.classList.add('removeIAnimation')
         e.target.parentNode.classList.add('removeAnimation') 
         
+        //timeout for divvy to go away       
         setTimeout(() => {
-            //timeout for divvy to go away       
             e.target.parentNode.parentNode.remove() 
             localStorage.removeItem(`#${e.target.parentNode.nextSibling.id}`)
             localStorage.removeItem(e.target.parentNode.nextSibling.id)
@@ -237,13 +139,13 @@ function collectionFun(e){
     //adds animation to check button
     if(e.target.classList.contains('fa-circle-check', 'addToRoster')) {
         e.target.parentNode.classList.toggle('addToRosterAnimation')
-        addTolocalStorage(e)
+        addToLocalStorage(e)
     } 
 }
 
 
 //Main functions
-function addTolocalStorage(e) {
+function addToLocalStorage(e) {
     const titlu = e.target.parentElement.parentElement.previousElementSibling.textContent
     if(!e.target.classList.contains('checked')) {
         e.target.classList.add('checked')
@@ -264,12 +166,12 @@ function addTolocalStorage(e) {
 }
 
 
-let array = [];
+/* let array = [];
 for (const [key, valoare] of Object.entries(localStorage)) {
     if(/^@\w+/g.test(key)) {
         array.push(localStorage.getItem(key));
     }
 }
-console.log(array)
+console.log(array) */
 
 

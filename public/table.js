@@ -118,14 +118,21 @@ async function getDataFun() {
       maxArr = lol.filter(e => !isNaN(e))
       maxArr.sort((a, b) => a - b).reverse() 
 console.log(maxArr)
+    
+
     //👑 DAY
     students.forEach(elev => {
-      const { points } = obj.class.find(({ name }) => name === elev.textContent)
+      let { points } = obj.class.find(({ name }) => name === elev.textContent)
       const td = document.createElement('td')
       elev.parentNode.append(td)
+      points === '' || points === '0' ?
+      points = 'abs' :
+      points
       td.textContent = points
       
+ 
 
+      
       
     td.textContent == maxArr[0] ?
     td.textContent = `🥇${maxArr[0]}`:
