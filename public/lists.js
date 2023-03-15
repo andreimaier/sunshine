@@ -1,108 +1,40 @@
+
+
+
 const collapsible = document.querySelectorAll('.collapsible')
 
-const instructions = document.getElementById('instructions')
-const createNew = document.getElementById('createNew')
-const words = document.querySelector('#word-list');
-const animationDuration = 1000
+
+
+
+function fun(key) {
+    const title = document.createElement('p')
+    const span = document.createElement('span')
+    const input = document.createElement('input')
+    input.setAttribute('type', 'checkbox')
+    title.classList.add('lists__item')
+    title.textContent = key.replace(/^#/g, '').replace(/^!/g, '')
+    listsBox.append(title, span)
+    title.append(span)
+    span.append(input)
+}
+
+
+const deleteList = document.querySelectorAll('.deleteList')
+const listsBox = document.getElementById('lists__box')
+const addToRoster = document.querySelectorAll('.addToRoster')
+
+
+
 
 
 document.addEventListener('click', e => {
-    if( e.target !== instructions
-        && e.target !== createNew 
-        && !e.target.matches('.collapsible')
-        && !e.target.matches('.fa-circle-check')
-        && !e.target.matches('.fa-trash-can')) {
+    if(!e.target.matches('.collapsible')
+    && !e.target.matches('.fa-circle-check')) {
         return
     } 
-    if(e.target === instructions) instructionsFun()
-    if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
-    if(e.target === createNew) listaNoua()
     if(e.target.matches('.collapsible')) collapsibleFun(e)
+    if(e.target.matches('.fa-circle-check')) addToMamaMare(e)
 })
-
-
-
-addEventListener('load', () => {
-    
-    for (const [key, value] of Object.entries(localStorage)) {
-        if(/^!\w+/g.test(key)) {
-            title = document.createElement('h5')
-            title.textContent = key
-            title.setAttribute('id', key)   
-            createButtonsAndDiv()
-            for (i = 0; i < value.split(',').length ; i++) {
-                const item = document.createElement('li')
-                item.textContent = value.split(',')[i]
-                newList.appendChild(item)
-            }  
-        }
-    } 
-})
-
-function createButtonsAndDiv() {
-    newList = document.createElement('ul') 
-
-    div = document.createElement('div')   
-    div.setAttribute('class', 'divvy')
-    collection.appendChild(div)
- 
-    removeBtn = document.createElement('button')
-    removeBtn.classList.add('remove')
-    emoticon = document.createElement('i')
-    emoticon.classList.add('fa-trash-can', 'fa-solid')
-    removeBtn.appendChild(emoticon)
-
-/*     addToRoster = document.createElement('button')
-    addToRoster.classList.add('addToRoster')
-    emoticon2 = document.createElement('i')
-    addToRoster.appendChild(emoticon2)
-    emoticon2.classList.add('fa-regular', 'fa-circle-check') */
-    
-    div.append(removeBtn, title, newList, /* addToRoster */) 
-}
-
-
-
-
-
-
-function instructionsFun() { //hides instructions
-    document.querySelectorAll('.hidden').forEach( x => {
-        if(x.hasAttribute('hidden')) {
-            x.removeAttribute('hidden')  
-        } else x.setAttribute('hidden', "")
-    })
-}
-
-function listaNoua(titleName) {
-    titleName = key.value
-    title = document.createElement('h5')
-    title.textContent = titleName
-    title.setAttribute('id', titleName)
-
-    if (titleName == '' || words.value == '') {
-        window.alert('hei...forgot something?')
-    } 
-    if (titleName != '' && words.value != '') {
-        if(document.getElementById(title.getAttribute(`id`))) {
-            alert('don\'t do it, Mickey!!!!')
-        } else {
-            if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
-                createButtonsAndDiv()
-                sanitizeWords()
-                localStorage.setItem(`!${titleName}`, words.value.split(/\n/))  
-            }
-        } 
-    }  
-}
-
-function sanitizeWords() {
-    for (i = 0; i < words.value.split(/\n/g).length ; i++) {
-        const item = document.createElement('li')
-        item.textContent = words.value.split(/\n/)[i]
-        newList.appendChild(item)
-    }
-}
 
 
 
@@ -117,35 +49,31 @@ function collapsibleFun(e) {
     }
 }
 
-//Functionality for Remove BTN
-function collectionFun(e){
-    //remove ONLY if not added to list
-    if(e.target.classList.contains('fa-trash-can') && !e.target.parentNode.parentElement.lastChild.classList.contains('addToRosterAnimation')){
-        e.target.classList.add('removeIAnimation')
-        e.target.parentNode.classList.add('removeAnimation') 
-        
-        //timeout for divvy to go away       
-        setTimeout(() => {
-            e.target.parentNode.parentNode.remove() 
-            localStorage.removeItem(`#${e.target.parentNode.nextSibling.id}`)
-            localStorage.removeItem(e.target.parentNode.nextSibling.id)
-        }, animationDuration);
-    } 
-    //checks if list added to randomList > can't delete
-    if(e.target.classList.contains('fa-trash-can') 
-    && e.target.parentNode.nextSibling.nextSibling.classList.contains('addToRosterAnimation')) {
-        alert('Can\'t delete an added list')
+
+
+for (const[key, value] of Object.entries(localStorage)) {
+    if(/^!\w+/g.test(key) || /^#\w+/g.test(key)) {
+        fun(key)
     }
-    //adds animation to check button
-    if(e.target.classList.contains('fa-circle-check', 'addToRoster')) {
-        e.target.parentNode.classList.toggle('addToRosterAnimation')
-        addToLocalStorage(e)
-    } 
+   if(addToRoster) {
+    addToRoster.forEach(e => {
+        console.log('i am')
+    })
+   }
 }
 
 
-//Main functions
-function addToLocalStorage(e) {
+
+function addToMamaMare(e){
+   
+   
+    if(e.target.classList.contains('fa-circle-check', 'addToRoster')) {
+        e.target.parentNode.classList.toggle('addToRosterAnimation')
+        bagaLaLocalStorage(e)
+    } 
+}
+
+function bagaLaLocalStorage(e) {
     const titlu = e.target.parentElement.parentElement.previousElementSibling.textContent
     if(!e.target.classList.contains('checked')) {
         e.target.classList.add('checked')
@@ -164,14 +92,3 @@ function addToLocalStorage(e) {
         localStorage.removeItem(`#${titlu}`)
     }
 }
-
-
-/* let array = [];
-for (const [key, valoare] of Object.entries(localStorage)) {
-    if(/^@\w+/g.test(key)) {
-        array.push(localStorage.getItem(key));
-    }
-}
-console.log(array) */
-
-

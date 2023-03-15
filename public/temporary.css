@@ -58,6 +58,8 @@ input {
 }
 
 
+
+
 header {
   
     display: flex;
@@ -76,10 +78,7 @@ header {
 }
 
 
-h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-}
+
 main {
     margin: 0 auto;
     max-width: 600px;
@@ -88,71 +87,53 @@ main {
     align-items: center;
 }
 
-
-
-
-
-#myLists {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1fr;
-
-}
-
-.collapsible {
-    margin-top: 10px;
-    background-color: #eee;
-    color: var(--CarolinaBlue);
-    cursor: pointer;
-    padding: 1rem;
-    width: 100%;
-    border: none;
-    text-align: left;
-    
-}
-.collapsible:after {
-    content: '\002B'; 
-    color: var(--CarolinaBlue);
-    float: right;
-}
-.active {
-    background-color: #0D2C54;
-}
-
-.active:after {
-    content: "\2212";
-}
-.weekX {
-    max-height: 0;
-    overflow: hidden;
-    transition: 300ms ease-in-out;
-    position: relative;
-    background: rgb(201,219,241);
-    background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-} 
-.weekX li {
-    padding: 0.2rem;
+.input,
+#lists__section {
+    width: 60%;
 }
 
 
-/* #lists__section {
-  
-} */
-#lists__box {
-    
+#key,
+#word-list,
+/* .output, */
+.divvy,
+.list {
+    margin-block: 0.3rem;
+    border: var(--YInMnBlue);
     border-radius: 10px;
-    min-height: 2.4rem;
-    margin-bottom: 10px;
-    border: 5px inset white;
-    color: #eee;
-    padding-block: 2px;
-    padding-inline: 10px;
+    box-shadow: 1px 1px 3px var(--YInMnBlue);  
 }
-.lists__item {
-    display: flex;
-    justify-content: space-between;
+#key:focus,
+#word-list:focus {
+    outline: 2px solid var(--OxfordBlue);
+}
+#key,
+#word-list {
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
 }
 
+
+
+/* CHANGE this to move title and words away */
+.input {
+    display: flex;
+    flex-direction: column;
+    max-width: 900%;
+}
+
+.remove {
+    background-color: transparent;
+    color: darkblue;
+    font-size: 2rem;
+    border-radius: 20%;
+    padding: 0.2rem;
+    border: none;
+    position: absolute;
+    right: 5%;
+    top: 5%; 
+    
+}
 .addToRoster {
     color: var(--YInMnBlue);
     background-color: transparent;
@@ -198,4 +179,43 @@ main {
 .removeIAnimation {
     transform: scale(0.1) rotate(1turn);
     transition: var(--animationDuration) ease;
+}
+
+
+.divvy {
+    padding: 0.5rem;
+    transform: rotate(1turn);
+    animation: entry 300ms linear;
+    flex: 1 1 3rem;
+    position: relative;
+    max-width: 100%;
+    background: rgb(201,219,241);
+background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
+
+
+}
+
+
+.divvy h5,
+.list h5 {
+    padding-right: 3.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.divvy ul,
+.list ul {
+    padding-top: 0.5rem;
+    padding-right: 3.5rem;
+}
+.divvy h5,
+.list h5 {
+    max-width: max-content;
+}
+.divvy li,
+.list li {
+    overflow-wrap: break-word;
+}
+
+.buttons {
+    margin-bottom: 10px;
 }

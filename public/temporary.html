@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="./images/icons8-star-96.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;800&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <script
+          src="https://kit.fontawesome.com/bb8e411a96.js"
+          crossorigin="anonymous"
+        ></script> -->
+    <link rel="stylesheet" href="./FA-6/css/all.css" />
+    <title>Document</title>
+    <link rel="stylesheet" href="temporary.css" />
+    <script src="temporary.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <a class="nav-link" href="index.html">🏠</a>
+      <a class="nav-link" href="lists.html">📑</a>
+      <a class="nav-link" href="temporary.html">⌨️</a>
+      <a class="nav-link" href="table.html">📅</a>
+    </header>
+    <main>
+      <div id="collection"></div>
+      <div class="input">
+        <label for="key" class="hidden">Title:</label>
+        <input type="text" name="key" id="key" placeholder="your title here" />
+        <label class="hidden" for="word-list">Words:</label>
+        <textarea
+          placeholder="Add your words separated by comma, space or a new line"
+          name="word list"
+          id="word-list"
+          cols="20"
+          rows="10"
+        ></textarea>
+      </div>
+      <div class="buttons">
+        <button id="instructions">Toggle instructions</button>
+        <button class="createNew" id="createNew">New List</button>
+      </div>
+    </main>
+  </body>
+</html>
