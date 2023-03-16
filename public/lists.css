@@ -26,6 +26,7 @@
 } */ 
 
 body{
+    min-height: 100vh;
     background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);    
 }
 p, li, h1, h2, h3, h4, h5, h6 {
@@ -93,14 +94,16 @@ main {
 
 
 #myLists {
+    margin-block: 100px;
+    width: 90%;
     display: grid;
-    width: 100%;
-    grid-template-columns: 1fr;
+    gap: 1rem;
+    grid-template-areas: 'a a a';
+    grid-auto-columns: 1fr;
 
 }
 
 .collapsible {
-    margin-top: 10px;
     background-color: #eee;
     color: var(--CarolinaBlue);
     cursor: pointer;
