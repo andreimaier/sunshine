@@ -6,6 +6,11 @@
 //--specific pages
 
 
+//stabilize also table header
+
+//multiple students add points at once...BIG interface change
+
+
 
 //FOR MARCH 13th
 //for all devices
@@ -107,6 +112,8 @@ document.addEventListener('click', e => {
 
 addEventListener('load', () => {
     retrieveScores()
+    permAbs()
+    /* newDisablingStuff(disabledArr) */
 })
 
 //HELPER functions//
@@ -121,22 +128,20 @@ function retrieveScores() {
 }
 
 
+//change on disablingStuff or where...need to disable the reduce count button too
+
+
+
+
 
 count.forEach( (e) => {
     e.addEventListener('click', () => {
-        const text = e.parentElement
-        console.log(e.nextElementSibling)    
-        e.textContent = ''
-        text.toggleAttribute("disabled") 
-        
-        text.hasAttribute('disabled') ?
-        e.nextElementSibling.textContent = '' :
-        e.nextElementSibling.textContent = '⭐' 
-
-        text.classList.toggle('count-disabled');
-   
+       disablingStuff(e) 
+       disableInLS(e)
+       
+       
         })
-}) 
+})  
 reduce.forEach( (e) => {
     e.addEventListener('click', () => {
         const buton = e.parentElement
@@ -145,25 +150,67 @@ reduce.forEach( (e) => {
         localStorage.setItem(buton.id, buton.value) 
     })
 })
-
+//start from here
 buttons.forEach((button) => {
     button.addEventListener('click', (e)=> {
-        if(e.target.matches('.count')) return 
+        if(e.target.matches('.count')) {
+            
+            /* newDisablingStuff(e)    */
+        } 
         else {
             button.value ++
             button.firstElementChild.textContent = button.value
             localStorage.setItem(button.id, button.value) 
         }
     })
-    //set the value into the span element
     
-    //me think no need this actually
-    /* button.firstElementChild.textContent = button.value */
-
-    //to sent to DB
 })
 
 
+function disablingStuff(e) {
+    const text = e.parentElement
+    text.toggleAttribute("disabled") 
+    text.classList.toggle('count-disabled');
+    
+    if(text.hasAttribute('disabled')){
+       e.nextElementSibling.textContent = '' 
+       e.textContent = '' 
+       e.nextElementSibling.style.width = '0px' 
+
+    } else {
+       e.nextElementSibling.textContent = '⭐'
+       e.textContent = text.value
+       e.nextElementSibling.style.width = '20px'
+    }
+}
+
+
+
+let disabledArr = []
+function disableInLS() {
+    disabledArr = [...buttons].filter(a => a.classList.contains('count-disabled')).map(a => a.id)
+    console.log(disabledArr)
+    localStorage.setItem('absent', disabledArr)
+}
+
+
+function permAbs() {
+    const temp = localStorage.getItem('absent').split(',')
+    console.log(temp)
+    buttons.forEach(a => {
+        for(let item of temp) {
+            if(item === a.id) {
+                a.classList.add('count-disabled')
+                a.setAttribute('disabled', '')
+                if(a.hasAttribute('disabled')) {
+                    a.firstElementChild.textContent = '' 
+                    a.lastElementChild.textContent = ''
+                    a.lastElementChild.style.width = '0px'
+                }
+            } 
+        } 
+    })
+}
 
 
 
@@ -191,7 +238,7 @@ function randomWordFun(e) {
     console.log(randomList)  
     }, 0);
 }
-document.querySelectorAll('.studentJS').forEach(item => {
+buttons.forEach(item => {
     let nou = item.textContent.replace(/⭐/, "")
     studentList.push(nou)
     if(item.id == "") {
