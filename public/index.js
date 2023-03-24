@@ -14,7 +14,7 @@ function callFunctionOnWeekdays() {
     const currentMinute = currentDate.getMinutes();
   
     // Check if it's Monday, Wednesday, Thursday or Friday at 8pm
-    if ([1, 3, 4, 5].includes(currentDayOfWeek) && currentHour === 19 && currentMinute === 00) {
+    if ([1, 3, 4, 5].includes(currentDayOfWeek) && currentHour === 21 && currentMinute === 0) {
       // Call your function here
       sendingScores()
       console.log('the time is now')
