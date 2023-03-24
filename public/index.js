@@ -6,9 +6,31 @@
 //--specific pages
 
 
-//stabilize also table header
+//CHANGE THIS to make it use node.js something...
+function callFunctionOnWeekdays() {
+    const currentDate = new Date();
+    const currentDayOfWeek = currentDate.getDay();
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+  
+    // Check if it's Monday, Wednesday, Thursday or Friday at 8pm
+    if ([1, 3, 4, 5].includes(currentDayOfWeek) && currentHour === 19 && currentMinute === 00) {
+      // Call your function here
+      sendingScores()
+      console.log('the time is now')
+    }
+  }
+  
+  // Call the function every minute to check if it's the right time to execute your function
+  setInterval(callFunctionOnWeekdays, 60000);
+
+ 
+
+
 
 //multiple students add points at once...BIG interface change
+
+
 
 
 
@@ -44,12 +66,8 @@ function studentTrimFun() {
     console.log(clasaMea)
 }
 
-
-submitDB.addEventListener("click", async (event) => {
-    
+async function sendingScores() {
     studentTrimFun()
-    
-    confirm("I updated the database")
    
     const options = {
     method: "POST",
@@ -62,7 +80,9 @@ const json = await response.json();
 console.log(json);
 
 clasaMea = []
-});
+}
+
+submitDB.addEventListener("click", sendingScores());
 
 
 
@@ -112,8 +132,8 @@ document.addEventListener('click', e => {
 
 addEventListener('load', () => {
     retrieveScores()
-    permAbs()
-    /* newDisablingStuff(disabledArr) */
+    absentFromLS()
+
 })
 
 //HELPER functions//
@@ -128,16 +148,14 @@ function retrieveScores() {
 }
 
 
-//change on disablingStuff or where...need to disable the reduce count button too
-
 
 
 
 
 count.forEach( (e) => {
     e.addEventListener('click', () => {
-       disablingStuff(e) 
-       disableInLS(e)
+       absent(e) 
+       absentToLS(e)
        
        
         })
@@ -150,14 +168,10 @@ reduce.forEach( (e) => {
         localStorage.setItem(buton.id, buton.value) 
     })
 })
-//start from here
+
 buttons.forEach((button) => {
     button.addEventListener('click', (e)=> {
-        if(e.target.matches('.count')) {
-            
-            /* newDisablingStuff(e)    */
-        } 
-        else {
+        if(!e.target.matches('.count')) {
             button.value ++
             button.firstElementChild.textContent = button.value
             localStorage.setItem(button.id, button.value) 
@@ -167,7 +181,7 @@ buttons.forEach((button) => {
 })
 
 
-function disablingStuff(e) {
+function absent(e) {
     const text = e.parentElement
     text.toggleAttribute("disabled") 
     text.classList.toggle('count-disabled');
@@ -187,16 +201,15 @@ function disablingStuff(e) {
 
 
 let disabledArr = []
-function disableInLS() {
+function absentToLS() {
     disabledArr = [...buttons].filter(a => a.classList.contains('count-disabled')).map(a => a.id)
     console.log(disabledArr)
     localStorage.setItem('absent', disabledArr)
 }
 
 
-function permAbs() {
+function absentFromLS() {
     const temp = localStorage.getItem('absent').split(',')
-    console.log(temp)
     buttons.forEach(a => {
         for(let item of temp) {
             if(item === a.id) {

@@ -40,26 +40,39 @@ h1 {
   text-align: center;
   padding-block-end: 1rem;
 }
-#section__pointsTable {
-  position: relative;
-  overflow: auto;
- /*  white-space: nowrap; */
+
+
+
+
+
+#div__pointsTable {
+  overflow: scroll;
+  max-width: 99vw;
+  max-height: 99vh;
+  border: 1px solid var(--YInMnBlue);
+  border-radius: 10px;
 }
 #pointsTable, td, th {
   text-align: center;
 }
 
 #pointsTable {
-  border: 1px solid var(--YInMnBlue);
-  overflow: hidden; 
   border-spacing: 0;
-  border-radius: 10px;
-  border-collapse: separate;
-  width: 90%;
-  min-height: 100vh;
-  margin: 5px auto;
-  box-shadow: 1px 1px 3px var(--YInMnBlue);  
+  position: relative;
   font-family: var(--grandstander);
+}
+ #pointsTable thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+} 
+#pointsTable td:first-child {
+  position: sticky;
+  left: 0;
+}
+#pointsTable thead th:first-child {
+  position: sticky;
+  left: 0;
 }
 
 
@@ -96,15 +109,4 @@ td:not(.total) {
 
 }
 
-.sticky {
-  position: sticky;
-  left: 0px;
-  width: 100px;
-}
-.stickyTotal {
-  position: sticky;
-  overflow: hidden;
-  left: 110px;
-  width: 50px;
-  
-}
+

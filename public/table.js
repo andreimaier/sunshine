@@ -117,7 +117,7 @@ async function getDataFun() {
       const lol = obj.class.map(lala => parseInt(lala.points)); 
       maxArr = lol.filter(e => !isNaN(e))
       maxArr.sort((a, b) => a - b).reverse() 
-console.log(maxArr)
+
     
 
     //👑 DAY
