@@ -274,17 +274,19 @@ function randomStudentFun(e) {
 }
 
 function resetPointsFun() {
-    for (const [key, valoare] of Object.entries(localStorage)) {
-        if(/^@\w+/g.test(key)) {
-          localStorage.removeItem(key);
+    if (window.confirm("ERASE points?")){
+        for (const [key, valoare] of Object.entries(localStorage)) {
+            if(/^@\w+/g.test(key)) {
+              localStorage.removeItem(key);
+            }
         }
+        buttons.forEach((button)=> {
+            
+            button.firstElementChild.textContent = '' 
+            button.value = ''
+        })
+        alert("Erased all points!")
     }
-    buttons.forEach((button)=> {
-       
-        button.firstElementChild.textContent = '' 
-        button.value = ''
-    })
-    alert("Erased all points!")
 }
 
 
