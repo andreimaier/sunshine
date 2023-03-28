@@ -182,7 +182,6 @@ buttons.forEach((button) => {
     
 })
 
-
 function absent(e) {
     const text = e.parentElement
     text.toggleAttribute("disabled") 
@@ -220,10 +219,10 @@ function absentFromLS() {
                 a.classList.add('count-disabled')
                 a.setAttribute('disabled', '')
                 if(a.hasAttribute('disabled')) {
-                    a.firstElementChild.textContent = '' 
-                    a.lastElementChild.textContent = ''
-                    a.lastElementChild.style.width = '0px'
-                    
+                    a.firstElementChild.textContent = '' ;
+                    a.lastElementChild.textContent = '';
+                    a.lastElementChild.style.width = '0px';
+                    a.style.color = "transparent";
                 }
             } 
         } 

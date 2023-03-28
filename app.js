@@ -38,6 +38,22 @@ const studentSchema = {
 const Student = mongoose.model('Student', studentSchema)
 
 
+
+
+const users = []
+
+
+app.get('/users', (req, res) => {
+  res.json(users)
+})
+
+
+
+
+
+
+
+
 app.get('/api', async (request, response) => {
   response.json(await Student.find({}));
     /* res.sendFile(__dirname + './public/index.html') */ //instead of putting things in public folder
