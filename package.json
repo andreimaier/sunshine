@@ -26,7 +26,7 @@
     "express": "^4.18.2",
     "mongodb": "^5.0.1",
     "mongoose": "^6.9.2",
-    "nebd": "^0.0.1-security"
-  },
-  "devDependencies": {}
+    "nebd": "^0.0.1-security",
+    "node-cron": "^3.0.2"
+  }
 }

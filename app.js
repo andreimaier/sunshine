@@ -1,8 +1,11 @@
 //mongodb+srv://andrei:andrei@cluster0.rkr6oej.mongodb.net/test
 
 
-
-
+var cron = require('node-cron');
+cron.schedule('08 14 * * Sat', () => {
+    console.log('I have arrived, I am cronos!')
+})
+console.log(cron)
 /* const { hello } = require('./testModule')
 hello() */
 

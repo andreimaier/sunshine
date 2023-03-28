@@ -1,9 +1,9 @@
 //fully automated atlas db submission at time of day
-//list of db entries with data displayed...for me to delete easier
+//list of db enties with data displayed...for me to delete easier
 
-//BIG ONE
-//--password and account
-//--specific pages
+
+
+
 
 
 //CHANGE THIS to make it use node.js something...
@@ -66,7 +66,9 @@ function studentTrimFun() {
     console.log(clasaMea)
 }
 
-async function sendingScores() {
+
+
+submitDB.addEventListener("click", async () => {
     studentTrimFun()
    
     const options = {
@@ -80,9 +82,9 @@ const json = await response.json();
 console.log(json);
 
 clasaMea = []
-}
 
-submitDB.addEventListener("click", sendingScores());
+location.href = "https://myscores.cyclic.app/table.html";
+} );
 
 
 
@@ -185,16 +187,18 @@ function absent(e) {
     const text = e.parentElement
     text.toggleAttribute("disabled") 
     text.classList.toggle('count-disabled');
-    
+    console.log(e)
     if(text.hasAttribute('disabled')){
        e.nextElementSibling.textContent = '' 
        e.textContent = '' 
        e.nextElementSibling.style.width = '0px' 
+       text.style.color = "transparent"
 
     } else {
        e.nextElementSibling.textContent = '⭐'
        e.textContent = text.value
        e.nextElementSibling.style.width = '20px'
+       text.style.color = "#00A6ED"
     }
 }
 
@@ -219,6 +223,7 @@ function absentFromLS() {
                     a.firstElementChild.textContent = '' 
                     a.lastElementChild.textContent = ''
                     a.lastElementChild.style.width = '0px'
+                    
                 }
             } 
         } 
@@ -285,7 +290,7 @@ function resetPointsFun() {
             button.firstElementChild.textContent = '' 
             button.value = ''
         })
-        alert("Erased all points!")
+        
     }
 }
 
