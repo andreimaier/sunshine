@@ -55,9 +55,20 @@ let totalArray = []
 
 
 
-async function countPoints() {
+/* async function countPoints() {
   const response = await fetch("/api");
   const data = await response.json();
+
+  
+}
+countPoints() */
+
+
+
+async function getDataFun() {
+  const response = await fetch("/api");
+  const data = await response.json();
+
 
   const studentPoints = data.reduce((acc, curr) => {
     curr.class.forEach(student => {
@@ -106,14 +117,12 @@ async function countPoints() {
     obiect.textContent = `🥉${obiect.textContent}` :
     obiect.textContent = obiect.textContent 
   })
-}
-countPoints()
 
 
 
-async function getDataFun() {
-  const response = await fetch("/api");
-  const data = await response.json();
+
+
+
   
   for(let obj of data){
     obj.date = obj.date.replace('/2023', '')
