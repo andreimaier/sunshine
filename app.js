@@ -1,11 +1,16 @@
 //mongodb+srv://andrei:andrei@cluster0.rkr6oej.mongodb.net/test
 
+/* 
+const distinctColors = require('distinct-colors').default
+let palette = distinctColors()
+console.log(palette) */
 
-var cron = require('node-cron');
+
+/* var cron = require('node-cron');
 cron.schedule('08 14 * * Sat', () => {
     console.log('I have arrived, I am cronos!')
 })
-console.log(cron)
+console.log(cron) */
 /* const { hello } = require('./testModule')
 hello() */
 
@@ -37,15 +42,9 @@ const studentSchema = {
 }
 const Student = mongoose.model('Student', studentSchema)
 
-
-
-
-const users = []
-
-
-app.get('/users', (req, res) => {
-  res.json(users)
-})
+/* 
+let testing = Student.find({ date: "3/29/2023" }).exec(console.log)
+ */
 
 
 

@@ -6,8 +6,10 @@
 
 
 
+
 //CHANGE THIS to make it use node.js something...
-function callFunctionOnWeekdays() {
+
+/* function callFunctionOnWeekdays() {
     const currentDate = new Date();
     const currentDayOfWeek = currentDate.getDay();
     const currentHour = currentDate.getHours();
@@ -23,15 +25,14 @@ function callFunctionOnWeekdays() {
   
   // Call the function every minute to check if it's the right time to execute your function
   setInterval(callFunctionOnWeekdays, 60000);
-
+ */
  
 
 
 
+
+
 //multiple students add points at once...BIG interface change
-
-
-
 
 
 //FOR MARCH 13th
@@ -47,11 +48,51 @@ alt + shift + D
 */
 
 
+
+
+
+
+const randomStudentButton = document.getElementById('randomStudentButton');
+
+const key = document.getElementById('key')
+const collection = document.querySelector('#collection')
+const submitDB = document.querySelector("#submitToMongodb");
+
+
+let title = {}
+let newList = {}
+let div = {}
+let removeBtn = {}
+let emoticon = {}
+let emoticon2 = {}
+let addToRoster = {}
+
+
+
+const animationDuration = 1000
+
+const count = document.querySelectorAll('.count')
+const reduce = document.querySelectorAll('.reduce')
+
+const buttons = document.querySelectorAll('.studentJS')
+
+
+
+
+let studentList = []
+//populates studentList for absents and other stuff
+buttons.forEach(item => {
+    let nou = item.textContent.replace(/⭐/, "")
+    if(item.id !== "") {
+        studentList.push(nou)
+    }
+})
+
+
 //CONNECT TO BACK
 
 let elev, name, score
 let clasaMea = []
-const submitDB = document.querySelector("#submitToMongodb");
 
 //clears EMPTY nodes, changes IDs and empty string score values
 function studentTrimFun() {
@@ -75,45 +116,27 @@ submitDB.addEventListener("click", async () => {
     method: "POST",
     headers: { "Content-Type": "application/JSON" },
     body: JSON.stringify(clasaMea),
-};
+    };
 
-const response = await fetch("/api", options);
-const json = await response.json();
-console.log(json);
+    const response = await fetch("/api", options);
+    const json = await response.json();
+    console.log(json);
 
-clasaMea = []
+    clasaMea = []
 
-location.href = "https://myscores.cyclic.app/table.html";
-} );
+    /* location.href = "https://myscores.cyclic.app/table.html"; */
+});
 
 
 
-const randomWordButton = document.getElementById('randomWordButton');
-const randomStudentButton = document.getElementById('randomStudentButton');
-
-const key = document.getElementById('key')
-const collection = document.querySelector('#collection')
-
-let title = {}
-let newList = {}
-let div = {}
-let removeBtn = {}
-let emoticon = {}
-let emoticon2 = {}
-let addToRoster = {}
-
-let studentList = []
-
-const animationDuration = 1000
-
-const count = document.querySelectorAll('.count')
-const reduce = document.querySelectorAll('.reduce')
-
-const buttons = document.querySelectorAll('.studentJS')
 
 
 
 //EVENT listeners
+addEventListener('load', () => {
+    retrieveScores()
+    LSGetAbsent()
+})
 
 document.addEventListener('click', e => {
     if( !e.target.matches('#randomWordButton')
@@ -122,7 +145,7 @@ document.addEventListener('click', e => {
         && !e.target.matches('#resetPoints')) {
         return
     } 
-    if(e.target.matches('#randomWordButton')) randomWordFun(e)
+    if(e.target.matches('#randomWordButton')) randomWordFun()
     if(e.target.matches('#randomStudentButton')) randomStudentFun(e)
     if(e.target.matches('#resetPoints')) resetPointsFun()
 })
@@ -132,11 +155,7 @@ document.addEventListener('click', e => {
 
  
 
-addEventListener('load', () => {
-    retrieveScores()
-    absentFromLS()
 
-})
 
 //HELPER functions//
 
@@ -157,10 +176,8 @@ function retrieveScores() {
 count.forEach( (e) => {
     e.addEventListener('click', () => {
        absent(e) 
-       absentToLS(e)
-       
-       
-        })
+       LSSetAbsent(e)
+    })
 })  
 reduce.forEach( (e) => {
     e.addEventListener('click', () => {
@@ -188,15 +205,15 @@ function absent(e) {
     text.classList.toggle('count-disabled');
     console.log(e)
     if(text.hasAttribute('disabled')){
-       e.nextElementSibling.textContent = '' 
-       e.textContent = '' 
-       e.nextElementSibling.style.width = '0px' 
-       text.style.color = "transparent"
+       e.nextElementSibling.textContent = '' //no ⭐
+       e.nextElementSibling.style.width = '0px' //can't click on it
+       e.textContent = '' //no points displayed
+       text.style.color = "transparent" //no name displayed
 
     } else {
        e.nextElementSibling.textContent = '⭐'
-       e.textContent = text.value
        e.nextElementSibling.style.width = '20px'
+       e.textContent = text.value
        text.style.color = "#00A6ED"
     }
 }
@@ -204,14 +221,14 @@ function absent(e) {
 
 
 let disabledArr = []
-function absentToLS() {
+function LSSetAbsent() {
     disabledArr = [...buttons].filter(a => a.classList.contains('count-disabled')).map(a => a.id)
     console.log(disabledArr)
     localStorage.setItem('absent', disabledArr)
 }
 
 
-function absentFromLS() {
+function LSGetAbsent() {
     const temp = localStorage.getItem('absent').split(',')
     buttons.forEach(a => {
         for(let item of temp) {
@@ -232,50 +249,89 @@ function absentFromLS() {
 
 
 
-const randomWordOutput = document.getElementById('randomWordOutput')
 
-function randomWordFun(e) {
-    let randomList = []
-    for(const [key, v] of Object.entries(localStorage)) {
-        if(/^#\w+/g.test(key)) {
-    for(const item of localStorage.getItem(key).split(',')) {
-        randomList.push(item)
-        };
-    }
-    }
-    console.log(e.target)
-    setTimeout(() => {
-      let index = Math.floor(Math.random() * randomList.length)
-      randomWordOutput.textContent = randomList[index];
-    randomWordButton.classList.add('outputAnimation')
-        randomWordButton.classList.remove('outputAnimation'); // reset animation
-        void randomWordButton.offsetWidth; // trigger reflow
-        randomWordButton.classList.add('outputAnimation'); // start animation
-  
-    console.log(randomList)  
-    }, 0);
-}
-buttons.forEach(item => {
-    let nou = item.textContent.replace(/⭐/, "")
-    studentList.push(nou)
-    if(item.id == "") {
-        studentList.splice(studentList.indexOf(item), 1)
-    }
-})
+
+
+
+
 
 const randomStudentOutput = document.getElementById("randomStudentOutput")
-function randomStudentFun(e) {
-    
-    setTimeout(() => {
-      let index = Math.floor(Math.random() * studentList.length)
-      randomStudentOutput.textContent = studentList[index];
-      randomStudentButton.classList.add('outputAnimation')
-        randomStudentButton.classList.remove('outputAnimation'); // reset animation
-        void randomStudentButton.offsetWidth; // trigger reflow
-        randomStudentButton.classList.add('outputAnimation'); // start animation
-    }, 0);
-    
+const randomWordOutput = document.getElementById('1')
+let indexWord, indexStudent, randomList = []
+
+function randomWordFun() {
+    indexWord = Math.floor(Math.random() * randomList.length)       
+    wordHelper()
+    document.getElementById('1').textContent = randomList[indexWord]
+
+    randomWordOutput.textContent = randomList[indexWord];
+    randomWordOutput.classList.add('outputAnimation')
+    randomWordOutput.classList.remove('outputAnimation'); // reset animation
+    void randomWordOutput.offsetWidth; // trigger reflow
+    randomWordOutput.classList.add('outputAnimation'); // start animation 
 }
+
+function randomStudentFun() {
+    indexStudent = Math.floor(Math.random() * studentList.length )
+
+    randomStudentOutput.textContent = studentList[indexStudent];
+    randomStudentOutput.classList.add('outputAnimation')
+    randomStudentOutput.classList.remove('outputAnimation'); // reset animation
+    void randomStudentOutput.offsetWidth; // trigger reflow
+    randomStudentOutput.classList.add('outputAnimation'); // start animation 
+}
+
+function wordHelper() {
+    for(const [key, ] of Object.entries(localStorage)) {
+        if(/^#\w+/g.test(key)) {
+            for(const item of localStorage.getItem(key).split(',')) {
+                randomList.push(item)
+            };
+        }
+    }
+}
+
+console.log(document.querySelectorAll(".randomFields__button")[0])
+
+
+
+
+
+const test = document.getElementById('test')
+test.addEventListener('click', () => {
+    let index = Math.floor(Math.random() * 3)
+    let ColArr = ['red', 'blue' , 'green']
+    test.style.backgroundColor = ColArr[index]
+})
+
+/* import distinctColors from "distinct-colors";
+
+let palette = distinctColors()
+
+ */
+
+
+
+
+
+/*     randomStudentOutput.textContent = studentList[indexStudent];
+    randomStudentButton.classList.add('outputAnimation')
+    randomStudentButton.classList.remove('outputAnimation'); // reset animation
+    void randomStudentButton.offsetWidth; // trigger reflow
+    randomStudentButton.classList.add('outputAnimation'); // start animation 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
 
 function resetPointsFun() {
     if (window.confirm("ERASE points?")){

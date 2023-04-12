@@ -166,7 +166,7 @@ main {
     justify-content: space-around;
     align-items: flex-start;
 }
-.randomFields__para {
+.randomFields__div div {
     border-radius: 10px;
     width: 70%;
     min-height: 2.4rem;
@@ -247,26 +247,50 @@ main {
 
 
 .outputAnimation {
-    animation: word 300ms ease-in-out;
+    animation: word 500ms ease-in-out;
 }
+/* @keyframes word {
+    from {background-color: red;}
+  to {background-color: yellow;}
+} */
 @keyframes word {
     from {
-        transform: scalex(0) scaleY(0) ;
+        /* transform: scaleY(50);  */
+        transform: scale(10, 10);
+       /*  transform: scaleX(1); */
+       background-color: red;
     }
-    to {
-        transform: scalex(1) scaleY(1) ;
-        
-    }
+  to {
+    transform: scale();
+    background-color: yellow;
+  }
+  /* to {
+    transform: scaleX(1,1);
+    background-color: yellow;
+  } */
 }
 
+.randomFields__para {
+    max-width: fit-content;
+    border-radius: 20px;
+    padding-inline: 1rem;
+
+}
+
+#test {
+    width: 200px;
+    aspect-ratio: 1;
+    background-color: #dcf391b4;
+    /* animation: colors 1000ms; */
+    transition: 500ms;
+}
+/* @keyframes colors {
+    transform {
+        rotate: 90deg;
+      transform-origin: bottom left
+    }
+} */
 
 
 
 
-/* //// add remove animation
-/* //// change existing buttons 
-/* //// change divvy style
-/* //// change instructions and add CSS
-
-
-.reset

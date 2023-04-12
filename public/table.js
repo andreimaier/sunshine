@@ -6,6 +6,8 @@ const students = document.querySelectorAll('.studentJS')
 const total = document.querySelectorAll('.total')
 const pointsTable = document.querySelector('#pointsTable')
 
+console.log(students)
+
 /* 
  //add the points  and logs to total column
 students.forEach(student => {
@@ -51,104 +53,108 @@ let totalArray = []
 
 
 
+
+
+async function countPoints() {
+  const response = await fetch("/api");
+  const data = await response.json();
+
+  const studentPoints = data.reduce((acc, curr) => {
+    curr.class.forEach(student => {
+      const index = acc.findIndex(s => s.name === student.name);
+      if (!isNaN(parseInt(student.points))) {
+      if (index !== -1) {
+        acc[index].points += parseInt(student.points, 10);
+      } else {
+          acc.push({
+            name: student.name,
+            points: parseInt(student.points, 10)
+          });
+        }
+      }
+    });
+    return acc;
+  }, []);
+
+  //👑 TOTAL
+  students.forEach(elev => {
+    
+
+    const { points } = studentPoints.find(({ name }) => name == elev.textContent)
+    const td = document.createElement('td')
+
+    elev.parentNode.append(td)
+    td.textContent = points
+    td.classList.add('stickyTotal')
+
+    if (!isNaN(parseInt(points))) {
+      totalArray.push(points)
+    }
+    
+    totalArray.sort((a, b) => a - b).reverse(); 
+  })  
+
+   
+  students.forEach(elev => {
+    let obiect = elev.nextElementSibling
+    
+    obiect.textContent == totalArray[0] ? 
+    obiect.textContent = `🥇${obiect.textContent}` :
+    obiect.textContent == totalArray[1] ? 
+    obiect.textContent = `🥈${obiect.textContent}` :
+    obiect.textContent == totalArray[2] ? 
+    obiect.textContent = `🥉${obiect.textContent}` :
+    obiect.textContent = obiect.textContent 
+  })
+}
+countPoints()
+
+
+
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
   
- /*  console.log(data) */
-
-    
-   const studentPoints = data.reduce((acc, curr) => {
-      curr.class.forEach(student => {
-        const index = acc.findIndex(s => s.name === student.name);
-        if (!isNaN(parseInt(student.points))) {
-        if (index !== -1) {
-          acc[index].points += parseInt(student.points, 10);
-        } else {
-            acc.push({
-              name: student.name,
-              points: parseInt(student.points, 10)
-            });
-          }
-        }
-      });
-      return acc;
-    }, []);
-/* console.log(studentPoints) */
-    
-
-
-  //👑 TOTAL
-  students.forEach(elev => {
-      const { points } = studentPoints.find(({ name }) => name == elev.textContent)
-      const td = document.createElement('td')
-  
-      elev.parentNode.append(td)
-      td.textContent = points
-      td.classList.add('stickyTotal')
-
-      if (!isNaN(parseInt(points))) {
-        totalArray.push(points)
-      }
-      
-
-      totalArray.sort((a, b) => a - b).reverse(); 
-    })  
- 
-    students.forEach(elev => {
-      let obiect = elev.nextElementSibling
-      
-      obiect.textContent == totalArray[0] ? 
-      obiect.textContent = `🥇${obiect.textContent}` :
-      obiect.textContent == totalArray[1] ? 
-      obiect.textContent = `🥈${obiect.textContent}` :
-      obiect.textContent == totalArray[2] ? 
-      obiect.textContent = `🥉${obiect.textContent}` :
-      obiect.textContent = obiect.textContent 
-    })
-
-
   for(let obj of data){
     obj.date = obj.date.replace('/2023', '')
     th = document.createElement('th') 
     th.textContent = obj.date
     appendDate.append(th)
 
-      const lol = obj.class.map(lala => parseInt(lala.points)); 
-      maxArr = lol.filter(e => !isNaN(e))
-      maxArr.sort((a, b) => a - b).reverse() 
-
-    
+    const lol = obj.class.map(lala => parseInt(lala.points)); 
+    maxArr = lol.filter(e => !isNaN(e))
+    maxArr.sort((a, b) => a - b).reverse() 
 
     //👑 DAY
     students.forEach(elev => {
-      let { points } = obj.class.find(({ name }) => name === elev.textContent)
-      const td = document.createElement('td')
-      elev.parentNode.append(td)
-      points === '' || points === '0' ?
-      points = 'abs' :
-      points
-      td.textContent = points
-      
- 
 
-      
-      
-    td.textContent == maxArr[0] ?
-    td.textContent = `🥇${maxArr[0]}`:
-    td.textContent == maxArr[1] ?
-    td.textContent = `🥈${maxArr[1]}`:
-    td.textContent == maxArr[2] ?
-    td.textContent = `🥉${maxArr[2]}`: 
-    td.textContent = td.textContent
+      if(!obj.class.find(({ name }) => name === elev.textContent)){
+        const td = document.createElement('td')
+        elev.parentNode.append(td)
+        td.textContent = 'NIC'
+        
 
+      } else {
 
+        let { points } = obj.class.find(({ name }) => name === elev.textContent)
+        const td = document.createElement('td')
+        elev.parentNode.append(td)
+        points === '' || points === '0' ?
+        points = 'abs' :
+        points
+        td.textContent = points
+          
+        td.textContent == maxArr[0] ?
+        td.textContent = `🥇${maxArr[0]}`:
+        td.textContent == maxArr[1] ?
+        td.textContent = `🥈${maxArr[1]}`:
+        td.textContent == maxArr[2] ?
+        td.textContent = `🥉${maxArr[2]}`: 
+        td.textContent = td.textContent
+      }
 
 
     });
-
-   
-   
   }
 
 
