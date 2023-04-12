@@ -140,7 +140,7 @@ async function getDataFun() {
       if(!obj.class.find(({ name }) => name === elev.textContent)){
         const td = document.createElement('td')
         elev.parentNode.append(td)
-        td.textContent = 'NIC'
+        td.textContent = 'NiC'
         
 
       } else {
