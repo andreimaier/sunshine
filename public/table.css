@@ -1,8 +1,10 @@
 body {
   background: none;
+  overflow: hidden;
 }
 main {
   background: none;
+
 }
 
 #div__pointsTable {
