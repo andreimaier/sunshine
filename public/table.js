@@ -64,11 +64,15 @@ let totalArray = []
 countPoints() */
 
 
+let dataMea = {}
+
 
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
 
+  dataMea = Object.assign({}, data)
+  
 
   const studentPoints = data.reduce((acc, curr) => {
     curr.class.forEach(student => {
@@ -192,6 +196,7 @@ console.log(filteredNodes)  */
 
 
   
+
 
 
 

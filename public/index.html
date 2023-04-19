@@ -25,14 +25,15 @@
     <title>Random WORD</title>
 
     <script src="./index.js" type="module" defer></script>
+    <link rel="stylesheet" href="./basic.css" />
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <header>
-      <a class="nav-link" href="index.html">🏠</a>
-      <a class="nav-link" href="lists.html">📑</a>
-      <a class="nav-link" href="temporary.html">⌨️</a>
-      <a class="nav-link" href="table.html">📅</a>
+      <a title="Home" class="nav-link" href="index.html">🏠</a>
+      <a title="Manage Lists" class="nav-link" href="lists.html">📑</a>
+      <a title="Make new list" class="nav-link" href="temporary.html">⌨️</a>
+      <a title="Past Scores" class="nav-link" href="table.html">📅</a>
     </header>
     <main>
       <!--  <a target="_blank" href="https://icons8.com/icon/19295/star">Star</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
@@ -158,7 +159,9 @@
         <button id="resetPoints">Reset Points</button>
         <button id="submitToMongodb">Submit to mongodb</button>
       </div>
-      <div id="test">content</div>
     </main>
+    <footer>
+      <a title="+10p" class="nav-link" id="addTenP">📈</a>
+    </footer>
   </body>
 </html>

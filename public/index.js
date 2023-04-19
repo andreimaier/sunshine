@@ -3,30 +3,16 @@
 
 
 
+//CHANGE 
+//make it come into view slower...like a transition on load
+//change css files ...separate one for header, footer, background, reset...
+
+//do a footer
+//make a website for seeing stuff for the users...modules? diff site? diff page?
 
 
 
 
-//CHANGE THIS to make it use node.js something...
-
-/* function callFunctionOnWeekdays() {
-    const currentDate = new Date();
-    const currentDayOfWeek = currentDate.getDay();
-    const currentHour = currentDate.getHours();
-    const currentMinute = currentDate.getMinutes();
-  
-    // Check if it's Monday, Wednesday, Thursday or Friday at 8pm
-    if ([1, 3, 4, 5].includes(currentDayOfWeek) && currentHour === 21 && currentMinute === 0) {
-      // Call your function here
-      sendingScores()
-      console.log('the time is now')
-    }
-  }
-  
-  // Call the function every minute to check if it's the right time to execute your function
-  setInterval(callFunctionOnWeekdays, 60000);
- */
- 
 
 
 
@@ -49,8 +35,7 @@ alt + shift + D
 
 
 
-
-
+const addTenP = document.getElementById('addTenP')
 
 const randomStudentButton = document.getElementById('randomStudentButton');
 
@@ -124,7 +109,7 @@ submitDB.addEventListener("click", async () => {
 
     clasaMea = []
 
-    /* location.href = "https://myscores.cyclic.app/table.html"; */
+    location.href = "https://myscores.cyclic.app/table.html"; 
 });
 
 
@@ -140,20 +125,34 @@ addEventListener('load', () => {
 
 document.addEventListener('click', e => {
     if( !e.target.matches('#randomWordButton')
+        && !e.target.matches('#addTenP')
         && !e.target.matches('#randomStudentButton')
         && !e.target.matches('.studentJS')
         && !e.target.matches('#resetPoints')) {
         return
     } 
+    if(e.target.matches('#addTenP')) addTenPFun()
     if(e.target.matches('#randomWordButton')) randomWordFun()
     if(e.target.matches('#randomStudentButton')) randomStudentFun(e)
     if(e.target.matches('#resetPoints')) resetPointsFun()
 })
 
+let a = '1'
+Number(a)
+console.log(typeof Number(a))
 
 
-
- 
+function addTenPFun() {
+    buttons.forEach(button => {
+        const score = button.firstElementChild
+        switch(score.textContent) {
+            case(''): score.textContent = 0;
+            default: score.textContent = parseInt(score.textContent) + 5; break;
+        }
+        button.value = score.textContent
+        localStorage.setItem(button.id, button.value) 
+    })
+}
 
 
 
@@ -295,20 +294,6 @@ console.log(document.querySelectorAll(".randomFields__button")[0])
 
 
 
-
-
-const test = document.getElementById('test')
-test.addEventListener('click', () => {
-    let index = Math.floor(Math.random() * 3)
-    let ColArr = ['red', 'blue' , 'green']
-    test.style.backgroundColor = ColArr[index]
-})
-
-/* import distinctColors from "distinct-colors";
-
-let palette = distinctColors()
-
- */
 
 
 

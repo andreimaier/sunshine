@@ -1,133 +1,6 @@
-/*work on the UI
-    title and textarea
-    random word show box
-    random word show animation
-    random word button
-
-    add list at the end...maybe hidden
-
-    toggle existing lists
-
-    find happy font
-*/
-
-
-
-
-
-
-*, *::before, *::after {
-    box-sizing: border-box;
-} 
-* {
-    margin: 0;
-    padding: 0; 
-} 
-:root {
-    --animationDuration: 1000ms;
-    --naplesYellow: #FEE165;
-    --redOrange: #F6511D;
-    --CarolinaBlue: #00A6ED;
-    --OxfordBlue: #0D2C54;
-    --YInMnBlue: #355070;
-    --roboto: 'Roboto', sans-serif;
-    --grandstander: 'Grandstander', cursive;
-}
-/* html {
-    color-scheme: dark light;
-}  */
-html, body {
-    height: 100%; 
-} 
-body{
-    background: linear-gradient(318deg, rgba(237,237,237,1) 13%, rgba(189,195,204,1) 16%, rgba(112,130,152,1) 48%, rgba(126,141,161,1) 52%, rgba(115,132,154,1) 88%, rgba(13,44,84,1) 94%);
-}
-p, li, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
-}
-p {
-    line-height: 1.5;
-}
-img, video, svg, video {
-    display: block;
-    max-width: 100%;
-}
-
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 10rem;
-    font-family: var(--roboto);  
-    color: var(--OxfordBlue);
-
-}
-textarea,
-button,
-input {
-    font-family: inherit;
-}
-:target {
-    color: aqua;
-}
-
-#to-save {
-    transition: transform 500ms ease;
-}
-#to-save:target {
-    transform: scale(1.5) rotate(1turn);
-}
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.nav ul {
-    display: none;
-    gap: 0.2rem;
-}
-
-li {
-    list-style-type: none;
-    transform: translate(0);
-
-}
-
-
-header {
-  
-    display: flex;
-    padding-inline-end: 1rem;
-    padding-block: 0.5rem;
-    justify-content: end;
-    align-items: center;
-}
-.nav-link {
-    text-decoration: none;
-    color: whitesmoke;
-    /* font-style: italic; */
-    font-size: 2rem;
-    font-weight: bolder;
-}
-.fa {
-    
-}
-
-
-
-h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-main {
-    margin: 0 auto;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .students {
-    
+    padding-block-start: 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -169,7 +42,6 @@ main {
 .randomFields__div div {
     border-radius: 10px;
     width: 70%;
-    min-height: 2.4rem;
     margin-bottom: 10px;
     border: 5px inset white;
     color: #eee;
@@ -215,19 +87,14 @@ main {
     font-weight: 600;
     color: var(--OxfordBlue);
 }
-
-/* add smth here to blur the name and also in JS to take out of local storage for the day pls...maybe store a special value...? */
 .count-disabled {
     color: grey; 
 }
-
-
 .buttons {
     display: inherit;
     justify-content: space-evenly;
     gap: 0.3rem;
     margin-top: 20px;
-    margin-bottom: 80px;
     width: calc(100% - 10px);
 }
 .buttons button {
@@ -237,37 +104,35 @@ main {
     display: block;
     padding: 0.5rem;
     border: none;
+    margin-bottom: 1rem;
 }
 #resetPoints {
     background-color: var(--naplesYellow);
 }
+#resetPoints:active {
+    transform: translate(2px,3px);
+    box-shadow: -5px -5px 2px var(--YInMnBlue);
+}
 #submitToMongodb {
     background-color: var(--CarolinaBlue);
+
+}
+#submitToMongodb:active {
+    transform: translate(2px,3px);
+    box-shadow: -5px -5px 2px var(--YInMnBlue);
 }
 
 
 .outputAnimation {
     animation: word 500ms ease-in-out;
 }
-/* @keyframes word {
-    from {background-color: red;}
-  to {background-color: yellow;}
-} */
 @keyframes word {
     from {
-        /* transform: scaleY(50);  */
-        transform: scale(10, 10);
-       /*  transform: scaleX(1); */
-       background-color: red;
+        transform: translateX(100px);
     }
-  to {
-    transform: scale();
-    background-color: yellow;
+    to {
+      transform: translateX(0px);
   }
-  /* to {
-    transform: scaleX(1,1);
-    background-color: yellow;
-  } */
 }
 
 .randomFields__para {
@@ -277,19 +142,7 @@ main {
 
 }
 
-#test {
-    width: 200px;
-    aspect-ratio: 1;
-    background-color: #dcf391b4;
-    /* animation: colors 1000ms; */
-    transition: 500ms;
-}
-/* @keyframes colors {
-    transform {
-        rotate: 90deg;
-      transform-origin: bottom left
-    }
-} */
+
 
 
 

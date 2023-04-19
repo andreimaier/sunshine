@@ -22,20 +22,21 @@
     ></script> -->
     <link rel="stylesheet" href="./FA-6/css/all.css" />
     <title>Document</title>
+    <link rel="stylesheet" href="basic.css" />
     <link rel="stylesheet" href="lists.css" />
     <script src="lists.js" defer></script>
   </head>
   <body>
     <header>
-      <a class="nav-link" href="index.html">🏠</a>
-      <a class="nav-link" href="lists.html">📑</a>
-      <a class="nav-link" href="temporary.html">⌨️</a>
-      <a class="nav-link" href="table.html">📅</a>
+      <a title="Home" class="nav-link" href="index.html">🏠</a>
+      <a title="Manage Lists" class="nav-link" href="lists.html">📑</a>
+      <a title="Make new list" class="nav-link" href="temporary.html">⌨️</a>
+      <a title="Past Scores" class="nav-link" href="table.html">📅</a>
     </header>
     <main>
       <section id="myLists">
         <div>
-          <button class="collapsible">Week 1</button>
+          <button class="collapsible" id="1">Week 1</button>
           <div class="weekX">
             <ul>
               <li>burglar</li>
@@ -63,13 +64,13 @@
               <li>hallway</li>
               <li>lift</li>
             </ul>
-            <button class="addToRoster">
+            <button class="addToRoster" title="Practice this list">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
         </div>
         <div>
-          <button class="collapsible">Week 3</button>
+          <button class="collapsible" id="3">Week 3</button>
           <div class="weekX">
             <ul>
               <li>burglar</li>
@@ -97,13 +98,13 @@
               <li>hallway</li>
               <li>lift</li>
             </ul>
-            <button class="addToRoster">
+            <button class="addToRoster" title="Practice this list">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
         </div>
         <div>
-          <button class="collapsible">Week 4</button>
+          <button class="collapsible" id="4">Week 4</button>
           <div class="weekX">
             <ul>
               <li>burglar</li>
@@ -131,13 +132,13 @@
               <li>hallway</li>
               <li>lift</li>
             </ul>
-            <button class="addToRoster">
+            <button class="addToRoster" title="Practice this list">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
         </div>
         <div>
-          <button class="collapsible">Week 2</button>
+          <button class="collapsible" id="2">Week 2</button>
           <div class="weekX">
             <ul>
               <li>unu</li>
@@ -148,7 +149,7 @@
               <li>patrucincisase</li>
               <li>patrucincisase</li>
             </ul>
-            <button class="addToRoster">
+            <button class="addToRoster" title="Practice this list">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
@@ -156,7 +157,7 @@
       </section>
 
       <section id="lists__section">
-        <h4>These are the lists</h4>
+        <h4 title="Practice with these words">Lists in use</h4>
         <div id="lists__box">
           <!-- <p class="lists__item">
             Week1
@@ -176,6 +177,7 @@
           </p> -->
         </div>
       </section>
+      <div id="test"></div>
     </main>
   </body>
 </html>

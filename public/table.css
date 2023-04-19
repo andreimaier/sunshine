@@ -1,49 +1,6 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-} 
-* {
-  margin: 0;
-  padding: 0; 
-} 
-:root {
-  --animationDuration: 1000ms;
-  --naplesYellow: #FEE165;
-  --redOrange: #F6511D;
-  --CarolinaBlue: #00A6ED;
-  --OxfordBlue: #0D2C54;
-  --YInMnBlue: #355070;
-  --roboto: 'Roboto', sans-serif;
-  --grandstander: 'Grandstander', cursive;
+body {
+  background: none;
 }
-main {
-  width: 100vw;
-  margin: auto;
-}
-header {
-  
-  display: flex;
-  width: 100%;
-  padding-inline-end: 1rem;
-  padding-block: 0.5rem;
-  justify-content: end;
-  align-items: center;
-}
-.nav-link {
-  text-decoration: none;
-  color: whitesmoke;
- 
-  font-size: 2rem;
-  font-weight: bolder;
-}
-
-h1 {
-  text-align: center;
-  padding-block-end: 1rem;
-}
-
-
-
-
 
 #div__pointsTable {
   overflow: scroll;
@@ -74,8 +31,6 @@ h1 {
   position: sticky;
   left: 0;
 }
-
-
 tr:nth-child(odd) {
   background-color: var(--CarolinaBlue);
 }
@@ -101,8 +56,6 @@ tr th:nth-child(2) {
   font-weight: bold;
   font-size: 1.3rem;
 }
-
-
 td:not(.total) {
   padding-block: 1rem;
   padding-inline: 1rem;

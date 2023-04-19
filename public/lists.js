@@ -34,7 +34,7 @@ function dinLocalStorage(key) {
     input.classList.add('deleteList')
     title.classList.add('lists__item')
     title.textContent = key.replace(/^#/g, '').replace(/^!/g, '')
-    
+    title.setAttribute('title', 'Practice with these words')
 
 
     listsBox.append(title)
@@ -61,7 +61,7 @@ document.addEventListener('click', e => {
         return
     } 
     if(e.target.matches('.collapsible')) clickIn(e)
-    if(e.target.matches('.fa-circle-check')) addToMamaMare(e)
+    if(e.target.matches('.fa-circle-check')) addToPracticeList(e)
     if(e.target.matches('.weekX')) console.log('doing nothing')
     if(e.target.matches('.deleteList')) deleteListFun(e)
     if(e.target.matches('.fa-circle-check', 'addToRoster')) bagaLaLocalStorage(e)
@@ -75,7 +75,6 @@ document.addEventListener('click', e => {
 
 function deleteListFun(e) {
     const key = e.target.parentElement.parentElement
-    console.log(key.textContent)
     localStorage.removeItem(`#${key.textContent}`) 
     key.remove() //removes element from DOM
 }
@@ -103,37 +102,85 @@ function clickIn(e) {
 
 
 
+const arrLen = document.getElementById('myLists').childElementCount
+let lista = []
+const test = document.getElementById('test')
+let i = 0
+while(i < collapsible.length) {
+    test.appendChild(document.createElement('p'));
+    i++;
+}
 
 
+function addToPracticeList(e){
+    
 
-
-function addToMamaMare(e){
     const title = document.createElement('p')
     const span = document.createElement('span')
     const input = document.createElement('input')
     const key = e.target.parentElement.parentElement.previousElementSibling.textContent
+    const id = e.target.parentElement.parentElement.previousElementSibling.id
+
+    title.setAttribute('title', 'Practice with these words')
     input.setAttribute('type', 'button')
     input.setAttribute('value', 'delete')
-    input.setAttribute('title', 'Delete')
+    input.setAttribute('title', 'Delete list')
     input.classList.add('deleteList')
     title.classList.add('lists__item')
     title.textContent = key
+
+    
+    //WORKING...
     const div = listsBox.querySelectorAll('p')
     
+    //Attempt to organize #lists__box using sparse array with predetermined length
+    lista.indexOf(id) === -1 ?
+    lista.push(id) :
+    lista.splice(lista.indexOf(id), 1)
+    lista.sort((a,b) => a-b)
+    
+    console.log(lista)
+   /*  listsBox.append(title)
+    title.append(span)
+    span.append(input)  */
+    
+
+    //make a new div with specified slots with id's to match the items from lista array
+  
+        let para
+        let i = 0
+        while(i < collapsible.length) {   
+            lista[i] ?           
+            [...test.querySelectorAll('p')][i].textContent = `Week ${lista[i]}` :
+            [...test.querySelectorAll('p')][i].textContent = lista[i];
+
+            //i stopped here...
+            //why only make for last??
+            lista[i] ? 
+            [...test.querySelectorAll('p')][i].append(span) :
+            0
+          
+            i++;  
+        }
+        
+      
+    //TO ADD the lists into #lists__box
     if(div.length == 0) {
         listsBox.append(title)
         title.append(span)
         span.append(input)  
-        console.log('click')
-        console.log(div.length)
     } else {
-        const temp = [...div].filter(a => a.textContent == key)
-        if(temp.length == 0){
+        const temp = [...div].filter(a => a.textContent == key) //it's not a filter, is a check === to match for key
+        if(temp.length == 0){ //does not match the key
             listsBox.append(title)
             title.append(span)
             span.append(input)  
         }
-    }
+    } 
+
+
+
+
 }
 
 
@@ -144,9 +191,9 @@ function bagaLaLocalStorage(e) {
     e.target.parentNode.classList.toggle('addToRosterAnimation')
     const div = listsBox.querySelectorAll('p')
     const titlu = e.target.parentElement.parentElement.previousElementSibling.textContent
+
     if(!e.target.classList.contains('checked')) {
         e.target.classList.add('checked')
-       
         let randomList = []
         e.target.parentElement.previousElementSibling.childNodes.forEach(a => {
             if(a.value == 0) {
@@ -154,6 +201,10 @@ function bagaLaLocalStorage(e) {
             }
         })
         localStorage.setItem(`#${titlu}`, randomList)
+
+        /* console.log(randomList) */
+
+
 
     } else {
         e.target.classList.remove('checked')
@@ -163,7 +214,8 @@ function bagaLaLocalStorage(e) {
             if(titlu == item.textContent)
             item.remove()
         } 
-        console.log(titlu)
+        
+        
     }
 }
 
