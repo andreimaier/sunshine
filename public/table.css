@@ -1,6 +1,9 @@
 body {
   background: none;
 }
+main {
+  background: none;
+}
 
 #div__pointsTable {
   overflow: scroll;
