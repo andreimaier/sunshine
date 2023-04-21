@@ -105,11 +105,15 @@ function clickIn(e) {
 const arrLen = document.getElementById('myLists').childElementCount
 let lista = []
 const test = document.getElementById('test')
+const para = document.getElementById('para')
+const erase = document.getElementById('erase');
 let i = 0
 while(i < collapsible.length) {
-    test.appendChild(document.createElement('p'));
+   
+    const title = document.createElement('p')
+    para.appendChild(title);
     i++;
-}
+} 
 
 
 function addToPracticeList(e){
@@ -136,8 +140,8 @@ function addToPracticeList(e){
     //Attempt to organize #lists__box using sparse array with predetermined length
     lista.indexOf(id) === -1 ?
     lista.push(id) :
-    lista.splice(lista.indexOf(id), 1)
-    lista.sort((a,b) => a-b)
+    lista.splice(lista.indexOf(id), 1);
+    lista.sort((a,b) => a-b);
     
     console.log(lista)
    /*  listsBox.append(title)
@@ -147,11 +151,40 @@ function addToPracticeList(e){
 
     //make a new div with specified slots with id's to match the items from lista array
   
-        let para
-        let i = 0
-        while(i < collapsible.length) {   
+    let i = 0;
+    while(i < collapsible.length) {
+       
+        [...para.querySelectorAll('p')][i].textContent = lista[i];
+        [...para.querySelectorAll('p')].forEach(e=> {
+            erase.append(input)
+        })
+        i++
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /*    let i = 0
+        while(i < lista.length) {  
+            
             lista[i] ?           
-            [...test.querySelectorAll('p')][i].textContent = `Week ${lista[i]}` :
+            [...test.querySelectorAll('p')][i].innerHTML = `Week ${lista[i]} <span><input type="button" value="delete" title="Delete" class="deleteList"></span>` :
             [...test.querySelectorAll('p')][i].textContent = lista[i];
 
             //i stopped here...
@@ -162,6 +195,11 @@ function addToPracticeList(e){
           
             i++;  
         }
+        
+        if(test) */
+
+
+
         
       
     //TO ADD the lists into #lists__box
