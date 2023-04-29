@@ -1,20 +1,54 @@
 const collapsible = document.querySelectorAll('.collapsible')
 const weekX = document.querySelectorAll('.weekX')
 
+let reviewList = [];
+
+
+
+
 
 document.addEventListener('click', e => {
     if(!e.target.matches('.collapsible')
-    && e.target.matches('.fa-circle-check')) {
+    && !e.target.matches('.fa-circle-check')) {
         clickOut(e)
         return
     } 
     if(e.target.matches('.collapsible')) clickIn(e);
-    if(e.target.matches('.fa-circle-check')) addToList()
+    if(e.target.matches('.fa-circle-check')) addToReview(e)
 })
 
-function addToList() {
-    console.log('works')
+function addToReview(e) {
+    e.target.classList.toggle('addToRosterAnimation')
+    //add color later when another function will look at the lsit and color the appropriate buttons
+    /* e.target.classList.toggle('checked') */
+
+    setStorage(e)
 }
+function setStorage(e) {
+    let id = e.target.parentElement.parentElement.previousElementSibling.id
+    let temp = localStorage.getItem('reviewList')
+    temp !== null ? reviewList.push(temp.split(',')) : 0
+
+    localStorage.removeItem('reviewList')
+
+
+    if(reviewList.indexOf(id) === -1){
+        reviewList.push(id)
+        console.log('add')
+    } else {
+        reviewList.splice(temp.indexOf(id, 1))
+        console.log('delete')
+    }
+
+    localStorage.setItem('reviewList', reviewList)
+    
+    console.log(reviewList)
+    console.log(temp)
+    
+}
+/* console.log(localStorage.getItem('reviewList').split(',')) */
+
+
 
 
 
