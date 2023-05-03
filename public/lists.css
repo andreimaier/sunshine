@@ -1,4 +1,4 @@
-
+/* CHANGE buttons for week list */
 #myLists {
     margin-block: 100px;
     width: 90%;
@@ -85,13 +85,19 @@
     transition: var(--animationDuration) ease;
 }
 
-
+.delete {
+    background-color: aqua;
+    border-radius: 5px;
+}
 
 
 #lists__section h4{
     text-align: center;
 }
-.lists__box {
+#lists__box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     border-radius: 10px;
     min-height: 2.4rem;
     margin-bottom: 10px;
@@ -100,7 +106,7 @@
     padding-block: 2px;
     padding-inline: 10px;
 }
-.lists__box div {
+#lists__box div {
     display: flex;
     gap: 0.5rem;
 }
@@ -109,3 +115,4 @@
 .lists__item input {
     margin-left: 0.2rem;
 }
+
