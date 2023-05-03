@@ -145,9 +145,11 @@ console.log(typeof Number(a))
 function addTenPFun() {
     buttons.forEach(button => {
         const score = button.firstElementChild
-        switch(score.textContent) {
-            case(''): score.textContent = 0;
-            default: score.textContent = parseInt(score.textContent) + 5; break;
+        if(!button.classList.contains('count-disabled')) {
+            switch(score.textContent) {
+                case(''): score.textContent = 0;
+                default: score.textContent = parseInt(score.textContent) + 5; break;
+            }
         }
         button.value = score.textContent
         localStorage.setItem(button.id, button.value) 
