@@ -40,8 +40,8 @@ main {
 
 #div__pointsTable {
   overflow: scroll;
-  max-width: 90vw;
-  max-height: 85vh;
+  max-width: 99vw;
+  max-height: 80vh;
   border: 1px solid var(--YInMnBlue);
   border-radius: 10px;
   transition: 1s ease-in-out;
@@ -113,5 +113,10 @@ td:not(.total) {
 }
 
 
-
+@media only screen and (min-width: 500px) {
+  #div__pointsTable{
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+}
 
