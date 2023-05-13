@@ -11,7 +11,6 @@ let secondMax = []
 const target = document.querySelectorAll('td:nth-of-type(2)')
 target.forEach(e => {
   const span = document.createElement('span')
-  e.append(span)
   if (parseInt(e.textContent) < 85) {
     span.textContent = '0';
   } else if (parseInt(e.textContent) < 90) {
@@ -26,7 +25,8 @@ target.forEach(e => {
   else {
     span.textContent = '0';
   }
-  /* [span.textContent, e.textContent] = [e.textContent, span.textContent] */
+  [span.textContent, e.textContent] = [e.textContent, span.textContent] 
+  e.append(span)
 })
 
 
@@ -93,7 +93,7 @@ async function getDataFun() {
   //for TOTAL
   students.forEach(elev => {
     let { points } = studentPoints.find(({ name }) => name == elev.textContent)
-    points += parseInt(elev.nextElementSibling.textContent.replace(/\d+%/, ''))
+    points += parseInt(elev.nextElementSibling.textContent.replace(/[0-9]{2}%$/,''))
     const td = document.createElement('td')
     elev.parentNode.append(td)
     td.textContent = points
@@ -137,7 +137,6 @@ students.forEach(elev => {
   }
   secondMax.sort((a, b) => a - b).reverse(); 
 }) 
-console.log(secondMax)
 
 
 students.forEach(col => {
@@ -190,12 +189,12 @@ students.forEach(col => {
 
     //👑 DAY
     students.forEach(elev => {
-      if(!obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.+/, ""))){
+      if(!obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.*/, ""))){
           const td = document.createElement('td')
           elev.parentNode.append(td)
           td.textContent = 'NiC'
       } else {
-          let { points } = obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.+/, ""))
+          let { points } = obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.*/, ""))
           const td = document.createElement('td')
           elev.parentNode.append(td)
           points === '' || points === '0' ?
