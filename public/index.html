@@ -24,7 +24,8 @@
 
     <title>Random WORD</title>
 
-    <script src="./index.js" type="module" defer></script>
+    <script src="./index.js" defer></script>
+    <script src="basic.js" defer></script>
     <link rel="stylesheet" href="./basic.css" />
     <link rel="stylesheet" href="./index.css" />
   </head>
@@ -35,6 +36,20 @@
       <a title="Make new list" class="nav-link" href="temporary.html">⌨️</a>
       <a title="Past Scores" class="nav-link" href="table.html">📅</a>
     </header>
+    <!-- <header>
+      <a title="Home" class="nav-link" href="index.html">🏠</a>
+      <a title="Manage Lists" class="nav-link" href="lists.html">📑</a>
+      <a title="Make new list" class="nav-link" href="temporary.html">⌨️</a>
+      <p title="Past Scores" class="nav-link" id="target">
+        📅<span class="hidden"
+          ><a title="Make new list" class="nav-link" href="temporary.html">⌨️</a
+          ><a title="Make new list" class="nav-link" href="temporary.html">⌨️</a
+          ><a title="Make new list" class="nav-link" href="temporary.html"
+            >⌨️</a
+          ></span
+        >
+      </p>
+    </header> -->
     <main>
       <!--  <a target="_blank" href="https://icons8.com/icon/19295/star">Star</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
 
@@ -50,39 +65,65 @@
 
       <!-- <h1 id="to-save">Students Points</h1> -->
       <section class="students">
-        <button class="studentJS itemCSS" name="Arthur" id="@Arthur">
-          Arthur<span class="count"></span><span class="reduce">⭐</span>
+        <button class="studentJS itemCSS" id="@Lucas">
+          Lucas<span class="count"></span><span class="reduce">⭐</span>
         </button>
         <button class="studentJS itemCSS" id="@Jerry">
           Jerry
           <span class="count"></span><span class="reduce">⭐</span>
         </button>
-        <button class="studentJS itemCSS" id="@Emma">
-          Emma
-          <span class="count"></span><span class="reduce">⭐</span>
+        <button class="studentJS itemCSS" id="@Sharon">
+          Sharon<span class="count"></span
+          ><span class="reduce">⭐</span></button
+        ><button class="studentJS itemCSS" id="@Tanya">
+          Tanya<span class="count"></span><span class="reduce">⭐</span>
         </button>
-        <button class="studentJS itemCSS" id="@Eason">
+        <button class="studentJS itemCSS" name="Tony" id="@Tony">
+          Tony<span class="count"></span><span class="reduce">⭐</span></button
+        ><button class="studentJS itemCSS" id="@Eason">
           Eason<span class="count"></span><span class="reduce">⭐</span>
         </button>
         <button class="studentJS itemCSS" id="@Eddie">
           Eddie<span class="count"></span><span class="reduce">⭐</span>
         </button>
-        <button class="studentJS itemCSS" id="@Gina">
-          Gina<span class="count"></span><span class="reduce">⭐</span>
-        </button>
         <button class="studentJS itemCSS" id="@Joanna">
           Joanna<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Daniel">
-          Daniel
-          <span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Lucas">
-          Lucas<span class="count"></span><span class="reduce">⭐</span>
         </button>
         <button class="studentJS itemCSS" id="@Grace">
           Grace
           <span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="studentJS itemCSS" id="@Dora">
+          Dora<span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="studentJS itemCSS" id="@Charlotte">
+          Charlotte
+          <span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="studentJS itemCSS" id="@Cathy">
+          Cathy
+          <span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="itemCSS" disabled></button>
+        <button class="studentJS itemCSS" id="@Jenny">
+          Jenny<span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="studentJS itemCSS" id="@Pauline">
+          Pauline
+          <span class="count"></span><span class="reduce">⭐</span>
+        </button>
+
+        <button class="studentJS itemCSS" id="@Emma">
+          Emma
+          <span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="studentJS itemCSS" name="Arthur" id="@Arthur">
+          Arthur<span class="count"></span><span class="reduce">⭐</span>
+        </button>
+        <button class="itemCSS" disabled></button>
+
+        <button class="studentJS itemCSS" id="@Gina">
+          Gina<span class="count"></span><span class="reduce">⭐</span>
         </button>
 
         <button class="studentJS itemCSS" id="@Mia">
@@ -90,45 +131,24 @@
           <span class="count"></span><span class="reduce">⭐</span>
         </button>
 
-        <button class="studentJS itemCSS" id="@Cathy">
-          Cathy
-          <span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="itemCSS" id="" disabled></button>
-        <button class="studentJS itemCSS" id="@Eva">
-          Eva<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Pauline">
-          Pauline
-          <span class="count"></span><span class="reduce">⭐</span>
-        </button>
         <button class="studentJS itemCSS" id="@Selina">
           Selina<span class="count"></span><span class="reduce">⭐</span>
         </button>
-        <button class="studentJS itemCSS" id="@Dora">
-          Dora<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="itemCSS" id="" disabled></button>
-        <button class="studentJS itemCSS" id="@Sharon">
-          Sharon<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Tanya">
-          Tanya<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Charlotte">
-          Charlotte
+
+        <button class="studentJS itemCSS" id="@Daniel">
+          Daniel
           <span class="count"></span><span class="reduce">⭐</span>
         </button>
+
+        <button class="itemCSS" disabled></button>
+
+        <button class="studentJS itemCSS" id="@Eva">
+          Eva<span class="count"></span><span class="reduce">⭐</span>
+        </button>
+
         <button class="studentJS itemCSS" id="@Carissa">
           Carissa
           <span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="itemCSS" id="" disabled></button>
-        <button class="studentJS itemCSS" name="Tony" id="@Tony">
-          Tony<span class="count"></span><span class="reduce">⭐</span>
-        </button>
-        <button class="studentJS itemCSS" id="@Jenny">
-          Jenny<span class="count"></span><span class="reduce">⭐</span>
         </button>
       </section>
       <section class="randomFields">
@@ -154,14 +174,11 @@
           </button>
         </div>
       </section>
-
-      <div class="buttons">
-        <button id="resetPoints">Reset Points</button>
-        <button id="submitToMongodb">Submit to mongodb</button>
-      </div>
     </main>
     <footer>
       <a title="+10p" class="nav-link" id="addTenP">📈</a>
+      <a title="Erase Points" class="nav-link" id="resetPoints">🧹</a>
+      <a title="Save Points" class="nav-link" id="submitToMongodb">💾</a>
     </footer>
   </body>
 </html>

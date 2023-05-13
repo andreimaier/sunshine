@@ -37,6 +37,7 @@ mongoose.connect('mongodb+srv://andrei:andrei@cluster0.rkr6oej.mongodb.net/nodeP
 
 //create schema
 const studentSchema = {
+    index: Number,
     date: String, 
     class: Array
 }
@@ -47,23 +48,18 @@ let testing = Student.find({ date: "3/29/2023" }).exec(console.log)
  */
 
 
-
-
-
-
-
-
 app.get('/api', async (request, response) => {
   response.json(await Student.find({}));
     /* res.sendFile(__dirname + './public/index.html') */ //instead of putting things in public folder
     console.log(`serveru alearga la ${port}`)
 })
-
+let a = 1;
 
 app.post("/api", (request, response) => {
   console.log("I got a request!");
   console.log(request.body);
   const dailyScores = new Student({ 
+    index: a++,
     date: new Date(Date.now()).toLocaleDateString(),
     class: request.body
   })
@@ -76,3 +72,19 @@ app.post("/api", (request, response) => {
 });
 
 
+/* //post the list to DB
+app.post("/list", (request, response) => {
+  console.log("I got a request for a list!");
+  console.log(request.body);
+  const dailyScores = new Student({ 
+    index: a++,
+    date: new Date(Date.now()).toLocaleDateString(),
+    class: request.body
+  })
+
+  dailyScores.save(function (err) {
+    if (err) console.log(err)
+  })
+  response.json(dailyScores);
+  response.redirect('/')
+}); */

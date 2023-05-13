@@ -6,13 +6,46 @@ main {
   background: none;
 
 }
+.tables{
+  margin-block: 1rem;
+}
+.tables h2{
+  text-align: center;
+}
+.tables div{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tables button {
+  background-color: hotpink;
+  width: 40%;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+.tables button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 200ms;
+}
+.hidden{
+  transform: scale(0);
+}
+.small {
+  width: 0px;
+  height: 0px;
+}
+
 
 #div__pointsTable {
   overflow: scroll;
+  
   max-width: 99vw;
   max-height: 99vh;
   border: 1px solid var(--YInMnBlue);
   border-radius: 10px;
+  transition: 1s ease-in-out;
 }
 #pointsTable, td, th {
   text-align: center;
@@ -22,6 +55,8 @@ main {
   border-spacing: 0;
   position: relative;
   font-family: var(--grandstander);
+  scale: 1;
+  transition: 500ms;
 }
  #pointsTable thead {
   position: sticky;
@@ -60,11 +95,31 @@ tr th:nth-child(2) {
   left: 0px;
   font-weight: bold;
   font-size: 1.3rem;
+  
 }
 td:not(.total) {
   padding-block: 1rem;
   padding-inline: 1rem;
 
 }
+
+
+.s {
+  color: red;
+  display: flex;
+  justify-content: center;
+}
+/* td:has(.s) {
+  display: flex;
+  flex-direction: column;
+} */
+
+.me span {
+  font-size: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
 
 

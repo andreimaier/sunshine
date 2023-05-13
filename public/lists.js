@@ -13,10 +13,12 @@ document.addEventListener('click', e => {
         return
     } 
     if(e.target.matches('.collapsible')) clickIn(e);
-    if(e.target.matches('.fa-circle-check')) {addToReview(e); populateListBox(); console.log(reviewList);}
-    if(e.target.matches('.delete')) deleteList(e)
+    if(e.target.matches('.fa-circle-check')) {addToReview(e); populateListBox(); console.log(`The list to review contains lists: ${reviewList}`);}
+    if(e.target.matches('.delete')) deleteList(e);
 })
 
+// initialize LS item
+localStorage.getItem('reviewList') ? 0 : localStorage.setItem('reviewList', '')
 
 let reviewList = []; //initialize empty list
 if((localStorage.getItem('reviewList').split(','))) {
@@ -51,7 +53,7 @@ function populateListBox() {
         parent.lastElementChild.remove() : 0
 
         del.setAttribute('type', 'button')
-        del.setAttribute('value', 'delete')
+        del.setAttribute('value', 'Delete')
         del.setAttribute('title', 'Delete this list') 
         del.classList.add('delete')
     }
@@ -86,7 +88,10 @@ function addToReview(e) {
     void e.target.offsetWidth
     e.target.classList.add('addToRosterAnimation')
     setStorage(e)
+    storeValues() 
 }
+list = []
+
 
 function setStorage(e) { //populate reviewList
     const id = e.target.parentElement.parentElement.previousElementSibling.id
@@ -99,6 +104,19 @@ function setStorage(e) { //populate reviewList
     localStorage.setItem('reviewList', reviewList) 
 }
 
+function storeValues() {
+    reviewList.forEach(e => {
+        (localStorage.getItem(e) === null) ? localStorage.setItem(e, '') : localStorage.removeItem(e)
+
+
+    })
+
+    /* let key = e.target.parentElement.parentElement.previousElementSibling.id
+    let array = Array.from(e.target.parentElement.previousElementSibling.children)
+    array.forEach(kid => list.push(kid.textContent))
+        key === cheie ? localStorage.removeItem(key) : localStorage.setItem(key, list)
+    } */
+}
 
 
 //called on document event listener

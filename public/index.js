@@ -2,15 +2,14 @@
 //list of db enties with data displayed...for me to delete easier
 
 
-
-//CHANGE 
+//ADD
+//prompts can add Ss name ... after I make the sing in site
 //make it come into view slower...like a transition on load
-//change css files ...separate one for header, footer, background, reset...
+//SEND user made lists to database
 
-//do a footer
-//make a website for seeing stuff for the users...modules? diff site? diff page?
-
-
+//CHANGE
+//the space between list items stays even after removing them on lists.js
+//some nicer buttons for removing lists...like X or smth
 
 
 
@@ -96,6 +95,7 @@ function studentTrimFun() {
 
 submitDB.addEventListener("click", async () => {
     studentTrimFun()
+    console.log('sent')
    
     const options = {
     method: "POST",
@@ -108,8 +108,7 @@ submitDB.addEventListener("click", async () => {
     console.log(json);
 
     clasaMea = []
-
-    location.href = "https://myscores.cyclic.app/table.html"; 
+   /*  location.href = "https://myscores.cyclic.app/table.html";  */
 });
 
 
@@ -228,7 +227,7 @@ function LSSetAbsent() {
     localStorage.setItem('absent', disabledArr)
 }
 
-
+localStorage.getItem('absent') ? 0 : localStorage.setItem('absent', "")
 function LSGetAbsent() {
     const temp = localStorage.getItem('absent').split(',')
     buttons.forEach(a => {

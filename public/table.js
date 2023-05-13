@@ -1,78 +1,76 @@
-let newData = []
 const appendDate = document.getElementById('appendDate')
-const row = document.getElementsByTagName('tr')
-let th, td
 const students = document.querySelectorAll('.studentJS')
-const total = document.querySelectorAll('.total')
-const pointsTable = document.querySelector('#pointsTable')
 
-console.log(students)
-
-/* 
- //add the points  and logs to total column
-students.forEach(student => {
-  let sum = 0
-  const tableRow = student.parentElement;
-  const config = { childList: true };
-  // Callback function to execute when mutations are observed
-  const callback = function(mutationsList, observer) {
-      // Loop through each mutation
-      for(let mutation of mutationsList) {
-          // Check if nodes were added
-          if (mutation.type === 'childList') {
-              // Loop through each added node
-              for(let node of mutation.addedNodes) {
-                sum += parseInt(node.textContent)
-            }
-        }
-    }
- 
-  student.nextElementSibling.textContent = sum
-  };
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(callback);
-  // Start observing the target node for configured mutations
-  observer.observe(tableRow, config);
-})   */
-
-//get a crown on best kid
-/* students.forEach(student => {
-
-})  */  
-
-let maxArr = []
-let sum
+let dayMax = []
+let totalMax = []
+let firstMax = []
+let secondMax = []
 
 
-
-
-
-
-let studentPoints 
-let totalArray = []
-
-
-
-
-
-/* async function countPoints() {
-  const response = await fetch("/api");
-  const data = await response.json();
-
-  
-}
-countPoints() */
-
-
-let dataMea = {}
+//add a span with the points based on test score
+const target = document.querySelectorAll('td:nth-of-type(2)')
+target.forEach(e => {
+  const span = document.createElement('span')
+  e.append(span)
+  if (parseInt(e.textContent) < 85) {
+    span.textContent = '0';
+  } else if (parseInt(e.textContent) < 90) {
+    span.textContent = '50';
+  } else if (parseInt(e.textContent) < 95) {
+    span.textContent = '100';
+  } else if (parseInt(e.textContent) < 100){
+    span.textContent = '150';
+  } else if (parseInt(e.textContent) = 100) {
+    span.textContent = '200';
+  }
+  else {
+    span.textContent = '0';
+  }
+})
 
 
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
+  const firstHalf = data.filter(i => !i.index)
+  const secondHalf = data.filter(i => i.index)
+  console.log(secondHalf)
 
-  dataMea = Object.assign({}, data)
-  
+//first half of second semester
+  const first = firstHalf.reduce((acc, curr) => {
+    curr.class.forEach(student => {
+      const index = acc.findIndex(s => s.name === student.name);
+      if (!isNaN(parseInt(student.points))) {
+      if (index !== -1) {
+        acc[index].points += parseInt(student.points, 10);
+      } else {
+          acc.push({
+            name: student.name,
+            points: parseInt(student.points, 10)
+          });
+        }
+      }
+    });
+    return acc;
+  }, []);
+
+//for first half
+  students.forEach(elev => {
+    let { points } = first.find(({ name }) => name == elev.textContent) ?? {}
+    const td = document.createElement('td')
+    elev.parentNode.append(td)
+    td.textContent = points ?? 'error'
+    td.classList.add('1stHalf')
+
+    if (!isNaN(parseInt(points))) {
+      firstMax.push(points)
+    }
+    
+    firstMax.sort((a, b) => a - b).reverse(); 
+  }) 
+
+
+
 
   const studentPoints = data.reduce((acc, curr) => {
     curr.class.forEach(student => {
@@ -91,36 +89,80 @@ async function getDataFun() {
     return acc;
   }, []);
 
-  //👑 TOTAL
+  //for TOTAL
   students.forEach(elev => {
-    
-
-    const { points } = studentPoints.find(({ name }) => name == elev.textContent)
+    let { points } = studentPoints.find(({ name }) => name == elev.textContent)
+    points += parseInt(elev.nextElementSibling.textContent.replace(/\d+%/, ''))
     const td = document.createElement('td')
-
     elev.parentNode.append(td)
     td.textContent = points
-    td.classList.add('stickyTotal')
+    td.classList.add('total')
 
     if (!isNaN(parseInt(points))) {
-      totalArray.push(points)
+      totalMax.push(points)
     }
-    
-    totalArray.sort((a, b) => a - b).reverse(); 
+    totalMax.sort((a, b) => a - b).reverse(); 
   })  
 
-   
-  students.forEach(elev => {
-    let obiect = elev.nextElementSibling
-    
-    obiect.textContent == totalArray[0] ? 
-    obiect.textContent = `🥇${obiect.textContent}` :
-    obiect.textContent == totalArray[1] ? 
-    obiect.textContent = `🥈${obiect.textContent}` :
-    obiect.textContent == totalArray[2] ? 
-    obiect.textContent = `🥉${obiect.textContent}` :
-    obiect.textContent = obiect.textContent 
-  })
+
+//first half of second semester
+const second = secondHalf.reduce((acc, curr) => {
+  curr.class.forEach(student => {
+    const index = acc.findIndex(s => s.name === student.name);
+    if (!isNaN(parseInt(student.points))) {
+    if (index !== -1) {
+      acc[index].points += parseInt(student.points, 10);
+    } else {
+        acc.push({
+          name: student.name,
+          points: parseInt(student.points, 10)
+        });
+      }
+    }
+  });
+  return acc;
+}, []);
+
+
+students.forEach(elev => {
+  //total for SECOND half
+  const { points } = second.find(({ name }) => name == elev.textContent) ?? {}
+  const span = document.createElement('span')
+  elev.append(span)
+  span.textContent = points ?? '0'
+  span.classList.add('s')
+  if (!isNaN(parseInt(points))) {
+    secondMax.push(points)
+  }
+  secondMax.sort((a, b) => a - b).reverse(); 
+}) 
+console.log(secondMax)
+
+
+students.forEach(col => {
+  //for TOTAL
+  let totalScor = col.nextElementSibling.nextElementSibling.nextElementSibling
+  totalScor.textContent == totalMax[0] ? 
+  totalScor.textContent = `🥇${totalScor.textContent}` :
+  totalScor.textContent == totalMax[1] ? 
+  totalScor.textContent = `🥈${totalScor.textContent}` :
+  totalScor.textContent == totalMax[2] ? 
+  totalScor.textContent = `🥉${totalScor.textContent}` :
+  totalScor.textContent = totalScor.textContent 
+
+  //for first half
+  let halfScor = col.nextElementSibling.nextElementSibling
+  halfScor.textContent == firstMax[0] ? 
+  halfScor.textContent = `🥇${halfScor.textContent}` :
+  halfScor.textContent == firstMax[1] ? 
+  halfScor.textContent = `🥈${halfScor.textContent}` :
+  halfScor.textContent == firstMax[2] ? 
+  halfScor.textContent = `🥉${halfScor.textContent}` :
+  halfScor.textContent = halfScor.textContent 
+
+  //for second half
+
+})
 
 
 
@@ -130,75 +172,45 @@ async function getDataFun() {
   
   for(let obj of data){
     obj.date = obj.date.replace('/2023', '')
-    th = document.createElement('th') 
+    const th = document.createElement('th') 
     th.textContent = obj.date
     appendDate.append(th)
 
     const lol = obj.class.map(lala => parseInt(lala.points)); 
-    maxArr = lol.filter(e => !isNaN(e))
-    maxArr.sort((a, b) => a - b).reverse() 
+    dayMax = lol.filter(e => !isNaN(e))
+    dayMax.sort((a, b) => a - b).reverse() 
 
     //👑 DAY
     students.forEach(elev => {
-
-      if(!obj.class.find(({ name }) => name === elev.textContent)){
-        const td = document.createElement('td')
-        elev.parentNode.append(td)
-        td.textContent = 'NiC'
-        
-
+      if(!obj.class.find(({ name }) => name === elev.textContent.replace(/(\d)+/, ""))){
+          const td = document.createElement('td')
+          elev.parentNode.append(td)
+          td.textContent = 'NiC'
       } else {
-
-        let { points } = obj.class.find(({ name }) => name === elev.textContent)
-        const td = document.createElement('td')
-        elev.parentNode.append(td)
-        points === '' || points === '0' ?
-        points = 'abs' :
-        points
-        td.textContent = points
-          
-        td.textContent == maxArr[0] ?
-        td.textContent = `🥇${maxArr[0]}`:
-        td.textContent == maxArr[1] ?
-        td.textContent = `🥈${maxArr[1]}`:
-        td.textContent == maxArr[2] ?
-        td.textContent = `🥉${maxArr[2]}`: 
-        td.textContent = td.textContent
+          let { points } = obj.class.find(({ name }) => name === elev.textContent.replace(/(\d)+/, ""))
+          const td = document.createElement('td')
+          elev.parentNode.append(td)
+          points === '' || points === '0' ?
+          points = 'abs' :
+          points
+          td.textContent = points
+            
+          td.textContent == dayMax[0] ?
+          td.textContent = `🥇${dayMax[0]}`:
+          td.textContent == dayMax[1] ?
+          td.textContent = `🥈${dayMax[1]}`:
+          td.textContent == dayMax[2] ?
+          td.textContent = `🥉${dayMax[2]}`: 
+          td.textContent = td.textContent
       }
-
-
     });
   }
-
-
 }
-
 getDataFun()
 
-
-
-
-
-
-
-
-//this is you ever need to FILTER text nodes
-
-/* const filteredNodes = [];
-for (let i = 0; i < nodes.length; i++) {
-  const node = nodes[i];
-  if (node.nodeType !== 3 && node.textContent.trim() !== '') {
-    filteredNodes.push(node);
-  }
-}
-console.log(filteredNodes)  */
-
-
-
-  
-
-
-
-
-
-
+//hide table etc...
+/* totalTab.addEventListener('click', ()=> {
+  pointsTable.classList.toggle('hidden')
+  document.querySelector('#div__pointsTable').classList.toggle('small')
+  document.querySelector('#div__pointsTable').classList.toggle('hidden')
+}) */

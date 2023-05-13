@@ -1,6 +1,7 @@
 /* CHANGE buttons for week list */
 #myLists {
-    margin-block: 100px;
+    margin-top: 20px;
+    margin-bottom: 50px;
     width: 90%;
     display: grid;
     gap: 1rem;
@@ -9,13 +10,23 @@
 
 }
 .collapsible {
-    background-color: #eee;
+    
+
+    background-color: whitesmoke;
+    background-size: cover;
+    border-radius: 10px;
     color: var(--CarolinaBlue);
     cursor: pointer;
     padding: 1rem;
     width: 100%;
     border: none;
     text-align: left;
+    font-weight: bold;
+}
+.collapsible:hover{
+    background-color: whitesmoke;
+    filter: brightness(120%);
+    
 }
 .collapsible:after {
     content: '\002B'; 
@@ -23,13 +34,17 @@
     float: right;
 }
 .active {
+    background-image: none;
     background-color: #0D2C54;
+    
 }
 .active:after {
     content: "\2212";
 }
 .weekX {
+    margin-top: 5px;
     max-height: 0;
+    border-radius: 10px;
     overflow: hidden;
     transition: 300ms ease-in-out;
     position: relative;
@@ -86,8 +101,12 @@
 }
 
 .delete {
-    background-color: aqua;
+    all: unset;
+    background-color: var(--YInMnBlue);
     border-radius: 5px;
+    padding: 2px;
+    font-size: small;
+   
 }
 
 
@@ -100,11 +119,14 @@
     gap: 0.5rem;
     border-radius: 10px;
     min-height: 2.4rem;
+    min-width: 100px;
     margin-bottom: 10px;
-    border: 5px inset white;
+    border-top: 5px solid white;
+    border-inline: 1px inset white;
     color: #eee;
     padding-block: 2px;
     padding-inline: 10px;
+    height: min-content;
 }
 #lists__box div {
     display: flex;
