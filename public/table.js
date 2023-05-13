@@ -26,6 +26,7 @@ target.forEach(e => {
   else {
     span.textContent = '0';
   }
+  /* [span.textContent, e.textContent] = [e.textContent, span.textContent] */
 })
 
 
@@ -151,17 +152,24 @@ students.forEach(col => {
   totalScor.textContent = totalScor.textContent 
 
   //for first half
-  let halfScor = col.nextElementSibling.nextElementSibling
-  halfScor.textContent == firstMax[0] ? 
-  halfScor.textContent = `🥇${halfScor.textContent}` :
-  halfScor.textContent == firstMax[1] ? 
-  halfScor.textContent = `🥈${halfScor.textContent}` :
-  halfScor.textContent == firstMax[2] ? 
-  halfScor.textContent = `🥉${halfScor.textContent}` :
-  halfScor.textContent = halfScor.textContent 
+  let firstHalf = col.nextElementSibling.nextElementSibling
+  firstHalf.textContent == firstMax[0] ? 
+  firstHalf.textContent = `🥇${firstHalf.textContent}` :
+  firstHalf.textContent == firstMax[1] ? 
+  firstHalf.textContent = `🥈${firstHalf.textContent}` :
+  firstHalf.textContent == firstMax[2] ? 
+  firstHalf.textContent = `🥉${firstHalf.textContent}` :
+  firstHalf.textContent = firstHalf.textContent 
 
   //for second half
-
+  let secondHalf = col.firstElementChild
+  secondHalf.textContent == secondMax[0] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥇` :
+  secondHalf.textContent == secondMax[1] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥈` :
+  secondHalf.textContent == secondMax[2] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥉` :
+  secondHalf.textContent = secondHalf.textContent 
 })
 
 
@@ -182,12 +190,12 @@ students.forEach(col => {
 
     //👑 DAY
     students.forEach(elev => {
-      if(!obj.class.find(({ name }) => name === elev.textContent.replace(/(\d)+/, ""))){
+      if(!obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.+/, ""))){
           const td = document.createElement('td')
           elev.parentNode.append(td)
           td.textContent = 'NiC'
       } else {
-          let { points } = obj.class.find(({ name }) => name === elev.textContent.replace(/(\d)+/, ""))
+          let { points } = obj.class.find(({ name }) => name === elev.textContent.replace(/\d+.+/, ""))
           const td = document.createElement('td')
           elev.parentNode.append(td)
           points === '' || points === '0' ?
