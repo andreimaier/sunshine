@@ -1,12 +1,12 @@
 body {
   background: none;
-
+  overflow-x: hidden;
 }
 main {
   background: none;
 
 }
-.tables{
+/* .tables{
   margin-block: 1rem;
 }
 .tables h2{
@@ -35,14 +35,13 @@ main {
 .small {
   width: 0px;
   height: 0px;
-}
+} */
 
 
 #div__pointsTable {
   overflow: scroll;
-  
-  max-width: 99vw;
-  max-height: 99vh;
+  max-width: 90vw;
+  max-height: 85vh;
   border: 1px solid var(--YInMnBlue);
   border-radius: 10px;
   transition: 1s ease-in-out;
@@ -102,18 +101,11 @@ td:not(.total) {
   padding-inline: 1rem;
 
 }
-
-
 .s {
   color: red;
   display: flex;
   justify-content: center;
 }
-/* td:has(.s) {
-  display: flex;
-  flex-direction: column;
-} */
-
 .me span {
   font-size: 8px;
   display: flex;
