@@ -73,8 +73,9 @@ function deleteList(e) {
 
     collapsible.forEach(a => {
         //dig deep to select the button
-        a.id === id ? a.nextElementSibling.lastElementChild.firstElementChild.classList.toggle('checked') : 0
+        a.id.replace('Week', '') === id ? a.nextElementSibling.lastElementChild.firstElementChild.classList.toggle('checked') : 0
     })
+    storeValues()
 }
 
 
@@ -87,6 +88,11 @@ function addToReview(e) {
     e.target.classList.remove('addToRosterAnimation')
     void e.target.offsetWidth
     e.target.classList.add('addToRosterAnimation')
+
+    for(item of reviewList) {
+        localStorage.removeItem(`Week ${item}`, '')
+    }
+    
     setStorage(e)
     storeValues() 
 }
@@ -94,7 +100,7 @@ list = []
 
 
 function setStorage(e) { //populate reviewList
-    const id = e.target.parentElement.parentElement.previousElementSibling.id
+    const id = e.target.parentElement.parentElement.previousElementSibling.id.replace('Week','')
     if(reviewList.indexOf(id) === -1){
         reviewList.push(id)
     } else {
@@ -105,18 +111,19 @@ function setStorage(e) { //populate reviewList
 }
 
 function storeValues() {
-    reviewList.forEach(e => {
-        (localStorage.getItem(e) === null) ? localStorage.setItem(e, '') : localStorage.removeItem(e)
-
-
-    })
-
-    /* let key = e.target.parentElement.parentElement.previousElementSibling.id
-    let array = Array.from(e.target.parentElement.previousElementSibling.children)
-    array.forEach(kid => list.push(kid.textContent))
-        key === cheie ? localStorage.removeItem(key) : localStorage.setItem(key, list)
-    } */
+    let vocab = {}
+    for(item of reviewList) {
+        let list = []
+        let arr = Array.from(document.querySelector(`#Week${item}`).nextElementSibling.firstElementChild.children) //get vocab based on review list
+        arr.forEach(e => list.push(e.textContent)) //assign words to list
+        vocab[`Week ${item}`] = list // assign to object
+    }
+    localStorage.vocab = JSON.stringify(vocab) //send it to LS
+    let x = JSON.parse(localStorage.vocab) //take it out
+    console.log(x)
 }
+storeValues()
+
 
 
 //called on document event listener
@@ -142,7 +149,7 @@ function clickIn(e) {
 //colors button according to reviewList
 (function colorCheckBtns() {
     checkBtns.forEach(btn => {
-        const id = btn.parentElement.parentElement.previousElementSibling.id
+        const id = btn.parentElement.parentElement.previousElementSibling.id.replace('Week','')
         for(i of reviewList) {
             i === id ? btn.classList.add('checked') :0
         }

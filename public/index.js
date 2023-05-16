@@ -9,15 +9,9 @@
 
 //CHANGE
 //the space between list items stays even after removing them on lists.js
+    //maybe with class on items I add rather than on premade based on collapsible/length
 //some nicer buttons for removing lists...like X or smth
 
-
-
-
-
-
-
-//multiple students add points at once...BIG interface change
 
 
 //FOR MARCH 13th
@@ -63,14 +57,7 @@ const buttons = document.querySelectorAll('.studentJS')
 
 
 
-let studentList = []
-//populates studentList for absents and other stuff
-buttons.forEach(item => {
-    let nou = item.textContent.replace(/⭐/, "")
-    if(item.id !== "") {
-        studentList.push(nou)
-    }
-})
+
 
 
 //CONNECT TO BACK
@@ -89,6 +76,7 @@ function studentTrimFun() {
         }
 })
     console.log(clasaMea)
+    clasaMea = []
 }
 
 
@@ -107,13 +95,8 @@ submitDB.addEventListener("click", async () => {
     const json = await response.json();
     console.log(json);
 
-    clasaMea = []
    /*  location.href = "https://myscores.cyclic.app/table.html";  */
 });
-
-
-
-
 
 
 //EVENT listeners
@@ -136,11 +119,11 @@ document.addEventListener('click', e => {
     if(e.target.matches('#resetPoints')) resetPointsFun()
 })
 
-let a = '1'
-Number(a)
-console.log(typeof Number(a))
 
 
+
+
+//increase by 5
 function addTenPFun() {
     buttons.forEach(button => {
         const score = button.firstElementChild
@@ -150,29 +133,10 @@ function addTenPFun() {
                 default: score.textContent = parseInt(score.textContent) + 5; break;
             }
         }
-        button.value = score.textContent
-        localStorage.setItem(button.id, button.value) 
+        arr[button.id] = score.textContent
+        localStorage.arr = JSON.stringify(arr)
     })
 }
-
-
-
-//HELPER functions//
-
-function retrieveScores() {
-    for (const [key, valoare] of Object.entries(localStorage)) {
-        if(/^@\w+/g.test(key)) {
-        document.getElementById(key).value = valoare
-        document.getElementById(key).firstElementChild.textContent = valoare 
-        }
-    }
-}
-
-
-
-
-
-
 count.forEach( (e) => {
     e.addEventListener('click', () => {
        absent(e) 
@@ -184,42 +148,64 @@ reduce.forEach( (e) => {
         const buton = e.parentElement
         buton.value -= 2
         buton.firstElementChild.textContent = buton.value
-        localStorage.setItem(buton.id, buton.value) 
+      
     })
 })
-
-buttons.forEach((button) => {
-    button.addEventListener('click', (e)=> {
-        if(!e.target.matches('.count')) {
-            button.value ++
-            button.firstElementChild.textContent = button.value
-            localStorage.setItem(button.id, button.value) 
-        }
-    })
-    
-})
-
-function absent(e) {
-    const text = e.parentElement
-    text.toggleAttribute("disabled") 
-    text.classList.toggle('count-disabled');
-    console.log(e)
-    if(text.hasAttribute('disabled')){
-       e.nextElementSibling.textContent = '' //no ⭐
-       e.nextElementSibling.style.width = '0px' //can't click on it
-       e.textContent = '' //no points displayed
-       text.style.color = "transparent" //no name displayed
-
-    } else {
-       e.nextElementSibling.textContent = '⭐'
-       e.nextElementSibling.style.width = '20px'
-       e.textContent = text.value
-       text.style.color = "#00A6ED"
+function resetPointsFun() {
+    if (window.confirm("ERASE points?")){
+        buttons.forEach((button)=> {
+            button.firstElementChild.textContent = '' 
+            button.value = ''
+            arr[button.id] = ''
+        })
+        localStorage.arr = JSON.stringify(arr)
     }
 }
 
 
 
+
+let arr = localStorage.arr ? JSON.parse(localStorage.arr) : {}
+console.log(arr)
+//HELPER functions//
+function retrieveScores() {
+    buttons.forEach((button) => button.value = arr[button.id] || '') 
+    
+        for (const [key, valoare] of Object.entries(JSON.parse(localStorage.arr))) {
+            
+            document.getElementById(key).value = valoare
+            document.getElementById(key).firstElementChild.textContent = valoare  
+        }
+}
+
+//increase by 1
+buttons.forEach((button) => {
+    button.addEventListener('click', (e)=> {
+        if(!e.target.matches('.count')) {
+            button.value ++
+            arr[button.id] = button.value
+            button.firstElementChild.textContent = button.value
+            localStorage.arr = JSON.stringify(arr)
+        }
+    })
+})
+
+function absent(e) {
+    const student = e.parentElement
+    student.toggleAttribute("disabled") 
+    student.classList.toggle('count-disabled');
+    if(student.hasAttribute('disabled')){
+       e.nextElementSibling.textContent = '' //no ⭐
+       e.nextElementSibling.style.width = '0px' //can't click on it
+       e.textContent = '' //no points displayed
+       student.style.color = "transparent" //no name displayed
+    } else {
+       e.nextElementSibling.textContent = '⭐'
+       e.nextElementSibling.style.width = '20px'
+       e.textContent = student.value
+       student.style.color = "#00A6ED"
+    }
+}
 let disabledArr = []
 function LSSetAbsent() {
     disabledArr = [...buttons].filter(a => a.classList.contains('count-disabled')).map(a => a.id)
@@ -227,7 +213,7 @@ function LSSetAbsent() {
     localStorage.setItem('absent', disabledArr)
 }
 
-localStorage.getItem('absent') ? 0 : localStorage.setItem('absent', "")
+localStorage.absent ? 0 : localStorage.absent = ''
 function LSGetAbsent() {
     const temp = localStorage.getItem('absent').split(',')
     buttons.forEach(a => {
@@ -249,19 +235,13 @@ function LSGetAbsent() {
 
 
 
-
-
-
-
-
-
 const randomStudentOutput = document.getElementById("randomStudentOutput")
 const randomWordOutput = document.getElementById('1')
 let indexWord, indexStudent, randomList = []
 
 function randomWordFun() {
     indexWord = Math.floor(Math.random() * randomList.length)       
-    wordHelper()
+    
     document.getElementById('1').textContent = randomList[indexWord]
 
     randomWordOutput.textContent = randomList[indexWord];
@@ -271,7 +251,18 @@ function randomWordFun() {
     randomWordOutput.classList.add('outputAnimation'); // start animation 
 }
 
+let studentList = []
 function randomStudentFun() {
+    buttons.forEach(item => {
+        //populates studentList for absents and other stuff
+        let nou = item.textContent.replace(/⭐/, "")
+        studentList.push(nou)
+        studentList = studentList.map(e => e.replace(/\d*\s+/g, ''))
+        //removes absentees from studentList
+        let absent = localStorage.absent.split(',').map(e => e.replace(/@/, ''))
+        studentList = studentList.filter(e => !absent.includes(e))
+    })
+
     indexStudent = Math.floor(Math.random() * studentList.length )
 
     randomStudentOutput.textContent = studentList[indexStudent];
@@ -281,17 +272,14 @@ function randomStudentFun() {
     randomStudentOutput.classList.add('outputAnimation'); // start animation 
 }
 
-function wordHelper() {
-    for(const [key, ] of Object.entries(localStorage)) {
-        if(/^#\w+/g.test(key)) {
-            for(const item of localStorage.getItem(key).split(',')) {
-                randomList.push(item)
-            };
-        }
-    }
-}
+(function wordHelper() {
+    const vocab = JSON.parse(localStorage.vocab)
+        for(const [key, value] of Object.entries(vocab)) {
+            randomList.push(value)
+        } 
+        randomList = randomList.flat()
+})()
 
-console.log(document.querySelectorAll(".randomFields__button")[0])
 
 
 
@@ -306,39 +294,6 @@ console.log(document.querySelectorAll(".randomFields__button")[0])
     void randomStudentButton.offsetWidth; // trigger reflow
     randomStudentButton.classList.add('outputAnimation'); // start animation 
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-function resetPointsFun() {
-    if (window.confirm("ERASE points?")){
-        for (const [key, valoare] of Object.entries(localStorage)) {
-            if(/^@\w+/g.test(key)) {
-              localStorage.removeItem(key);
-            }
-        }
-        buttons.forEach((button)=> {
-            
-            button.firstElementChild.textContent = '' 
-            button.value = ''
-        })
-        
-    }
-}
-
-
-
-
-
 
 
 //IDEAAAAA
