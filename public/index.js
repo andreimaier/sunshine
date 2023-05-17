@@ -170,12 +170,14 @@ console.log(arr)
 //HELPER functions//
 function retrieveScores() {
     buttons.forEach((button) => button.value = arr[button.id] || '') 
-    
+    if(localStorage.arr) {
         for (const [key, valoare] of Object.entries(JSON.parse(localStorage.arr))) {
             
             document.getElementById(key).value = valoare
             document.getElementById(key).firstElementChild.textContent = valoare  
         }
+
+    }
 }
 
 //increase by 1
@@ -273,11 +275,13 @@ function randomStudentFun() {
 }
 
 (function wordHelper() {
-    const vocab = JSON.parse(localStorage.vocab)
-        for(const [key, value] of Object.entries(vocab)) {
-            randomList.push(value)
-        } 
-        randomList = randomList.flat()
+    if(localStorage.vocab) {
+        const vocab = JSON.parse(localStorage.vocab)
+            for(const [key, value] of Object.entries(vocab)) {
+                randomList.push(value)
+            } 
+            randomList = randomList.flat()
+    }
 })()
 
 
