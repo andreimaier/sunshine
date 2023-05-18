@@ -1,52 +1,42 @@
-const instructions = document.getElementById('instructions')
 const createNew = document.getElementById('createNew')
 const words = document.querySelector('#word-list');
 const animationDuration = 1000
 const collection = document.getElementById('collection')
 
 
-
+const selfVocab = localStorage.selfVocab ? JSON.parse(localStorage.selfVocab) : {}
+console.log(selfVocab)
+//add funky animation flying to the top righ corner when you set a new list
 
 
 document.addEventListener('click', e => {
-    if( e.target !== instructions
-        && e.target !== createNew 
-       
-        && !e.target.matches('.fa-circle-check')
+    if( e.target !== createNew 
         && !e.target.matches('.fa-trash-can')) {
         return
     } 
-    if(e.target === instructions) instructionsFun()
-    if(e.target.matches('.fa-circle-check') || e.target.matches('.fa-trash-can')) collectionFun(e)
+    if(e.target.matches('.fa-trash-can')) collectionFun(e)
     if(e.target === createNew) listaNoua()
 })
 
 addEventListener('load', () => {
-    
-    for (const [key, value] of Object.entries(localStorage)) {
-        if(/^!\w+/g.test(key)) {
+    if(localStorage.selfVocab){
+
+        for (const [key, value] of Object.entries(JSON.parse(localStorage.selfVocab))) {
             title = document.createElement('h5')
             title.textContent = key
             title.setAttribute('id', key)   
             createButtonsAndDiv()
-            for (i = 0; i < value.split(',').length ; i++) {
+            for (i = 0; i < value.length ; i++) {
                 const item = document.createElement('li')
-                item.textContent = value.split(',')[i]
+                item.textContent = value[i]
                 newList.appendChild(item)
             }  
-        }
-    } 
+        } 
+    }
 })
 
 
 
-function instructionsFun() { //hides instructions
-    document.querySelectorAll('.hidden').forEach( x => {
-        if(x.hasAttribute('hidden')) {
-            x.removeAttribute('hidden')  
-        } else x.setAttribute('hidden', "")
-    })
-}
 
 
 
@@ -57,11 +47,12 @@ function collectionFun(e){
         e.target.classList.add('removeIAnimation')
         e.target.parentNode.classList.add('removeAnimation') 
         
+        //REMOVE FROM LS
         //timeout for divvy to go away       
         setTimeout(() => {
             e.target.parentNode.parentNode.remove() 
-            localStorage.removeItem(`#${e.target.parentNode.nextSibling.id}`)
-            localStorage.removeItem(e.target.parentNode.nextSibling.id)
+            delete selfVocab[e.target.parentNode.nextSibling.id]
+            localStorage.selfVocab = JSON.stringify(selfVocab)
         }, animationDuration);
     } 
     //checks if list added to randomList > can't delete
@@ -77,8 +68,8 @@ function collectionFun(e){
 }
 
 
-function listaNoua(titleName) {
-    titleName = key.value
+function listaNoua() {
+    const titleName = key.value
     title = document.createElement('h5')
     title.textContent = titleName
     title.setAttribute('id', titleName)
@@ -93,10 +84,12 @@ function listaNoua(titleName) {
             if (window.confirm(`Your List Title: ${titleName} \nYour Words: ${words.value}`)) {
                 createButtonsAndDiv()
                 sanitizeWords()
-                localStorage.setItem(`!${titleName}`, words.value.split(/\n/))  
+                selfVocab[`${titleName}`] = words.value.split(/\n/)
+                localStorage.selfVocab = JSON.stringify(selfVocab)
             }
         } 
     }  
+    console.log(selfVocab)
 }
 
 

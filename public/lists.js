@@ -111,7 +111,7 @@ function setStorage(e) { //populate reviewList
 }
 
 function storeValues() {
-    let vocab = {}
+    let vocab = {};
     for(item of reviewList) {
         let list = []
         let arr = Array.from(document.querySelector(`#Week${item}`).nextElementSibling.firstElementChild.children) //get vocab based on review list
@@ -119,8 +119,7 @@ function storeValues() {
         vocab[`Week ${item}`] = list // assign to object
     }
     localStorage.vocab = JSON.stringify(vocab) //send it to LS
-    let x = JSON.parse(localStorage.vocab) //take it out
-    console.log(x)
+    console.log(vocab)
 }
 storeValues()
 
