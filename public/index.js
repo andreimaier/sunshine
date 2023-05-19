@@ -75,8 +75,7 @@ function studentTrimFun() {
             clasaMea.push(elev)
         }
 })
-    console.log(clasaMea)
-    clasaMea = []
+    console.log(clasaMea) 
 }
 
 
@@ -96,6 +95,7 @@ submitDB.addEventListener("click", async () => {
     console.log(json);
 
    /*  location.href = "https://myscores.cyclic.app/table.html";  */
+   clasaMea = []
 });
 
 

@@ -7,7 +7,7 @@ let totalMax = []
 let firstMax = []
 let secondMax = []
 
-function testFun(){
+function testScore(){
   //add a span with the points based on test score
   const target = document.querySelectorAll('td:nth-of-type(2)')
   target.forEach(e => {
@@ -36,14 +36,46 @@ function testFun(){
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
-  localStorage.data = JSON.stringify(data)
+  localStorage.data = JSON.stringify(data) 
 }
+
+
+
+
+// Set the time for 8pm
+const targetTime = new Date();
+targetTime.setHours(19);
+targetTime.setMinutes(0);
+targetTime.setSeconds(0);
+targetTime.setMilliseconds(0);
+
+// Get the current time
+const currentTime = new Date();
+
+// Calculate the time until the target time
+let timeUntilTarget = targetTime.getTime() - currentTime.getTime();
+
+// If the target time has already passed today, add 1 day to the time until target
+if (timeUntilTarget < 0) {
+  timeUntilTarget += 86400000; // 1 day in milliseconds
+}
+
+// Set up an interval to run the function every 24 hours
+setInterval(function() {
+  getDataFun();
+}, 86400000); // 1 day in milliseconds
+
+// Wait until the target time and then run the function
+setTimeout(function() {
+  getDataFun();
+}, timeUntilTarget);
+
 
 
  
 
 
- if(!localStorage.data) {
+if(!localStorage.data) {
   getDataFun()
 } else {
   if(!localStorage.refresh) {
@@ -55,7 +87,7 @@ async function getDataFun() {
 
 
 function renderPage(){
-  testFun()
+  testScore()
   firstFun()
   totalFun()
   secondFun()
@@ -64,19 +96,11 @@ function renderPage(){
 renderPage()
 
 
-function kk(lala){
-  console.log(lala)
-}
-setInterval(kk, 1200);
-
 
 
 
 
 //first half of second semester
-
-
-
 function firstFun() {
   
   const firstHalf = data.filter(i => !i.index)
@@ -106,20 +130,8 @@ function firstFun() {
   
     if (!isNaN(parseInt(points))) {
       firstMax.push(points)
-    }
-    
-    firstMax.sort((a, b) => a - b).reverse(); 
-
-      //for first half
-    let firstHalf = elev.nextElementSibling.nextElementSibling
-    firstHalf.textContent == firstMax[0] ? 
-    firstHalf.textContent = `🥇${firstHalf.textContent}` :
-    firstHalf.textContent == firstMax[1] ? 
-    firstHalf.textContent = `🥈${firstHalf.textContent}` :
-    firstHalf.textContent == firstMax[2] ? 
-    firstHalf.textContent = `🥉${firstHalf.textContent}` :
-    firstHalf.textContent = firstHalf.textContent 
-
+    }   
+  firstMax.sort((a, b) => a - b).reverse();   
   }) 
 }
 
@@ -158,17 +170,6 @@ function totalFun() {
       totalMax.push(points)
     }
     totalMax.sort((a, b) => a - b).reverse(); 
-
-    //for TOTAL
-    let totalScor = elev.nextElementSibling.nextElementSibling.nextElementSibling
-    totalScor.textContent == totalMax[0] ? 
-    totalScor.textContent = `🥇${totalScor.textContent}` :
-    totalScor.textContent == totalMax[1] ? 
-    totalScor.textContent = `🥈${totalScor.textContent}` :
-    totalScor.textContent == totalMax[2] ? 
-    totalScor.textContent = `🥉${totalScor.textContent}` :
-    totalScor.textContent = totalScor.textContent 
- 
   })  
 }
 
@@ -208,16 +209,6 @@ function secondFun() {
     secondMax.push(points)
   }
   secondMax.sort((a, b) => a - b).reverse(); 
-
-  //for second half
-  let secondHalf = elev.firstElementChild
-  secondHalf.textContent == secondMax[0] ? 
-  secondHalf.textContent = `${secondHalf.textContent}🥇` :
-  secondHalf.textContent == secondMax[1] ? 
-  secondHalf.textContent = `${secondHalf.textContent}🥈` :
-  secondHalf.textContent == secondMax[2] ? 
-  secondHalf.textContent = `${secondHalf.textContent}🥉` :
-  secondHalf.textContent = secondHalf.textContent 
   }) 
 }
 
@@ -267,4 +258,35 @@ function dailyFun() {
 
 
 
-
+students.forEach(elev => {
+  
+  //for first half
+  let firstHalf = elev.nextElementSibling.nextElementSibling
+  firstHalf.textContent == firstMax[0] ? 
+  firstHalf.textContent = `🥇${firstHalf.textContent}` :
+  firstHalf.textContent == firstMax[1] ? 
+  firstHalf.textContent = `🥈${firstHalf.textContent}` :
+  firstHalf.textContent == firstMax[2] ? 
+  firstHalf.textContent = `🥉${firstHalf.textContent}` :
+  firstHalf.textContent = firstHalf.textContent 
+  
+  //for second half
+  let secondHalf = elev.firstElementChild
+  secondHalf.textContent == secondMax[0] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥇` :
+  secondHalf.textContent == secondMax[1] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥈` :
+  secondHalf.textContent == secondMax[2] ? 
+  secondHalf.textContent = `${secondHalf.textContent}🥉` :
+  secondHalf.textContent = secondHalf.textContent 
+  
+  //for TOTAL
+  let totalScor = elev.nextElementSibling.nextElementSibling.nextElementSibling
+  totalScor.textContent == totalMax[0] ? 
+  totalScor.textContent = `🥇${totalScor.textContent}` :
+  totalScor.textContent == totalMax[1] ? 
+  totalScor.textContent = `🥈${totalScor.textContent}` :
+  totalScor.textContent == totalMax[2] ? 
+  totalScor.textContent = `🥉${totalScor.textContent}` :
+  totalScor.textContent = totalScor.textContent 
+})
