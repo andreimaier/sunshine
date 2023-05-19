@@ -36,7 +36,18 @@ main {
   width: 0px;
   height: 0px;
 } */
-
+#getData{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  aspect-ratio: 1;
+  word-wrap: break-word;
+  background-color: var(--YInMnBlue);
+  color: white;
+  border-radius: 10px;
+  
+}
 
 #div__pointsTable {
   overflow: scroll;

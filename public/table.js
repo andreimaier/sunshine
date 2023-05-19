@@ -1,5 +1,6 @@
 const appendDate = document.getElementById('appendDate')
 const students = document.querySelectorAll('.studentJS')
+const getData = document.querySelector('#getData')
 const data = localStorage.data ? JSON.parse(localStorage.data) : [] 
 
 let dayMax = []
@@ -31,6 +32,7 @@ function testScore(){
   })
 }
 
+getData.addEventListener('click', getDataFun)
 
 
 async function getDataFun() {
