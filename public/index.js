@@ -27,6 +27,26 @@ alt + shift + D
 */
 
 
+function atTimeOfDay(hour, minutes, func) {
+    const twentyFourHours = 86400000;
+    const now = new Date();
+    let ETA = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now
+    if(ETA < 0) {
+        ETA += twentyFourHours
+    }
+    setTimeout(() => { 
+        func();
+        setInterval(func, twentyFourHours)
+    }, ETA)
+}
+atTimeOfDay(19, 1, submit)
+function test(){
+    console.log("Hi there!!")
+}
+
+
+
+
 
 const addTenP = document.getElementById('addTenP')
 
@@ -77,10 +97,7 @@ function studentTrimFun() {
 })
     console.log(clasaMea) 
 }
-
-
-
-submitDB.addEventListener("click", async () => {
+async function submit() {
     studentTrimFun()
     console.log('sent')
    
@@ -96,7 +113,10 @@ submitDB.addEventListener("click", async () => {
 
    /*  location.href = "https://myscores.cyclic.app/table.html";  */
    clasaMea = []
-});
+ }
+
+
+submitDB.addEventListener("click", submit);
 
 
 //EVENT listeners

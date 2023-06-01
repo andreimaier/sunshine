@@ -43,34 +43,21 @@ async function getDataFun() {
 
 
 
-
-// Set the time for 8pm
-const targetTime = new Date();
-targetTime.setHours(19);
-targetTime.setMinutes(0);
-targetTime.setSeconds(0);
-targetTime.setMilliseconds(0);
-
-// Get the current time
-const currentTime = new Date();
-
-// Calculate the time until the target time
-let timeUntilTarget = targetTime.getTime() - currentTime.getTime();
-
-// If the target time has already passed today, add 1 day to the time until target
-if (timeUntilTarget < 0) {
-  timeUntilTarget += 86400000; // 1 day in milliseconds
+function atTimeOfDay(hour, minutes, func) {
+  const twentyFourHours = 3000;
+  const now = new Date();
+  let ETA = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now
+  if(ETA < 0) {
+      ETA += twentyFourHours
+  }
+  setTimeout(() => { 
+      func();
+      setInterval(func, twentyFourHours)
+  }, ETA)
 }
+atTimeOfDay(19, 5, getDataFun) 
 
-// Set up an interval to run the function every 24 hours
-setInterval(function() {
-  getDataFun();
-}, 86400000); // 1 day in milliseconds
 
-// Wait until the target time and then run the function
-setTimeout(function() {
-  getDataFun();
-}, timeUntilTarget);
 
 
 
