@@ -1,4 +1,24 @@
 
+function foo() {
+  const me = "Ioan"
+  function bar() {
+    const me = 'Andrei'
+    console.log(me)
+  }
+  console.log(me)
+  bar()
+}
+foo()
+
+
+
+
+
+
+
+
+
+
 let obj = [
     {
         "name": 'Andrei',
