@@ -9,7 +9,7 @@
 
 //CHANGE
 //the space between list items stays even after removing them on lists.js
-    //maybe with class on items I add rather than on premade based on collapsible/length
+//maybe with class on items I add rather than on premade based on collapsible/length
 //some nicer buttons for removing lists...like X or smth
 
 
@@ -31,16 +31,16 @@ function atTimeOfDay(hour, minutes, func) {
     const twentyFourHours = 86400000;
     const now = new Date();
     let ETA = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now
-    if(ETA < 0) {
+    if (ETA < 0) {
         ETA += twentyFourHours
     }
-    setTimeout(() => { 
+    setTimeout(() => {
         func();
         setInterval(func, twentyFourHours)
     }, ETA)
 }
 atTimeOfDay(19, 1, submit)
-function test(){
+function test() {
     console.log("Hi there!!")
 }
 
@@ -87,33 +87,33 @@ let clasaMea = []
 
 //clears EMPTY nodes, changes IDs and empty string score values
 function studentTrimFun() {
-    document.querySelectorAll('.studentJS').forEach( (student) => {
-        if(student.id) {
-            
+    document.querySelectorAll('.studentJS').forEach((student) => {
+        if (student.id) {
+
             elev = { name: `${student.id.replace('@', '')}`, points: student.value }
-        
+
             clasaMea.push(elev)
         }
-})
-    console.log(clasaMea) 
+    })
+    console.log(clasaMea)
 }
 async function submit() {
     studentTrimFun()
     console.log('sent')
-   
+
     const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/JSON" },
-    body: JSON.stringify(clasaMea),
+        method: "POST",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(clasaMea),
     };
 
     const response = await fetch("/api", options);
     const json = await response.json();
     console.log(json);
 
-   /*  location.href = "https://myscores.cyclic.app/table.html";  */
-   clasaMea = []
- }
+    /*  location.href = "https://myscores.cyclic.app/table.html";  */
+    clasaMea = []
+}
 
 
 submitDB.addEventListener("click", submit);
@@ -126,17 +126,17 @@ addEventListener('load', () => {
 })
 
 document.addEventListener('click', e => {
-    if( !e.target.matches('#randomWordButton')
+    if (!e.target.matches('#randomWordButton')
         && !e.target.matches('#addTenP')
         && !e.target.matches('#randomStudentButton')
         && !e.target.matches('.studentJS')
         && !e.target.matches('#resetPoints')) {
         return
-    } 
-    if(e.target.matches('#addTenP')) addTenPFun()
-    if(e.target.matches('#randomWordButton')) randomWordFun()
-    if(e.target.matches('#randomStudentButton')) randomStudentFun(e)
-    if(e.target.matches('#resetPoints')) resetPointsFun()
+    }
+    if (e.target.matches('#addTenP')) addTenPFun()
+    if (e.target.matches('#randomWordButton')) randomWordFun()
+    if (e.target.matches('#randomStudentButton')) randomStudentFun(e)
+    if (e.target.matches('#resetPoints')) resetPointsFun()
 })
 
 
@@ -147,34 +147,37 @@ document.addEventListener('click', e => {
 function addTenPFun() {
     buttons.forEach(button => {
         const score = button.firstElementChild
-        if(!button.classList.contains('count-disabled')) {
-            switch(score.textContent) {
-                case(''): score.textContent = 0;
-                default: score.textContent = parseInt(score.textContent) + 5; break;
-            }
+        if (button.classList.contains('count-disabled')) return
+        switch (score.textContent) {
+            case (''): score.textContent = 0;
+            default:
+                score.textContent = parseInt(score.textContent) + 5;
+                button.value = score.textContent
+                break;
         }
+
         arr[button.id] = score.textContent
         localStorage.arr = JSON.stringify(arr)
     })
 }
-count.forEach( (e) => {
+count.forEach((e) => {
     e.addEventListener('click', () => {
-       absent(e) 
-       LSSetAbsent(e)
+        absent(e)
+        LSSetAbsent(e)
     })
-})  
-reduce.forEach( (e) => {
+})
+reduce.forEach((e) => {
     e.addEventListener('click', () => {
         const buton = e.parentElement
         buton.value -= 2
         buton.firstElementChild.textContent = buton.value
-      
+
     })
 })
 function resetPointsFun() {
-    if (window.confirm("ERASE points?")){
-        buttons.forEach((button)=> {
-            button.firstElementChild.textContent = '' 
+    if (window.confirm("ERASE points?")) {
+        buttons.forEach((button) => {
+            button.firstElementChild.textContent = ''
             button.value = ''
             arr[button.id] = ''
         })
@@ -189,12 +192,12 @@ let arr = localStorage.arr ? JSON.parse(localStorage.arr) : {}
 console.log(arr)
 //HELPER functions//
 function retrieveScores() {
-    buttons.forEach((button) => button.value = arr[button.id] || '') 
-    if(localStorage.arr) {
+    buttons.forEach((button) => button.value = arr[button.id] || '')
+    if (localStorage.arr) {
         for (const [key, valoare] of Object.entries(JSON.parse(localStorage.arr))) {
-            
+
             document.getElementById(key).value = valoare
-            document.getElementById(key).firstElementChild.textContent = valoare  
+            document.getElementById(key).firstElementChild.textContent = valoare
         }
 
     }
@@ -202,9 +205,9 @@ function retrieveScores() {
 
 //increase by 1
 buttons.forEach((button) => {
-    button.addEventListener('click', (e)=> {
-        if(!e.target.matches('.count')) {
-            button.value ++
+    button.addEventListener('click', (e) => {
+        if (!e.target.matches('.count')) {
+            button.value++
             arr[button.id] = button.value
             button.firstElementChild.textContent = button.value
             localStorage.arr = JSON.stringify(arr)
@@ -214,18 +217,18 @@ buttons.forEach((button) => {
 
 function absent(e) {
     const student = e.parentElement
-    student.toggleAttribute("disabled") 
+    student.toggleAttribute("disabled")
     student.classList.toggle('count-disabled');
-    if(student.hasAttribute('disabled')){
-       e.nextElementSibling.textContent = '' //no ⭐
-       e.nextElementSibling.style.width = '0px' //can't click on it
-       e.textContent = '' //no points displayed
-       student.style.color = "transparent" //no name displayed
+    if (student.hasAttribute('disabled')) {
+        e.nextElementSibling.textContent = '' //no ⭐
+        e.nextElementSibling.style.width = '0px' //can't click on it
+        e.textContent = '' //no points displayed
+        student.style.color = "transparent" //no name displayed
     } else {
-       e.nextElementSibling.textContent = '⭐'
-       e.nextElementSibling.style.width = '20px'
-       e.textContent = student.value
-       student.style.color = "#00A6ED"
+        e.nextElementSibling.textContent = '⭐'
+        e.nextElementSibling.style.width = '20px'
+        e.textContent = student.value
+        student.style.color = "#00A6ED"
     }
 }
 let disabledArr = []
@@ -239,18 +242,18 @@ localStorage.absent ? 0 : localStorage.absent = ''
 function LSGetAbsent() {
     const temp = localStorage.getItem('absent').split(',')
     buttons.forEach(a => {
-        for(let item of temp) {
-            if(item === a.id) {
+        for (let item of temp) {
+            if (item === a.id) {
                 a.classList.add('count-disabled')
                 a.setAttribute('disabled', '')
-                if(a.hasAttribute('disabled')) {
-                    a.firstElementChild.textContent = '' ;
+                if (a.hasAttribute('disabled')) {
+                    a.firstElementChild.textContent = '';
                     a.lastElementChild.textContent = '';
                     a.lastElementChild.style.width = '0px';
                     a.style.color = "transparent";
                 }
-            } 
-        } 
+            }
+        }
     })
 }
 
@@ -262,8 +265,8 @@ const randomWordOutput = document.getElementById('1')
 let indexWord, indexStudent, randomList = []
 
 function randomWordFun() {
-    indexWord = Math.floor(Math.random() * randomList.length)       
-    
+    indexWord = Math.floor(Math.random() * randomList.length)
+
     document.getElementById('1').textContent = randomList[indexWord]
 
     randomWordOutput.textContent = randomList[indexWord];
@@ -285,7 +288,7 @@ function randomStudentFun() {
         studentList = studentList.filter(e => !absent.includes(e))
     })
 
-    indexStudent = Math.floor(Math.random() * studentList.length )
+    indexStudent = Math.floor(Math.random() * studentList.length)
 
     randomStudentOutput.textContent = studentList[indexStudent];
     randomStudentOutput.classList.add('outputAnimation')
@@ -295,12 +298,12 @@ function randomStudentFun() {
 }
 
 (function wordHelper() {
-    if(localStorage.vocab) {
+    if (localStorage.vocab) {
         const vocab = JSON.parse(localStorage.vocab)
-            for(const [key, value] of Object.entries(vocab)) {
-                randomList.push(value)
-            } 
-            randomList = randomList.flat()
+        for (const [key, value] of Object.entries(vocab)) {
+            randomList.push(value)
+        }
+        randomList = randomList.flat()
     }
 })()
 
@@ -316,7 +319,7 @@ function randomStudentFun() {
     randomStudentButton.classList.add('outputAnimation')
     randomStudentButton.classList.remove('outputAnimation'); // reset animation
     void randomStudentButton.offsetWidth; // trigger reflow
-    randomStudentButton.classList.add('outputAnimation'); // start animation 
+    randomStudentButton.classList.add('outputAnimation'); // start animation
  */
 
 

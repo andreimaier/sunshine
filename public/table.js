@@ -34,17 +34,18 @@ function testScore(){
 
 getData.addEventListener('click', getDataFun)
 
-
+let kk = []
 async function getDataFun() {
   const response = await fetch("/api");
   const data = await response.json();
   localStorage.data = JSON.stringify(data) 
 }
+fetch("/api").then((blob) => blob.json()).then((data) => kk.push(...data))
 
 
 
 function atTimeOfDay(hour, minutes, func) {
-  const twentyFourHours = 3000;
+  const twentyFourHours = 86400000;
   const now = new Date();
   let ETA = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now
   if(ETA < 0) {
