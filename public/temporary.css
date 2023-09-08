@@ -1,125 +1,143 @@
-
 .input,
 #lists__section {
-    width: 60%;
+  width: 60%;
 }
 #key,
 #word-list,
 .divvy,
 .list {
-    margin-block: 0.3rem;
-    border: var(--YInMnBlue);
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px var(--YInMnBlue);  
+  margin-block: 0.3rem;
+  border: var(--YInMnBlue);
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px var(--YInMnBlue);
 }
 #key:focus,
 #word-list:focus {
-    outline: 2px solid var(--OxfordBlue);
+  outline: 2px solid var(--OxfordBlue);
 }
 #key,
 #word-list {
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
 }
 
 /* CHANGE this to move title and words away */
 .input {
-    display: flex;
-    flex-direction: column;
-    max-width: 900%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 900%;
 }
 
 .remove {
-    background-color: transparent;
-    color: darkblue;
-    font-size: 2rem;
-    border-radius: 20%;
-    padding: 0.2rem;
-    border: none;
-    position: absolute;
-    right: 5%;
-    top: 5%; 
-    
+  background-color: transparent;
+  color: darkblue;
+  font-size: 2rem;
+  border-radius: 20%;
+  padding: 0.2rem;
+  border: none;
+  position: absolute;
+  right: 5%;
+  top: 5%;
 }
 .addToRoster {
-    color: var(--YInMnBlue);
-    background-color: transparent;
-    border: none;
-    border-radius: 20%;
-    padding: 0.2rem;
-    position: absolute;
-    right: 2%;
-    bottom: 0%;
-    font-size: 2rem;
+  color: var(--YInMnBlue);
+  background-color: transparent;
+  border: none;
+  border-radius: 20%;
+  padding: 0.2rem;
+  position: absolute;
+  right: 2%;
+  bottom: 0%;
+  font-size: 2rem;
 }
-
 
 .checked {
-    color: var(--CarolinaBlue);
-    transition: 300ms ease-in-out;
+  color: var(--CarolinaBlue);
+  transition: 300ms ease-in-out;
 }
-
 
 .addToRosterAnimation {
-    animation: jiggle 500ms ease-in-out;
-} 
-@keyframes jiggle {
-    20% {
-        transform: translateX(-20%)
-    }
-    40% {
-        transform: translateX(20%)
-    }
-    60% {
-        transform: translateX(-10%)
-    }
-    80% {
-        transform: translateX(10%)
-    }
+  animation: jiggle 500ms ease-in-out;
 }
-
+@keyframes jiggle {
+  20% {
+    transform: translateX(-20%);
+  }
+  40% {
+    transform: translateX(20%);
+  }
+  60% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(10%);
+  }
+}
 
 .removeAnimation {
-    background-color: transparent;
-    transition: var(--animationDuration);
-} 
+  background-color: transparent;
+  transition: var(--animationDuration);
+}
 .removeIAnimation {
-    transform: scale(0.1) rotate(1turn);
-    transition: var(--animationDuration) ease;
+  transform: scale(0.1) rotate(1turn);
+  transition: var(--animationDuration) ease;
 }
 
-
 .divvy {
-    padding: 0.5rem;
-    transform: rotate(1turn);
-    animation: entry 300ms linear;
-    flex: 1 1 3rem;
-    position: relative;
-    max-width: 100%;
-    background: rgb(201,219,241);
-background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-
+  padding: 0.5rem;
+  transform: rotate(1turn);
+  animation: entry 300ms linear;
+  flex: 1 1 3rem;
+  position: relative;
+  max-width: 100%;
+  background: rgb(201, 219, 241);
+  background: linear-gradient(
+    313deg,
+    rgba(201, 219, 241, 1) 0%,
+    rgba(255, 255, 255, 1) 71%
+  );
 }
 .divvy h5,
 .list h5 {
-    padding-right: 3.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
+  padding-right: 3.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .divvy ul,
 .list ul {
-    padding-top: 0.5rem;
-    padding-right: 3.5rem;
+  padding-top: 0.5rem;
+  padding-right: 3.5rem;
 }
 .divvy h5,
 .list h5 {
-    max-width: max-content;
+  max-width: max-content;
 }
 .divvy li,
 .list li {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .buttons {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.invisible {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+  color: black;
+  opacity: 0;
+  width: 1rem;
+  text-align: center;
+  line-height: 30px;
+}
+.active {
+  opacity: 1;
+  transform: scale(4) translateY(-3px) translateX(-2px);
+  box-shadow: 1px 1px 1rem #ff0000;
+  border: 1px solid #bada55;
+  border-radius: 20px;
 }

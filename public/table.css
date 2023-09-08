@@ -4,7 +4,6 @@ body {
 }
 main {
   background: none;
-
 }
 /* .tables{
   margin-block: 1rem;
@@ -36,7 +35,7 @@ main {
   width: 0px;
   height: 0px;
 } */
-#getData{
+#getData {
   position: absolute;
   top: 0;
   right: 0;
@@ -46,7 +45,6 @@ main {
   background-color: var(--YInMnBlue);
   color: white;
   border-radius: 10px;
-  
 }
 
 #div__pointsTable {
@@ -57,7 +55,9 @@ main {
   border-radius: 10px;
   transition: 1s ease-in-out;
 }
-#pointsTable, td, th {
+#pointsTable,
+td,
+th {
   text-align: center;
 }
 
@@ -68,11 +68,11 @@ main {
   scale: 1;
   transition: 500ms;
 }
- #pointsTable thead {
+#pointsTable thead {
   position: sticky;
   top: 0;
   z-index: 1;
-} 
+}
 #pointsTable td:first-child {
   position: sticky;
   left: 0;
@@ -89,7 +89,7 @@ tr:nth-child(odd) td:nth-child(2) {
   background-color: var(--CarolinaBlue);
 }
 tr:nth-child(even) td:first-child,
-tr:nth-child(even) td:nth-child(2)  {
+tr:nth-child(even) td:nth-child(2) {
   background-color: white;
 }
 tr th:first-child,
@@ -105,12 +105,10 @@ tr th:nth-child(2) {
   left: 0px;
   font-weight: bold;
   font-size: 1.3rem;
-  
 }
 td:not(.total) {
   padding-block: 1rem;
   padding-inline: 1rem;
-
 }
 .s {
   color: red;
@@ -123,11 +121,9 @@ td:not(.total) {
   justify-content: flex-end;
 }
 
-
 @media only screen and (min-width: 500px) {
-  #div__pointsTable{
+  #div__pointsTable {
     max-width: 95vw;
     max-height: 90vh;
   }
 }
-

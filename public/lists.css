@@ -1,138 +1,178 @@
 /* CHANGE buttons for week list */
 #myLists {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    width: 90%;
-    display: grid;
-    gap: 1rem;
-    grid-template-areas: 'a a a';
-    grid-auto-columns: 1fr;
-
+  margin-top: 20px;
+  margin-bottom: 50px;
+  width: 90%;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: "a a a";
+  grid-auto-columns: 1fr;
 }
 .collapsible {
-    background-color: whitesmoke;
-    background-size: cover;
-    border-radius: 10px;
-    color: var(--CarolinaBlue);
-    cursor: pointer;
-    padding: 1rem;
-    width: 100%;
-    border: none;
-    text-align: left;
-    font-weight: bold;
+  background-color: whitesmoke;
+  background-size: cover;
+  border-radius: 10px;
+  color: var(--CarolinaBlue);
+  cursor: pointer;
+  padding: 1rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-weight: bold;
 }
-.collapsible:hover{
-    background-color: whitesmoke;
-    filter: brightness(120%);
-    
+.collapsible:hover {
+  background-color: whitesmoke;
+  filter: brightness(120%);
 }
 .collapsible:after {
-    content: '\002B'; 
-    color: var(--CarolinaBlue);
-    float: right;
+  content: "\002B";
+  color: var(--CarolinaBlue);
+  float: right;
 }
 .active {
-    background-image: none;
-    background-color: #0D2C54;
-    
+  background-image: none;
+  background-color: #0d2c54;
 }
 .active:after {
-    content: "\2212";
+  content: "\2212";
 }
 .weekX {
-    margin-top: 5px;
-    max-height: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: 300ms ease-in-out;
-    position: relative;
-    background: rgb(201,219,241);
-    background: linear-gradient(313deg, rgba(201,219,241,1) 0%, rgba(255,255,255,1) 71%);
-} 
-.weekX li {
-    padding: 0.2rem;
+  margin-top: 5px;
+  max-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 300ms ease-in-out;
+  position: relative;
+  background: rgb(201, 219, 241);
+  background: linear-gradient(
+    313deg,
+    rgba(201, 219, 241, 1) 0%,
+    rgba(255, 255, 255, 1) 71%
+  );
 }
-
-
-
-
+.weekX li {
+  padding: 0.2rem;
+}
 
 .addToRoster {
-    color: var(--YInMnBlue);
-    background-color: transparent;
-    border: none;
-    border-radius: 20%;
-    padding: 0.2rem;
-    position: absolute;
-    right: 2%;
-    top: 0%;
-    font-size: 2rem;
+  color: var(--YInMnBlue);
+  background-color: transparent;
+  border: none;
+  border-radius: 20%;
+  padding: 0.2rem;
+  position: absolute;
+  right: 2%;
+  top: 0%;
+  font-size: 2rem;
 }
 .checked {
-    color: var(--CarolinaBlue);
-    transition: 300ms ease-in-out;
+  color: var(--CarolinaBlue);
+  transition: 300ms ease-in-out;
 }
 .addToRosterAnimation {
-    animation: jiggle 500ms ease-in-out;
-} 
+  animation: jiggle 500ms ease-in-out;
+}
 @keyframes jiggle {
-    20% {
-        transform: translateX(-20%)
-    }
-    40% {
-        transform: translateX(20%)
-    }
-    60% {
-        transform: translateX(-10%)
-    }
-    80% {
-        transform: translateX(10%)
-    }
+  20% {
+    transform: translateX(-20%);
+  }
+  40% {
+    transform: translateX(20%);
+  }
+  60% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(10%);
+  }
 }
 .removeAnimation {
-    background-color: transparent;
-    transition: var(--animationDuration);
-} 
+  background-color: transparent;
+  transition: var(--animationDuration);
+}
 .removeIAnimation {
-    transform: scale(0.1) rotate(1turn);
-    transition: var(--animationDuration) ease;
+  transform: scale(0.1) rotate(1turn);
+  transition: var(--animationDuration) ease;
 }
 
 .delete {
-    all: unset;
-    background-color: var(--YInMnBlue);
-    border-radius: 5px;
-    padding: 2px;
-    font-size: small;
-   
+  all: unset;
+  background-color: var(--YInMnBlue);
+  border-radius: 5px;
+  padding: 2px;
+  font-size: small;
 }
 
-
-#lists__section h4{
-    text-align: center;
+#lists__section h4 {
+  text-align: center;
 }
 #lists__box {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    border-radius: 10px;
-    min-height: 2.4rem;
-    min-width: 100px;
-    margin-bottom: 10px;
-    border-top: 5px solid white;
-    border-inline: 1px inset white;
-    color: #eee;
-    padding-block: 2px;
-    padding-inline: 10px;
-    height: min-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 10px;
+  min-height: 2.4rem;
+  min-width: 100px;
+  margin-bottom: 10px;
+  border-top: 5px solid white;
+  border-inline: 1px inset white;
+  color: #eee;
+  padding-block: 2px;
+  padding-inline: 10px;
+  height: min-content;
 }
 #lists__box div {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
-
 
 .lists__item input {
-    margin-left: 0.2rem;
+  margin-left: 0.2rem;
 }
 
+.clock {
+  min-width: 125px;
+  text-align: left;
+  font-family: cursive;
+
+  color: white;
+  background-color: var(--color);
+  padding: 0.5rem;
+  border-radius: 10px;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073,
+    0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+.clock > span {
+  display: inline-block;
+  width: 29px;
+  text-align: center;
+}
+.clock > span:last-child {
+  color: red;
+  text-align: left;
+  margin-left: 5px;
+}
+.clock > span:first-child {
+  text-align: right;
+  margin-right: 5px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+.color,
+.bg {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+.color input {
+  width: 30px;
+  height: 30px;
+}
+.bg input {
+  width: 100px;
+}
